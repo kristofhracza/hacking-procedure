@@ -51,7 +51,7 @@ Note: Here one can insert malicious code to be executed by the program.
 ## Monitor buses
 `busctl` can be used to monitor and examine the D-Bus.
 
-## Vulnerable buses
+## Vulnerable interfaces
 
 ### USBCreator D-Bus | com.ubuntu.USBCreator
 #### Steps to exploit
