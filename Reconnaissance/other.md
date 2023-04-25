@@ -26,3 +26,19 @@ Software versioning and revision control system
 
 ## To see files on the server
 `svn co <url>`
+
+
+# QUIC protocol
+
+## Info
+- [https://www.debugbear.com/blog/http3-quic-protocol-guide](https://www.debugbear.com/blog/http3-quic-protocol-guide)
+- [https://en.wikipedia.org/wiki/QUIC](https://en.wikipedia.org/wiki/QUIC)
+
+## Access pages with Curl
+```bash
+curl --http3 https://site.com
+```
+
+### Build Curl from source
+This is if your version of `curl` doesn't support QUIC.
+[https://github.com/curl/curl/blob/master/docs/HTTP3.md#quiche-version](https://github.com/curl/curl/blob/master/docs/HTTP3.md#quiche-version)
