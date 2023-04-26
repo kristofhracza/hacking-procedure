@@ -83,3 +83,12 @@ admin:tomcat
 ## RCE
 If one has access to the Application Manager of Tomcat, the attacker can upload and run a .war file to execute code.     
 **This is only possible if the account that the attacker is logged in with has enough privileges (admin,manager-script,manager)**
+
+
+# ESIGate (ESI Injection)
+Any ESIGate software is affected that has a lower version than *5.3*
+
+## References
+These are blog posts that consist of 2 parts
+- [https://www.gosecure.net/blog/2018/04/03/beyond-xss-edge-side-include-injection/](https://www.gosecure.net/blog/2018/04/03/beyond-xss-edge-side-include-injection/)
+- [https://www.gosecure.net/blog/2019/05/02/esi-injection-part-2-abusing-specific-implementations/](https://www.gosecure.net/blog/2019/05/02/esi-injection-part-2-abusing-specific-implementations/)
