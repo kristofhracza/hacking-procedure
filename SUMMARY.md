@@ -19,4 +19,4 @@
 ## Privilege escalation
 
 * [Linux](Privilege_escalation/linux.md)  
-* [Windows](Privilege_escalation/window.md)  
+* [Windows](Privilege_escalation/windows.md)  
