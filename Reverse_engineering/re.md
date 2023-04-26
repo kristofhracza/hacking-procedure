@@ -60,7 +60,7 @@ Python Exploit Development Assistance for GDB
     ```
     *If the program breaks, it's vulnerable to buffer overflow*
 5. Finding the right size      
-    Here I personally reduce the length of the paylod by half and if it breaks again repeat the steps.    
+    Here what I personally like to do is to,reduce the length of the payload by half and if it breaks again repeat the steps.    
     If the program doesn't break, you found a shorter length than the input. Here one can go by increments of 1s or 5s     
     as they like and when the program breaks on a specific length they found the desired length.    
     You can see if the payload is loaded into the EIP register upon running `info registers` in gdb.
@@ -122,7 +122,7 @@ Hopefully this should spawn the attacker a reverse shell.
 
 
 # UPX
-If a binary is packed with `upx` used this to unpack it:
+If a binary is packed with `upx` use this to unpack it:
 ```bash
 upx -d <binary>
 ```
@@ -130,7 +130,7 @@ upx -d <binary>
 
 # PyInstaller packed binaries
 Python files can be packed and unpacked to and from a binary.    
-Use the links below to unpack said binary.    
+Use the links below to unpack said binaries.    
 
 After unpacking the binary, use [uncompyle6](https://pypi.org/project/uncompyle6/) to decompile `.pyc` files gotten from the unpacking process.
 
