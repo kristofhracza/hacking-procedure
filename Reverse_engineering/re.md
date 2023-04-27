@@ -1,5 +1,5 @@
 # Reverse Engineering
-Everything that you need for about RE
+Everything that you need for RE
 
 # Radare2 (R2)
 Manipulate binaries easily    
@@ -11,7 +11,7 @@ You can use R2 to overwrite parts of the assembly code so one part doesn't get c
 
 
 # Ghidra
-Open source reverse engineering software developed by NSA
+Open-source reverse engineering software developed by NSA
 
 ## Help
 - [https://github.com/NationalSecurityAgency/ghidra](https://github.com/NationalSecurityAgency/ghidra)
@@ -60,7 +60,7 @@ Python Exploit Development Assistance for GDB
     ```
     *If the program breaks, it's vulnerable to buffer overflow*
 5. Finding the right size      
-    Here what I personally like to do is to,reduce the length of the payload by half and if it breaks again repeat the steps.    
+    Here what I like to do is to, reduce the length of the payload by half and if it breaks again repeat the steps.    
     If the program doesn't break, you found a shorter length than the input. Here one can go by increments of 1s or 5s     
     as they like and when the program breaks on a specific length they found the desired length.    
     You can see if the payload is loaded into the EIP register upon running `info registers` in gdb.
@@ -71,7 +71,7 @@ Python Exploit Development Assistance for GDB
     eip     <0x616162> 
     [snip]
     ```
-    In the above code `62` is the random char. So, however long was the payload above, we need to add one more charcter to it.     
+    In the above code `62` is the random char. So, however long was the payload above, we need to add one more character to it.     
     For simplicity's sake let's say that the correct size was `512`.
 
 6. Making the actual payload
@@ -88,7 +88,7 @@ Python Exploit Development Assistance for GDB
         **OR**    
         Get a shellcode from here: [https://shell-storm.org/shellcode/index.html](https://shell-storm.org/shellcode/index.html) 
     3. Assemble the payload in Python     
-        **Keep in mind that most system are storing data in little endian**    
+        **Keep in mind that most systems are storing data in little-endian**    
         *This means that all addresses and bytes have to be reversed*
         ```python
         #!/usr/bin/python3
@@ -113,7 +113,7 @@ Python Exploit Development Assistance for GDB
     Enter string: <payload-here>
     ```
 
-Hopefully this should spawn the attacker a reverse shell.
+Hopefully, this should spawn the attacker a reverse shell.
 
 ### References
 - **Best help**    [**https://samsclass.info/127/proj/p3-lbuf1.htm**](https://samsclass.info/127/proj/p3-lbuf1.htm)
