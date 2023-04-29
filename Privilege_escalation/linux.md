@@ -46,6 +46,13 @@ read myvar
 Note: Here one can insert malicious code to be executed by the program.
 
 
+
+# Binaries (file read and write)
+- If a gven binary allows you to edit files and one's not yet root, the attacker can try to edit the **sudoers** file and put the user in there, hence gaining root privs.      
+- Also, maybe try copying the original file and add yourself to it and replace the original file with the altered version.
+
+
+
 # Processes / Buses
 
 ## Monitor buses
