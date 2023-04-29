@@ -1,5 +1,5 @@
 # Passwords and hashes
-Ways to break password hashes, or just methods to make the bruteforce easier.
+Ways to break password hashes, or just methods to make the brute-force easier.
 
 # Adding salt (as a normal string) to a password file
 This is if the password has no salt shown, because it has been concatenated when encrypting, therefore the salt has to be added to the dictionary, line-by-line.
@@ -9,7 +9,7 @@ sed -e 's/^/prefix/' <file> > <file.new>
 
 
 # Cewl
-Cewl can be used on a webpage and if one suspects that a password is hidden     
+Cewl can be used on a webpage, and if one suspects that a password is hidden     
 somewhere in the website.
 
 ## Usage
@@ -18,7 +18,7 @@ cewl -w <wordlist> -d 10 -m 1 <url>
 ```
 
 
-# Padding oracle atttack
+# Padding oracle attack
 ## Usage
 ```bash
 # DECRYPT
@@ -29,7 +29,7 @@ padbuster <url> "old_cookie" 8 -encoding 0 -cookies "auth=old_cookie" -plaintext
 ```
 
 ### Reference
-- https://book.hacktricks.xyz/crypto-and-stego/padding-oracle-priv[](https://book.hacktricks.xyz/crypto-and-stego/padding-oracle-priv)
+- [https://book.hacktricks.xyz/crypto-and-stego/padding-oracle-priv](https://book.hacktricks.xyz/crypto-and-stego/padding-oracle-priv)
 
 
 # Powershell credentials file
