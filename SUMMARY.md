@@ -26,3 +26,9 @@
 ## Reverse Engineering
 
 * [Reverse engineering](Reverse_engineering/re.md)
+
+
+
+## Passwords & hashing
+
+* [Passwords and hashes](Hashes_password/pass_hash.md)
