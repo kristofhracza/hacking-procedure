@@ -78,5 +78,5 @@ Help: [https://unit42.paloaltonetworks.com/usbcreator-d-bus-privilege-escalation
 # Web technologies
 Below you'll find a list of vulnerabilities in web technologies that will allow one to escalate privileges on a machine.
 
-- [Redis - CVE-2022-0543](../Known_vulnerabilities/web.md#redis---lua-sandbox-escape-vulnerability-(cve-2022-0543))
-- [Flask (Jinja 2) RCE](../Known_vulnerabilities/web.md#flask-(jinja-2)-rce)
+- [Redis - CVE-2022-0543](../Known_vulnerabilities/web.md#redis-lua-sandbox-escape-vulnerability-cve-2022-0543)
+- [Flask (Jinja 2) RCE](../Known_vulnerabilities/web.md#flask-jinja-2-rce)
