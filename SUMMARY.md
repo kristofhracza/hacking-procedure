@@ -12,7 +12,8 @@
 
 ## Known vulnerabilities
 
-* [Web](Known_vulnerabilities/web.md)    
+* [Web](Known_vulnerabilities/web.md)  
+* [Programming languages](Known_vulnerabilities/languages.md)    
 
 
 
@@ -32,3 +33,8 @@
 ## Passwords & hashing
 
 * [Passwords and hashes](Hashes_password/pass_hash.md)
+
+
+## Useful tools
+
+* [Web based](Useful_tools/web.md)
