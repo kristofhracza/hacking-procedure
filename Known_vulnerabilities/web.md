@@ -132,10 +132,13 @@ admin:s3cr3t
 tomcat:s3cr3t
 admin:tomcat
 ```
-## RCE
-If one has access to the Application Manager of Tomcat, the attacker can upload and run a .war file to execute code.     
+
+## War file exploit (RCE)
+If one has access to the Application Manager of Tomcat, the attacker can upload and run a .war file to execute code and get a shell potentially.     
 **This is only possible if the account that the attacker is logged in with has enough privileges (admin,manager-script,manager)**
 
+### References
+- [https://www.hackingarticles.in/multiple-ways-to-exploit-tomcat-manager/](https://www.hackingarticles.in/multiple-ways-to-exploit-tomcat-manager/)
 
 # ESIGate (ESI Injection)
 Any ESIGate software is affected that has a lower version than *5.3*
