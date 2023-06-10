@@ -52,4 +52,10 @@ hashcat -m 13100 --force <hash_file> <password_file>
 
 # Tools for all tech
 ## crackmapexec
-This allows you to enumerate Active Directory environments.
+
+### Brute force users
+Both the password and the username can either be a string or a file.    
+**First, try to brute force the user(s) with their own name as a password to save time, if that doesn't work one can use a password list**
+```
+crackmapexec smb <ip> -u <user/file> -p <password/file> --continue-on-success
+```

@@ -13,7 +13,8 @@
 ## Known vulnerabilities
 
 * [Web](Known_vulnerabilities/web.md)  
-* [Programming languages](Known_vulnerabilities/languages.md)    
+* [Programming languages](Known_vulnerabilities/languages.md)   
+* [Windows](Known_vulnerabilities/windows.md)  
 
 
 

