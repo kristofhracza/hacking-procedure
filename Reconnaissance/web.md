@@ -44,6 +44,17 @@ These are all stuff that one should look at when inspecting a web page, to see i
 - Cookies and local storage
 
 
+# Gobuster
+## Scan dir
+```sh
+gobuster dir -u <IP> -w <wordlist>
+```
+## Scan for multiple file extensions with the same list
+```sh
+# -x is to specify the file extension, the ones given are just examples
+gobuster dir -u <IP> -w <wordlist> -x txt,php,html
+```
+
 # Wfuzz
 Wfuzz is a tool designed for bruteforcing Web Applications, it can be used for finding resources not linked directories, servlets, scripts, etc.
 

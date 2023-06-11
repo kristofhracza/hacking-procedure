@@ -13,7 +13,8 @@ Things that aren't self explanatory if not encountered before
 - PHP files
     - If one or more file is found during recon, assume that there are more php files on the site and scan for them.    
     (Use a wordlist such as [https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/Common-PHP-Filenames.txt](https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/Common-PHP-Filenames.txt))
-- If there's a list of people or names with email addresses and see a list of countries listed    
+    - Any other files:      Try the method described [here](./web#scan-for-multiple-file-extensions-with-the-same-list) to expose more files.
+- If there's a list of people or names with email addresses and see a list of countries listed 
 assume that different people might have different email formats (see help and longer explanation below)
 
 ## Emails

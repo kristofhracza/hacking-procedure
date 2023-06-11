@@ -17,6 +17,16 @@ GIF :    47 49 46 38
 - Follow [this]([https://www.onsecurity.io/blog/file-upload-checklist/) article and try any other methods that I have not mentioned    
 [(https://www.onsecurity.io/blog/file-upload-checklist/)](https://www.onsecurity.io/blog/file-upload-checklist/)
 
+## Word limits on file upload
+If an image and/or file upload form cannot be broken by the methods described above, try to see if the program puts a limit on the number of characters
+allowed in the file name.     
+Hence, try breaking it by testing the name's length.
+
+### What gives it away?
+- One can only upload a certain file type (no trick to upload other file works)
+    - Find the limit and upload with double extension (.php.png) and the last four chars will get cut off and .php file will be uploaded to grant a shell.
+- Error messages
+    - The program outputs an error message that the name has exceeded the character limit.
 
 ## Exiftool
 If one discovered that the server is using exiftool to process the image uploaded one can try to exploit the tool with the following methods:
@@ -183,3 +193,19 @@ Any ESIGate software is affected that has a lower version than *5.3*
 These are blog posts that consist of 2 parts
 - [https://www.gosecure.net/blog/2018/04/03/beyond-xss-edge-side-include-injection/](https://www.gosecure.net/blog/2018/04/03/beyond-xss-edge-side-include-injection/)
 - [https://www.gosecure.net/blog/2019/05/02/esi-injection-part-2-abusing-specific-implementations/](https://www.gosecure.net/blog/2019/05/02/esi-injection-part-2-abusing-specific-implementations/)
+
+# PHP juggling
+This happens when the loose comparison operator `== or !=` is used instead of the strict comparison operator `=== or !==`    
+PHP juggling may return unexpetec true or false response, that could result in authentication problems.
+
+## Magic hashes / hash juggling
+If a hash only contains numbers after the first `0e`, PHP will treat the hash as a float.       
+A password hash that begins with `0e` will always appear to match the below strings, regardless of what they actually are.       
+The consequence is that when these magic hash numbers are compared to other hashes and treated as the number `0,` the comparison will result in a **True**.
+
+## Check your hash
+[https://github.com/spaze/hashes/blob/master/md5.md](https://github.com/spaze/hashes/blob/master/md5.md)       
+If the first part of one's hash matches one of the strings on the page, they can use that to login.
+
+### References
+- [https://secops.group/php-type-juggling-simplified/](https://secops.group/php-type-juggling-simplified/)
