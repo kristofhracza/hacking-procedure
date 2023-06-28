@@ -1,4 +1,7 @@
 # Databases (SQL / NoSQL)
+## Tips
+If a database has a table of session one can try to steal cookies or other credentials from the table to authenticate as another user.
+
 # SQL injection cheat sheets
 - [https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/](https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/)
 - [https://portswigger.net/web-security/sql-injection/cheat-sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet)
@@ -82,6 +85,17 @@ username=name&password=password
 - [https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635](https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635)
 ​​
 ​
+## MSSQL union queries
+Test the following query, it should dump all the data from the selected table.         
+```sql
+abcd' union select 1, concat(<data>,':',<data>) 3,4,5,6 from <table>;-- -
+```      
+
+*If the query needs to be edited, please follow the link in [the references](#references-1)* below.
+
+### References
+- [https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/](https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/)
+
 # MySQL user defined functions
 [​​https://medium.com/r3d-buck3t/privilege-escalation-with-mysql-user-defined-functions-996ef7d5ceaf](​​https://medium.com/r3d-buck3t/privilege-escalation-with-mysql-user-defined-functions-996ef7d5ceaf)
 

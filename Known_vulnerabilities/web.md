@@ -45,7 +45,16 @@ If a local file is queried via a URL parameter, an attacker might be able to que
 ### Example usage and occurrence
 `http://site.com?module=login.php`    
 A bad actor could exploit this and make the following URL:    
-`http://site.com?module=/etc/passwd`    
+`http://site.com?module=/etc/passwd`   
+
+### Code execution via url and file render
+If the url parameter allows for code to be executed, one might be able to get local resources.
+
+```
+php://filter/convert.base64-encode/resource=<FILE>
+```
+
+The code above will get a file in base64, one would need to decode it and will be able to read any file which they have permission to.
 
 
 ## RFI
@@ -209,3 +218,16 @@ If the first part of one's hash matches one of the strings on the page, they can
 
 ### References
 - [https://secops.group/php-type-juggling-simplified/](https://secops.group/php-type-juggling-simplified/)
+
+# Domain hosted on localhost of compromised system
+If a system is compromised and a site of the compromised system is hosted only on localhost and cannot be accessed (due to shell access only), but has ssh enabled one can use
+ssh tunneling as follows:    
+
+1. Forward the connection (attacker machine)
+    ```bash
+    ssh -L <attacker-system-port>:localhost:<remote-server-port> <remote-server> -N
+    ```
+2. Check the site (attacker machine browser)
+    ```
+    http://localhost:<attacker-system-port>
+    ```

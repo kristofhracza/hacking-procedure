@@ -68,6 +68,12 @@ The host can also be written like this:
 http://TARGET/script.php?path=http://localhost:FUZZ
 ```
 
+## URL parameter discovery
+```bash
+# -H options might not need to be set
+wfuzz -u https://<link>/<page>/?FUZZ= -w <wordlist> -H "Cookie: PHPSESSID="
+```
+
 # WPScan    
 ```bash
 wpscan --url <url> -e ap,at,dbe,u --plugins-detection aggressive
