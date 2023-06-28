@@ -205,7 +205,7 @@ These are blog posts that consist of 2 parts
 
 # PHP juggling
 This happens when the loose comparison operator `== or !=` is used instead of the strict comparison operator `=== or !==`    
-PHP juggling may return unexpetec true or false response, that could result in authentication problems.
+PHP juggling may return unexpected true or false response, that could result in authentication problems.
 
 ## Magic hashes / hash juggling
 If a hash only contains numbers after the first `0e`, PHP will treat the hash as a float.       

