@@ -3,19 +3,30 @@ Everything to check when trying to become root
 
 
 # Commands
+## Basic info
 - `sudo -l`
 - `ps aux | grep <user>`
-- `netstat -tulnp`
-- `ls - ltrh` --> sort files by latest update (the one that is close to you by date, could be important)
-- `kill -9 <pid>`
 - `w` --> Displays each logged in user and shows their activity
 - `groups` --> Shows all the groups that a user is in. *(Check for unusual groups)*
+- `(env || set) 2>/dev/null` --> Shows environment variables
+
+## Directories and files
+- `ls - ltrh` --> sort files by latest update (the one that is close to you by date, could be important)
+- `find / -writable -type d 2>/dev/null`
+- `find / -perm -4000 2>/dev/null`
+
+## Network
+- `(netstat -punta || ss --ntpu)` --> Open ports
+
+## Misc
+- `kill -9 <pid>`
+- `cat /sys/class/graphics/fb0/virtual_size` --> Shows the screen resolution.
 - `blkid` --> Determines the type of content (e.g. filesystem, swap) a block device holds.
     - Check [this](https://linux.die.net/man/8/blkid) link for more.
-- `cat /sys/class/graphics/fb0/virtual_size` --> Shows the screen resolution.
 - [`debugfs`](./linux.md#debugfs)
 - `ltrace`
 
+*Check out [this script](https://gist.github.com/IVBecy/fa31bb1e268b7709b79764614a97a79f) for ease of use*
 
 # Directories
 - ~/
