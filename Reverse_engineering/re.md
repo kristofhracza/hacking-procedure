@@ -62,3 +62,16 @@ After unpacking the binary, use [uncompyle6](https://pypi.org/project/uncompyle6
 
 ### Help
 [https://www.fortinet.com/blog/threat-research/unpacking-python-executables-windows-linux](https://www.fortinet.com/blog/threat-research/unpacking-python-executables-windows-linux)
+
+
+# Angr and claripy
+Binary analysis platform
+
+## Use cases
+One can write a python script to brute-force a flag in a binary.      
+[This](https://gist.github.com/IVBecy/cadc99ba82632b5cc6bda3a882c70c50) script gives an outline on how to write a script.
+*It was written for a HTB challenge*
+
+### References
+- [https://blog.notso.pro/2019-03-20-angr-introduction-part0/](https://blog.notso.pro/2019-03-20-angr-introduction-part0/)
+- [https://nier0x00.medium.com/spooky-license-reversing-challenge-hackthebox-writeup-d0cd20459f29](https://nier0x00.medium.com/spooky-license-reversing-challenge-hackthebox-writeup-d0cd20459f29)
