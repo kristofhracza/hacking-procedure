@@ -10,10 +10,50 @@ Everything to check for when trying to become Administrator on windows
 # Directories
 - C:\Windows\System32\spool\drivers\color
     - To upload files to
+- C:\Program Files or C:\Program Files (x86)
+    - To discover potentially vulnerable software
 - C:\Data\Users\app>
     - Old windows versions
 - C:\program files\windowspowershell\modules\packagemanagement
     - Check for any code, policy or password in files
+
+# Config files
+Most config files can be found in `C:\Windows\System32\config`     
+
+## Get info from registry hive
+```bash
+secretsdump.py -sam SAM -security SECURITY -system SYSTEM LOCAL
+```
+
+# Mount windows shares and VHD files
+The Common Internet File System (CIFS) is a network file-sharing protocol. CIFS is a form of SMB.    
+```bash
+mount -t cifs //<ip>/<share> <mount_dir> -o user=<username>,password=<password>
+```
+
+## Mount VHD files
+One can use `guestmount` to mount a guest filesystem on the host.     
+Install with: `apt install libguestfs-tools`
+
+```bash
+guestmount --add <vhd_file> --inspector --ro <mount_dir>
+```
+
+### References
+- [https://linux.die.net/man/1/guestmount](https://linux.die.net/man/1/guestmount)
+
+
+# Softwares
+## mRemoteNG
+mRemoteNG is a remote connection management tool, and it allows the user to save passwords for various types of connections. There is a file in the user's AppData directory, confCons.xml, that holds that information:
+
+### confCons.xml
+One can use `mremoteng-decrypt` to crack the password from the config file.     
+```bash
+python3 mremoteng_decrypt.py -s <string>
+```
+
+[https://github.com/kmahyyg/mremoteng-decrypt](https://github.com/kmahyyg/mremoteng-decrypt)
 
 
 # Tools
