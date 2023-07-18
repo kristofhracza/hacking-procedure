@@ -15,6 +15,7 @@
 * [Web](Known_vulnerabilities/web.md)  
 * [Programming languages](Known_vulnerabilities/languages.md)   
 * [Windows](Known_vulnerabilities/windows.md)  
+* [File types](Known_vulnerabilities/files.md) 
 
 
 

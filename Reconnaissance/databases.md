@@ -1,6 +1,7 @@
 # Databases (SQL / NoSQL)
 ## Tips
-If a database has a table of session one can try to steal cookies or other credentials from the table to authenticate as another user.
+- If a database has a table of session one can try to steal cookies or other credentials from the table to authenticate as another user.     
+- If one is in a database with write access and there are roles assigned to users, give the current user admin rights.
 
 # SQL injection cheat sheets
 - [https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/](https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/)

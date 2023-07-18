@@ -59,3 +59,30 @@ if __name__ == "__main__":
     brute()
 ```
 This script can be altered for different sites.
+
+# Linux
+## .dockerenv
+If there is a `.dockerenv` file, it means that the host is also a docker container
+
+## Shell upgrade to tty
+```bash
+username@host:~# script /dev/null -c bash
+
+# Press Ctrl+Z
+username@host:~# ^Z
+
+# Type: stty raw -echo; fg
+localname@localmachine$ stty raw -echo; fg
+
+# Type: reset
+reset
+reset: unknown terminal type unknown
+
+# Type: screen
+Terminal type? screen
+                                                                         
+username@host:~# 
+```
+
+# Local IPs
+If there are multiple IPs listed in order, and one is missing (has no port forwarded), one should run an `nmap` scan on the given IP

