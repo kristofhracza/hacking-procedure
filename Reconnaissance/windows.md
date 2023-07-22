@@ -16,12 +16,12 @@ windapsearch.py --dc-ip <ip> -d domain.local -u "" -U
 # SMB
 ## Enumeration
 
-# smbmap
+### smbmap
 ```bash
 # Without creds
 smbmap -H <ip>
 
-# With cresd
+# With creds
 smbmap -H <ip> -u <user> -p <password>
 ```
 
