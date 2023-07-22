@@ -9,8 +9,7 @@ sed -e 's/^/prefix/' <file> > <file.new>
 
 
 # Cewl
-Cewl can be used on a webpage, and if one suspects that a password is hidden     
-somewhere in the website.
+Cewl can be used on a webpage, and if one suspects that a password is hidden somewhere in the website.
 
 ## Usage
 ```bash
@@ -20,10 +19,10 @@ cewl -w <wordlist> -d 10 -m 1 <url>
 
 # Padding oracle attack
 ```bash
-# DECRYPT
+# Decrypt
 padbuster <url> "cookie" 8 -encoding 0 -cookies "cookiename=cookie"
 
-# ENCRYPT NEW COOKIE
+# Encrypt new cookie
 padbuster <url> "old_cookie" 8 -encoding 0 -cookies "auth=old_cookie" -plaintext "user=admin"
 ```
 
@@ -32,7 +31,7 @@ padbuster <url> "old_cookie" 8 -encoding 0 -cookies "auth=old_cookie" -plaintext
 
 
 # Powershell credentials file
-The command below can be used to, decrypt a given credentials file. **(has to be logged in as the user)**
+The command below can be used to decrypt a given credentials file. **(has to be logged in as the user)**
 ```powershell
 (Import-CliXml -Path user.txt).GetNetworkCredential().Password
 ```
@@ -41,13 +40,13 @@ The command below can be used to, decrypt a given credentials file. **(has to be
 # KeePass (jenkins) & kdbx files
 1.  Use `keepass2john` to make the file into a hash.
 2. Crack the hash file (from step 1) with hashcat, this will give you the **master password**    
-```bash
-hashcat.bin CEH.kdbx.hash /usr/share/wordlists/rockyou.txt --user
-```
+    ```bash
+    hashcat.bin CEH.kdbx.hash /usr/share/wordlists/rockyou.txt --user
+    ```
 3. Use `kpcli` to extract passwords: 
-```bash
-kpcli --kdb <file>.kdbx
-```
+    ```bash
+    kpcli --kdb <file>.kdbx
+    ```
 4. Run, `find .` in `kpcl`i will list all of the passwords
 5. `show -f [num]` will print a password based on the number that was input 
 
