@@ -6,7 +6,6 @@ Change the `$client` variable to this line, where the IP is the address of the v
 ```ps1
 $client = new-object System.Data.SqlClient.SqlConnection -ArgumentList "Server = <ip>; Data Source=(localdb)\.\ADSync;Initial Catalog=ADSync"
 ```
-
 *Next, download and execute the script*
 
 ### References

