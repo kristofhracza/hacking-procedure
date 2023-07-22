@@ -4,22 +4,24 @@ Commands and procedures to be done when looking through a web page.
 
 # Nmap   
 ```bash
+# Scan all ports (TCP)
 nmap -p- -v -T5 <ip>
-```    
-after ports are known    
-```bash
-nmap -p <ports> -A -v -T5 <ip>
-```    
-You can use the `-sU` flag to scan for UDP ports **(requires root privileges)**
 
+# Scan all ports (UDP)
+nmap -p- -v -T5 -sU <ip> 
+
+# Scan ports aggressively (-A) to get better info
+nmap -p <ports> -A -v -T5 <ip>
+```
 
 # Nikto  
+Website vulnerability scanner
 ```bash
 nikto -h http://target
 ```
 
 # FFUF
-   
+Website fuzzing tool
 ## Directory scan
 ```bash
 ffuf -w /path/to/wordlist -u https://target/FUZZ
@@ -59,18 +61,12 @@ gobuster dir -u <IP> -w <wordlist> -x txt,php,html
 Wfuzz is a tool designed for brute-forcing Web Applications, it can be used for finding resources not linked directories, servlets, scripts, etc.
 
 ## Bruteforce internal port (SSRF)
-This was written for a HTB machine.
 ```bash
 wfuzz -c -z range,1-65535 --hl=2 http://10.10.10.55:60000/url.php?path=http://localhost:FUZZ
-```
-The host can also be written like this:
-```
-http://TARGET/script.php?path=http://localhost:FUZZ
 ```
 
 ## URL parameter discovery
 ```bash
-# -H options might not need to be set
 wfuzz -u https://<link>/<page>/?FUZZ= -w <wordlist> -H "Cookie: PHPSESSID="
 ```
 

