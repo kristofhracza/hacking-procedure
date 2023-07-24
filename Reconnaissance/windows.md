@@ -2,15 +2,42 @@
 Windows tech enumeration
 
 # LDAP
-## Look for anonymous binds
+## ldapsearch
 ```bash
+# Anonymous access
 ldapsearch -H ldap://<ip>:<port> -b "dc=domain,dc=local" -x
+
+# Naming Contexts
+ldapsearch -h <ip> -x -s base namingcontexts
+
+# Get all info
+ldapsearch -h <ip> -x -b "dc=domain,dc=local"
+
+# Filter people
+ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=person)'
+
+# Filter users
+ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=user)'
+
+# Filter groups
+ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=group)'
 ```   
 *Make sure to look for users in the Remote Management Users group*  
 
-## Get users with
+## windapsearch.py
+LDAP enumeration script      
+[https://github.com/ropnop/windapsearch](https://github.com/ropnop/windapsearch)
 ```bash
 windapsearch.py --dc-ip <ip> -d domain.local -u "" -U
+```
+
+## Useful notes
+### ldapsearch passwords in result
+If an `ldapsearch` query comes back with users, try checking whether they have any password related options set.    
+
+**Examples**
+```
+cascadeLegacyPwd: BASE64 STRING
 ```
 ​
 # SMB
@@ -86,7 +113,7 @@ hashcat -m 13100 --force <hash_file> <password_file>
 # Enumeration
 ```bash
 # Null authentication
-rpcclient -U '' <ip>
+rpcclient -U '' -N <ip>
 
 # With creds
 rpcclient -U <username> <ip>

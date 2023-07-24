@@ -41,3 +41,7 @@ username@host:~#
 
 # Local IPs
 If there are multiple IPs listed in order, and one is missing (has no port forwarded), one should run an `nmap` scan on the given IP
+
+# Sub-folder or file exposed in non-accessible directory
+If access is denied to a folder but there's a resource known to be beyond it / inside it, one can try to access the resource.
+Either by changing directories or outputting a file.
