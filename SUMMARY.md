@@ -10,12 +10,12 @@
    
 
 
-## Known vulnerabilities
+## Tricks and vulnerabilities
 
-* [Web](Known_vulnerabilities/web.md)  
-* [Programming languages](Known_vulnerabilities/languages.md)   
-* [Windows](Known_vulnerabilities/windows.md)  
-* [File types](Known_vulnerabilities/files.md) 
+* [Web](Tricks_vulns/web.md)  
+* [Programming languages](Tricks_vulns/languages.md)   
+* [Windows](Tricks_vulns/windows.md)  
+* [File types](Tricks_vulns/files.md) 
 
 
 
