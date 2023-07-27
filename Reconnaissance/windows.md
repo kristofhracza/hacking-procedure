@@ -1,6 +1,16 @@
 # Windows technologies
 Windows tech enumeration
 
+# Tips
+## Multiple users
+If there's more than one user that needs to compromised before getting root, enumerate
+each user as they might have access to something new that was protected before.
+
+## Temporary account
+If some info suggests that an account is only temporary, than they might have some misconfigurations
+or rights that other users don't have.     
+Especially if they're created by a user which is in a group that has higher privileges.
+
 # LDAP
 ## ldapsearch
 ```bash
@@ -30,6 +40,15 @@ LDAP enumeration script
 ```bash
 windapsearch.py --dc-ip <ip> -d domain.local -u "" -U
 ```
+
+## nmap ldap
+Basic info about the domain
+```bash
+nmap -sT -Pn -n --open <ip> -p389 --script ldap-rootdse
+```
+
+### Reference
+- [https://exploit.ph/active-directory-recon-1.html](https://exploit.ph/active-directory-recon-1.html)
 
 ## Useful notes
 ### ldapsearch passwords in result
@@ -117,4 +136,21 @@ rpcclient -U '' -N <ip>
 
 # With creds
 rpcclient -U <username> <ip>
+```
+
+# Analyse office files
+Modern *Office* documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
+
+## Unzip
+```bash
+unzip <file>
+```
+
+## oletools
+```bash
+# Download tools
+sudo pip3 install -U oletools
+
+# Extract macros
+olevba -c <file>
 ```

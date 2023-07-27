@@ -1,5 +1,9 @@
 # Useful linux tools
 
+# username-anarchy
+Tool for generating usernames
+[https://github.com/urbanadventurer/username-anarchy](https://github.com/urbanadventurer/username-anarchy)
+
 # authbind
 If the system doesn't allow a user to bind a certain address they can try:
 ```bash

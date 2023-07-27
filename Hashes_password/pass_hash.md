@@ -10,6 +10,7 @@ sed -e 's/^/prefix/' <file> > <file.new>
 
 # Cewl
 Cewl can be used on a webpage, and if one suspects that a password is hidden somewhere in the website.
+[https://www.kali.org/tools/cewl/](https://www.kali.org/tools/cewl/)
 
 ## Usage
 ```bash

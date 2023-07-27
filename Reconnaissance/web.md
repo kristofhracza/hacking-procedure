@@ -37,6 +37,14 @@ ffuf -w <TEXT FILE> -u https://FUZZ.<DOMAIN>/
 ffuf -w <TEXT FILE> -u <HOST> -H "Host: FUZZ.<DOMAIN>"
 ```
 
+# Cewl
+Cewl can be used on a webpage, and if one suspects that a password is hidden somewhere in the website.
+[https://www.kali.org/tools/cewl/](https://www.kali.org/tools/cewl/)
+
+## Usage
+```bash
+cewl -w <wordlist> -d 10 -m 1 <url>
+```
 
 # On-page / on-site recon
 These are all stuff that one should look at when inspecting a web page, to see if there's anything suspicious.
