@@ -32,9 +32,9 @@
 
 
 
-## Passwords & hashing
+## Cryptography and passwords
 
-* [Cryptography and passwords](Crypto_password/pass_hash.md)
+* [Tricks and commands](Crypto_password/pass_hash.md)
 
 
 ## Useful tools
