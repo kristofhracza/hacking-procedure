@@ -34,7 +34,7 @@
 
 ## Passwords & hashing
 
-* [Passwords and hashes](Hashes_password/pass_hash.md)
+* [Cryptography and passwords](Crypto_password/pass_hash.md)
 
 
 ## Useful tools
