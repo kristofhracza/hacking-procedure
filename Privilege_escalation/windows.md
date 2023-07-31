@@ -3,7 +3,7 @@ Everything to check for when trying to become Administrator on Windows
 
 # Commands
 ## User related
-**User and group info**
+### User and group info
 ```powershell
 # User info
 net user
@@ -18,7 +18,7 @@ net localgroup <groupname>
 net group <groupname> /add <username>
 ```
 
-**Account creation**
+### Account creation
 ```powershell
 # Create account
 net user <username> <password> /add
@@ -29,6 +29,12 @@ net user <username> <password> /add /domain
 ```
 
 ## Basic
+### System
+```bash
+# Shows info about system
+# Look whether HotFixes are applied or not
+systeminfo
+```
 ### Show drives
 ```powershell
 powershell -c get-psdrive -psprovider filesystem
@@ -52,6 +58,9 @@ Invoke-WebRequest -Uri <source> -OutFile <output_file>
 # Method 3
 Import-Module BitsTransfer
 Start-BitsTransfer -Source <url> -Destination <output_file>
+
+# Method 4
+certutil -urlcache -f <url> output_file<>
 ```
 
 # Directories to check
@@ -250,6 +259,11 @@ echo -n <string> | xxd -r -p | openssl enc -des-cbc --nopad --nosalt -K e84ad660
 ## References
 - [https://github.com/frizb/PasswordDecrypts](https://github.com/frizb/PasswordDecrypts)
 - [https://github.com/billchaison/VNCDecrypt](https://github.com/billchaison/VNCDecrypt)
+
+# Exploits
+## Window-Exploit-Suggester
+This tool compares a targets patch levels against the Microsoft vulnerability database in order to detect potential missing patches on the target. It also notifies the user if there are public exploits and Metasploit modules available for the missing bulletins.
+[https://github.com/AonCyberLabs/Windows-Exploit-Suggester](https://github.com/AonCyberLabs/Windows-Exploit-Suggester)
 
 # Softwares
 ## mRemoteNG
