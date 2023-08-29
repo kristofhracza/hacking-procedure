@@ -135,10 +135,10 @@ SELECT 1, group_concat(schema_name), 3, 4, 5, 6, 7 from information_schema.schem
 # MSSQL
 
 ## Cheat sheets and references
-- [](https://book.hacktricks.xyz/generic-methodologies-and-resources/brute-force#sql-server)
-- [](https://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet)
-- [](https://gabb4r.gitbook.io/oscp-notes/service-enumeration/mssql-port-1433)
-- [](https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server)
+- [https://book.hacktricks.xyz/generic-methodologies-and-resources/brute-force#sql-server](https://book.hacktricks.xyz/generic-methodologies-and-resources/brute-force#sql-server)
+- [https://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet](https://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet)
+- [(https://gabb4r.gitbook.io/oscp-notes/service-enumeration/mssql-port-1433](https://gabb4r.gitbook.io/oscp-notes/service-enumeration/mssql-port-1433)
+- [https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server](https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server)
 ​
 # Oracle / ODAT
 Use [this](https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf) link as a reference for the steps described below    
