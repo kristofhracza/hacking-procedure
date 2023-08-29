@@ -63,6 +63,7 @@ ltrace or strace
 /dev/shm
 /opt
 /var
+var/www/html
 /usr
 # if a site is live
 /etc/apache2 
@@ -154,6 +155,21 @@ A raw image data can be converted to an actual image to reveal its content.
 2. Select resolution (`cat /sys/class/graphics/fb0/virtual_size` if unknown)
 3. Edit image types
 4. Export as png
+
+# OS command injection
+Command injection is a security vulnerability that allows an attacker to execute arbitrary commands inside a vulnerable application.
+## References
+- [https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
+
+# Services
+A service is defined by a `.service` file. The systemctl is used to link it to systemd, and then used again to start the service.      
+What the service does is defined by the `.service` file.     
+
+If a user has access to the `systemctl` binary, they can make a service which can read file or even spawn a reverse shell.
+
+## References
+- [https://gtfobins.github.io/gtfobins/systemctl/](https://gtfobins.github.io/gtfobins/systemctl/)
+- [https://0xdf.gitlab.io/2019/11/09/htb-jarvis.html#malicious-service](https://0xdf.gitlab.io/2019/11/09/htb-jarvis.html#malicious-service)
 
 # User in disk group
 A user who is in the disk group, will probably have access to info on a given disk.

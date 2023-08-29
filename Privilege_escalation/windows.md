@@ -293,3 +293,8 @@ sudo pip3 install -U oletools
 # Extract macros
 olevba -c <file>
 ```
+
+# OS command injection
+Command injection is a security vulnerability that allows an attacker to execute arbitrary commands inside a vulnerable application.
+## References
+- [https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

