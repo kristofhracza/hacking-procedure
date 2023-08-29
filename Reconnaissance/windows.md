@@ -11,6 +11,33 @@ If some info suggests that an account is only temporary, than they might have so
 or rights that other users don't have.     
 Especially if they're created by a user which is in a group that has higher privileges.
 
+# DNS
+##  dig
+```bash
+# Normal DNS request
+dig A @<ip> <domain> 
+
+# Get all available entries
+dig any server.local @<DNS_IP>
+
+#Zone transfer without domain
+dig axfr @<DNS_IP>
+
+#Zone transfer with domain
+dig axfr @<DNS_IP> <DOMAIN>
+
+```
+
+## nmap
+```bash
+nmap -sSU -p53 --script dns-nsec-enum --script-args dns-nsec-enum.domains=paypal.com <domain>
+```
+
+## metasploit
+```
+auxiliary/gather/enum_dns
+```
+
 # LDAP
 ## ldapsearch
 ```bash
