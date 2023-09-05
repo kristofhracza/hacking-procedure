@@ -206,7 +206,7 @@ A Silver Ticket is a forged TGS (Ticket Granting Service) ticket, which is used 
 
 
 # RPC
-# Enumeration
+## Login
 ```bash
 # Null authentication
 rpcclient -U '' -N <ip>
@@ -214,6 +214,45 @@ rpcclient -U '' -N <ip>
 # With creds
 rpcclient -U <username> <ip>
 ```
+
+## Enumeration
+```bash
+# USERS
+querydispinfo
+enumdomusers
+
+## User details
+queryuser <rid>
+
+## User groups
+queryusergroups <rid>
+
+## SID
+lookupnames <rid>
+
+## Aliases
+queryuseraliases builtin <username>
+
+
+# GROUPS
+enumdomgroups
+
+## Group Details
+querygroup <rid>
+
+## Group members
+querygroupmem <rid>
+
+
+# SHARES
+netshareenumall
+
+## Share details
+netsharegetinfo <share>
+```
+
+### Reference
+- [https://book.hacktricks.xyz/network-services-pentesting/pentesting-smb/rpcclient-enumeration](https://book.hacktricks.xyz/network-services-pentesting/pentesting-smb/rpcclient-enumeration)
 
 # Analyse office files
 Modern *Office* documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
