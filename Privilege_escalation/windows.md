@@ -140,7 +140,7 @@ Set-SeBackupPrivilege
 Get-SeBackupPrivilege
 ```
 
-## Get hashes from .dit file
+### Get hashes from .dit file
 ```bash
 # REMOTE
 

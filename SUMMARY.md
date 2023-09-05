@@ -3,26 +3,25 @@
 ## Reconnaissance
 
 * [Web](Reconnaissance/web.md)    
-* [Database](Reconnaissance/databases.md)   
 * [Windows](Reconnaissance/windows.md)   
+* [Database](Reconnaissance/databases.md)   
 * [Other technologies](Reconnaissance/other.md)    
-* [Assumptions](Reconnaissance/assumptions.md)    
    
-
-
-## Tricks and vulnerabilities
-
-* [Web](Tricks_vulns/web.md)  
-* [Programming languages](Tricks_vulns/languages.md)   
-* [Windows](Tricks_vulns/windows.md)  
-* [File types](Tricks_vulns/files.md) 
-
 
 
 ## Privilege escalation
 
 * [Linux](Privilege_escalation/linux.md)  
-* [Windows](Privilege_escalation/windows.md)  
+* [Windows](Privilege_escalation/windows.md) 
+
+
+## Tricks and vulnerabilities
+
+* [Assumptions](Reconnaissance/assumptions.md)    
+* [Web](Tricks_vulns/web.md)  
+* [Programming languages](Tricks_vulns/languages.md)   
+* [Windows](Tricks_vulns/windows.md)  
+* [File types](Tricks_vulns/files.md) 
 
 
 
