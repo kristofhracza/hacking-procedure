@@ -37,6 +37,12 @@ The command below can be used to decrypt a given credentials file. **(has to be 
 (Import-CliXml -Path user.txt).GetNetworkCredential().Password
 ```
 
+# VNC passwords
+[https://github.com/trinitronx/vncpasswd.py](https://github.com/trinitronx/vncpasswd.py)     
+Use the tool above to decrypt a VNC password hash
+```bash
+python vncpasswd.py -d -f <hashfile>
+```
 
 # KeePass (jenkins) & kdbx files
 1.  Use `keepass2john` to make the file into a hash.

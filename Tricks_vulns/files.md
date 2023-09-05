@@ -1,3 +1,9 @@
+# File with non-compatible characters
+`hexdump` will show all the characters
+```bash
+cat <file> | hexdump -C
+```
+
 # Jamovi OMV files
 OMV files are used for Jamovi to display data.     
 These files are basically zip archives so:      
