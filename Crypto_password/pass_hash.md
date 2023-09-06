@@ -82,3 +82,37 @@ Try [crackstation](https://crackstation.net/), the hash might already be in thei
 ### References
 - [https://aas-s3curity.gitbook.io/cheatsheet/internalpentest/active-directory/post-exploitation/extracting-credentials/retrieve-windows-hashes](https://aas-s3curity.gitbook.io/cheatsheet/internalpentest/active-directory/post-exploitation/extracting-credentials/retrieve-windows-hashes)
 - [https://0xdf.gitlab.io/2021/05/19/htb-kotarak.html](https://0xdf.gitlab.io/2021/05/19/htb-kotarak.html)
+
+# PFX files
+Password protected file certificate commonly used for code signing your application. It derives from the PKCS 12 archive file format certificate, and it stores multiple cryptographic objects within a single file     
+
+## Extract private key and certificate
+```bash
+# PRIVATE KEY
+openssl pkcs12 -in <pfx_file> -nocerts -out private.key
+
+# CERTIFICATE
+openssl pkcs12 -in <pfx_file> -clcerts -nokeys -out certificate.crt
+```
+
+### Password protection
+`pfx2john` can turn these files into a hash which can be brute-forced to extract password.
+```bash
+# Make hash file
+pfx2john.py <file> > <hashfile>
+
+# Dictionary attack
+john -w=/usr/share/wordlists/rockyou.txt <hashfile>
+
+# Brute force
+john  <hashfile>
+
+# One liners
+pfx2john <file>  |john /dev/stdin
+pfx2john <file>  |john -w=/usr/share/wordlists/rockyou.txt /dev/stdin
+```
+
+## Login with evil-winrm
+```bash
+evil-winrm -i <ip> -S -k <private_key> -c <certificate>
+```

