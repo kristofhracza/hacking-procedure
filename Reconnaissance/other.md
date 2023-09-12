@@ -1,7 +1,3 @@
-# Other technologies
-Recon tactics for technologies that don't fit any other category
-
-
 # SNMP
 Simple Network Management Protocol
 

@@ -1,6 +1,3 @@
-# Windows technologies
-Windows tech enumeration
-
 # Tips
 ## Multiple users
 If there's more than one user that needs to compromised before getting root, enumerate

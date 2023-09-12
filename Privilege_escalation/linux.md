@@ -1,6 +1,3 @@
-# Linux
-Everything to check for when trying to become root
-
 # Commands
 ## Basic info
 ```bash

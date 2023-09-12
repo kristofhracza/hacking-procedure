@@ -1,6 +1,3 @@
-# Reverse Engineering
-Everything that you need for RE
-
 # Radare2 (R2)
 Manipulate binaries easily    
 You can use R2 to overwrite parts of the assembly code so one part doesn't get called or gets redirected.

@@ -1,20 +1,3 @@
-# Assumptions
-Things that aren't self explanatory if not encountered before
-
-
-# Stuff to check for
-- **/dev** DIR on web page. If found, use `git-dumper` to get data. 
-- Try to access a page with both HTTP and HTTPS. *They might host different content*
-- PHP files
-    - If one or more file is found during recon, assume that there are more php files on the site and scan for them.    
-    (Use a wordlist such as [https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/Common-PHP-Filenames.txt](https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/Common-PHP-Filenames.txt))
-    - Any other files:      Try the method described [here](./web#scan-for-multiple-file-extensions-with-the-same-list) to expose more files.
-
-- On a webpage scan for all types of files, with DIR names during recon. 
-    ```bash 
-    gobuster dir -u <IP> -w <wordlist> -x txt,php,html
-    ```
-
 # Linux
 ## .dockerenv
 If there is a `.dockerenv` file, it means that the host is most likely a docker container

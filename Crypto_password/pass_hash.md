@@ -1,6 +1,3 @@
-# Passwords and hashes
-Ways to break password hashes, or just methods to make the brute-force easier.
-
 # Adding salt (as a normal string) to a password file
 This is if the password has no salt shown, because it has been concatenated when encrypting, therefore the salt has to be added to the dictionary, line-by-line.
 ```bash

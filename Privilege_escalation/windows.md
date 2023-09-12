@@ -1,6 +1,3 @@
-# Windows
-Everything to check for when trying to become Administrator on Windows
-
 # Commands
 ## User related
 ### User and group info

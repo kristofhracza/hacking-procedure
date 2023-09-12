@@ -1,7 +1,3 @@
-# Web enumeration
-Commands and procedures to be done when looking through a web page.
-
-
 # Nmap   
 ```bash
 # Scan all ports (TCP)

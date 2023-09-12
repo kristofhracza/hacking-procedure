@@ -1,5 +1,3 @@
-# Useful linux tools
-
 # username-anarchy
 Tool for generating usernames
 [https://github.com/urbanadventurer/username-anarchy](https://github.com/urbanadventurer/username-anarchy)
