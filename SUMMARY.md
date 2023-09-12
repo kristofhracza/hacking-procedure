@@ -2,42 +2,42 @@
 
 ## Reconnaissance
 
-* [Web](Reconnaissance/web.md)    
-* [Windows](Reconnaissance/windows.md)   
-* [Database](Reconnaissance/databases.md)   
-* [Other technologies](Reconnaissance/other.md)    
+* [Web](recon/web.md)    
+* [Windows](recon/windows.md)   
+* [Database](recon/databases.md)   
+* [Other technologies](recon/other.md)    
    
 
 
 ## Privilege escalation
 
-* [Linux](Privilege_escalation/linux.md)  
-* [Windows](Privilege_escalation/windows/windows.md) 
-    * [Active Directory](Privilege_escalation/windows/windows_ad.md) 
+* [Linux](priv_esc/linux.md)  
+* [Windows](priv_esc/windows/windows.md) 
+    * [Active Directory](priv_esc/windows/windows_ad.md) 
 
 
 ## Tricks and vulnerabilities
 
-* [Assumptions](Reconnaissance/assumptions.md)    
-* [Web](Tricks_vulns/web.md)  
-* [Programming languages](Tricks_vulns/languages.md)   
-* [Windows](Tricks_vulns/windows.md)  
-* [File types](Tricks_vulns/files.md) 
+* [Assumptions](recon/assumptions.md)    
+* [Web](tricks/web.md)  
+* [Programming languages](tricks/languages.md)   
+* [Windows](tricks/windows.md)  
+* [File types](tricks/files.md) 
 
 
 
 ## Reverse Engineering
 
-* [Reverse engineering](Reverse_engineering/re.md)
+* [Reverse engineering](re/re.md)
 
 
 
 ## Cryptography and passwords
 
-* [Tricks and commands](Crypto_password/pass_hash.md)
+* [Tricks and commands](crypto/pass_hash.md)
 
 
 ## Useful tools
 
-* [Web](Useful_tools/web.md)
-* [Linux](Useful_tools/linux.md)
+* [Web](tools/web.md)
+* [Linux](tools/linux.md)
