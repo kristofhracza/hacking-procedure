@@ -1,13 +1,12 @@
-# Active Directory
-## BloodHound
+# BloodHound
 This is used to visualise AD environments and discover attack paths.
 
-### Ingestors
-#### SharpHound
+## Ingestors
+### SharpHound
 Data collector for BloodHound
 [https://github.com/BloodHoundAD/SharpHound](https://github.com/BloodHoundAD/SharpHound)
 
-#### bloodhound.py
+### bloodhound.py
 Python based data collection tool for BloodHound     
 This will run against the domain, so can one run it from a remote machine.
 ```bash
@@ -16,15 +15,15 @@ bloodhound-python -u <username> -p <password> -d <domain> -c All -ns <nameserver
 [https://github.com/fox-it/BloodHound.py](https://github.com/fox-it/BloodHound.py)
 
 
-### Useful info
+## Useful info
 - [https://bloodhound.readthedocs.io/en/latest/index.html](https://bloodhound.readthedocs.io/en/latest/index.html)
 - [https://github.com/fox-it/BloodHound.py](https://github.com/fox-it/BloodHound.py)
 - [https://bloodhound.readthedocs.io/en/latest/data-collection/sharphound.html](https://bloodhound.readthedocs.io/en/latest/data-collection/sharphound.html)
 
-## Evil-WinRM
+# Evil-WinRM
 Allows remote login to WinRM, if credentials are known.
 
-### Usage
+## Usage
 ```bash
 # With password
 evil-winrm -i <ip> -u <user> -p <password>
@@ -36,12 +35,12 @@ evil-winrm -i <ip> -u <user> -H <hash>
 evil-winrm -i <ip> -S -k <private_key> -c <certificate>
 ```
 
-## LAPS
+# LAPS
 LAPS allows you to manage the local Administrator password (which is randomised, unique, and changed regularly) on domain-joined computers. These passwords are centrally stored in Active Directory and restricted to authorised users using ACLs. Passwords are protected in transit from the client to the server using Kerberos v5 and AES       
 
 When using LAPS, 2 new attributes appear in the computer objects of the domain: ms-mcs-AdmPwd and ms-mcs-AdmPwdExpirationTime. These attributes contains the plain-text admin password and the expiration time. Then, in a domain environment, it could be interesting to check which users can read these attributes.
 
-### Commands
+## Commands
 ```powershell
 # Check if LAPS is activated
 reg query "HKLM\Software\Policies\Microsoft Services\AdmPwd" /v AdmPwdEnabled
@@ -58,7 +57,7 @@ Find-AdmPwdExtendedRights -Identity Workstations | fl
 Get-AdmPwdPassword -ComputerName wkstn-2 | fl
 ```
 
-### Dumping credentials via crackmapexec
+## Dumping credentials via crackmapexec
 ```bash
 # LDAP
 crackmapexec ldap <ip> -u <user> -p <password> -d <domain> -M laps
@@ -67,7 +66,7 @@ crackmapexec ldap <ip> -u <user> -p <password> -d <domain> -M laps
 crackmapexec smb <ip> -u <user> -p <password> --laps
 ```
 
-#### References
+### References
 - [https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps)
 - [https://www.crackmapexec.wiki/smb-protocol/defeating-laps](https://www.crackmapexec.wiki/smb-protocol/defeating-laps)
 - [https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps](https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps)s
