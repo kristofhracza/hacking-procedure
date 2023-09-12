@@ -12,7 +12,10 @@
 ## Privilege escalation
 
 * [Linux](Privilege_escalation/linux.md)  
-* [Windows](Privilege_escalation/windows.md) 
+* [Windows](Privilege_escalation/windows/windows.md) 
+
+### Active Directory
+* [Active Directory](Privilege_escalation/windows/windows_ad.md) 
 
 
 ## Tricks and vulnerabilities
