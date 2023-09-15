@@ -1,5 +1,4 @@
-# Databases (SQL / NoSQL)
-## Tips
+# Tips
 - If a database has a table of session one can try to steal cookies or other credentials from the table to authenticate as another user.     
 - If one is in a database with write access and there are roles assigned to users, give the current user admin rights.
 
@@ -135,12 +134,14 @@ Username --> Scott
 Password --> tiger
 ```
 
-## Brute force SID
-*Steps*    
+## Brute force SID  
 1. Use: `odat` and its `sidguesser` to bruteforce with a link provided
 2. Use metasploit and use `auxiliary(admin/oracle/sid_brute)`
 3. Use `sqlplus` to login with the creds or
-    1. Read file with odat as such:    `odat ctxsys -s 10.10.10.14 -d XE -U SCOTT -P tiger --sysdba --getFile flag.txt`
+    1. Read file with odat:    
+    ```sh
+    odat ctxsys -s <ip> -d XE -U SCOTT -P tiger --sysdba --getFile flag.txt
+    ```
 
 
 # NoSQL

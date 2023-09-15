@@ -8,6 +8,8 @@ If some info suggests that an account is only temporary, than they might have so
 or rights that other users don't have.     
 Especially if they're created by a user which is in a group that has higher privileges.
 
+
+
 # DNS
 ##  dig
 ```bash
@@ -25,6 +27,8 @@ dig axfr @<DNS_IP> <DOMAIN>
 
 ```
 
+
+
 ## nmap
 ```bash
 nmap -sSU -p53 --script dns-nsec-enum --script-args dns-nsec-enum.domains=paypal.com <domain>
@@ -34,6 +38,8 @@ nmap -sSU -p53 --script dns-nsec-enum --script-args dns-nsec-enum.domains=paypal
 ```
 auxiliary/gather/enum_dns
 ```
+
+
 
 # LDAP
 ## ldapsearch
@@ -71,18 +77,17 @@ Basic info about the domain
 nmap -sT -Pn -n --open <ip> -p389 --script ldap-rootdse
 ```
 
-### Reference
-- [https://exploit.ph/active-directory-recon-1.html](https://exploit.ph/active-directory-recon-1.html)
-
-## Useful notes
+## Notes
 ### ldapsearch passwords in result
 If an `ldapsearch` query comes back with users, try checking whether they have any password related options set.    
 
-**Examples**
+**Example(s)**
 ```
 cascadeLegacyPwd: BASE64 STRING
 ```
 ​
+
+
 # SMB
 ## Enumeration
 
@@ -127,7 +132,7 @@ crackmapexec smb <ip> -u ""
 crackmapexec smb <ip> -u <username/file> -p <password/file>
 ```
 
-## Connecting
+## Establishing connection
 ### smbclient
 ```bash
 smbclient //<ip> -U <user>
@@ -144,18 +149,18 @@ smbclient.py <domain>/<username>:<password>@<ip>
 smbclient.py -k <domain>/<username>:<password>@<ip> -dc-ip <ip>
 ```
 
+
+
 # Kerberos
 ## GetNPUsers.py
 Impacket's `GetNPUsers.py` will attempt to harvest the non-preauth AS_REP responses for a given list of usernames
 
-### Usage
 ```bash
 GetNPUsers.py domain.local/ -dc-ip <ip> -usersfile <username_file> -format hashcat -outputfile <output>
 ```
 
 ## Kerberoasting
 Kerberoasting is a post-exploitation attack technique that attempts to obtain a password hash of an Active Directory account that has a Service Principal Name.
-
 ```bash
 GetUserSPNs.py -request -dc-ip <ip> domain.local/user -save -outputfile <output_file>
 ```
@@ -167,14 +172,16 @@ hashcat -m 13100 --force <hash_file> <password_file>
 
 ### Troubleshooting
 #### NTLM hash disabled
-Use the `-k` option as well as `-dc-host` instead of `-dc-ip`. As that will break the authentication and throw an error.
+Use the `-k` option as well as `-dc-host` instead of `-dc-ip`. As the latter will break the authentication and throw an error.
 
 #### References
 - [https://www.crowdstrike.com/cybersecurity-101/kerberoasting/](https://www.crowdstrike.com/cybersecurity-101/kerberoasting/)
 
 
 ## Silver ticket attack
-A Silver Ticket is a forged TGS (Ticket Granting Service) ticket, which is used directly between the client and the service, without necessarily going to the DC. Instead, the TGS ticket is signed by the service account itself, and thus the Silver Ticket is limited to authenticating only the service itself.
+A Silver Ticket is a forged TGS (Ticket Granting Service) ticket, which is used directly between the client and the service, without necessarily going to the DC. Instead, the TGS ticket is signed by the service account itself, and thus the Silver Ticket is limited to authenticating only the service itself.      
+-[https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/](https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/)
+
 
 ### Steps
 1. Generate NTLM hash
@@ -197,21 +204,8 @@ A Silver Ticket is a forged TGS (Ticket Granting Service) ticket, which is used 
     ```
 
 
-### References
-- [https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/](https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/)
-- [https://adsecurity.org/?p=2011](https://adsecurity.org/?p=2011)
-
 
 # RPC
-## Login
-```bash
-# Null authentication
-rpcclient -U '' -N <ip>
-
-# With creds
-rpcclient -U <username> <ip>
-```
-
 ## Enumeration
 ```bash
 # USERS
@@ -248,11 +242,19 @@ netshareenumall
 netsharegetinfo <share>
 ```
 
-### Reference
-- [https://book.hacktricks.xyz/network-services-pentesting/pentesting-smb/rpcclient-enumeration](https://book.hacktricks.xyz/network-services-pentesting/pentesting-smb/rpcclient-enumeration)
+## Establishing connection
+```bash
+# Null authentication
+rpcclient -U '' -N <ip>
+
+# With creds
+rpcclient -U <username> <ip>
+```
+
+
 
 # Analyse office files
-Modern *Office* documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
+Modern `Office` documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
 
 ## Unzip
 ```bash
@@ -260,6 +262,7 @@ unzip <file>
 ```
 
 ## oletools
+oletools is a package of python tools to analyze Microsoft OLE2 files (also called Structured Storage, Compound File Binary Format or Compound Document File Format), such as Microsoft Office documents or Outlook messages
 ```bash
 # Download tools
 sudo pip3 install -U oletools

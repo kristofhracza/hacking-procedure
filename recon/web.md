@@ -1,4 +1,5 @@
 # Nmap   
+Discover port and services running on the remote host.
 ```bash
 # Scan all ports (TCP)
 nmap -p- -v -T5 <ip>
@@ -10,71 +11,61 @@ nmap -p- -v -T5 -sU <ip>
 nmap -p <ports> -A -v -T5 <ip>
 ```
 
+
+
 # Nikto  
-Website vulnerability scanner
+Scan sites for known vulnerabilities, misconfigurations and directories.
 ```bash
 nikto -h http://target
 ```
 
-# FFUF
-Website fuzzing tool
-## Directory scan
+
+
+# gobuster
+Web brute forcer
 ```bash
-ffuf -w /path/to/wordlist -u https://target/FUZZ
-```
+# DNS / Sub-domain scan
+gobuster dns -d <host> -w <wordlist>
 
-## Sub-domain scan
-```bash
-ffuf -w <TEXT FILE> -u https://FUZZ.<DOMAIN>/
-```
-
-## Vhost fuzzing
-```bash
-ffuf -w <TEXT FILE> -u <HOST> -H "Host: FUZZ.<DOMAIN>"
-```
-
-# Cewl
-Cewl can be used on a webpage, and if one suspects that a password is hidden somewhere in the website.
-[https://www.kali.org/tools/cewl/](https://www.kali.org/tools/cewl/)
-
-## Usage
-```bash
-cewl -w <wordlist> -d 10 -m 1 <url>
-```
-
-# On-page / on-site recon
-These are all stuff that one should look at when inspecting a web page, to see if there's anything suspicious.
-- Links
-- Paths
-- URL parameters
-- Cookies and local storage
-
-
-# Gobuster
-## Scan dir
-```sh
+# Directory scan
 gobuster dir -u <IP> -w <wordlist>
-```
-## Scan for multiple file extensions with the same list
-```sh
-# -x is to specify the file extension, the ones given are just examples
+
+## Scan for multiple file extensions with the same list (-x)
 gobuster dir -u <IP> -w <wordlist> -x txt,php,html
+
+# VHOST scanning
+gobuster vhost -u <host> -w <wordlist> 
 ```
+
+
 
 # Wfuzz
 Wfuzz is a tool designed for brute-forcing Web Applications, it can be used for finding resources not linked directories, servlets, scripts, etc.
 
-## Bruteforce internal port (SSRF)
-```bash
-wfuzz -c -z range,1-65535 --hl=2 http://10.10.10.55:60000/url.php?path=http://localhost:FUZZ
-```
+```sh
+# Bruteforce internal port (SSRF)
+wfuzz -c -z range,1-65535 --hl=2 http://<ip>:<port>/url.php?path=http://localhost:FUZZ
 
-## URL parameter discovery
-```bash
+# URL parameter discovery
 wfuzz -u https://<link>/<page>/?FUZZ= -w <wordlist> -H "Cookie: PHPSESSID="
 ```
 
-# WPScan    
+
+
+# Cewl
+CeWL (Custom Word List generator) is a ruby app which spiders a given URL, up to a specified depth, and returns a list of words which can then be used for password crackers such as John the Ripper. Optionally, CeWL can follow external links.      
+
+CeWL can also create a list of email addresses found in mailto links. These email addresses can be used as usernames in brute force actions.
+[https://www.kali.org/tools/cewl/](https://www.kali.org/tools/cewl/)
+
 ```bash
-wpscan --url <url> -e ap,at,dbe,u --plugins-detection aggressive
+cewl -w <wordlist> -d 10 -m 1 <url>
+```
+
+
+
+# WPScan    
+Scan wordpress sites
+```bash
+wpscan --url <url> -e ap,at,dbe,u
 ```

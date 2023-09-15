@@ -4,9 +4,10 @@
 
 * [Web](recon/web.md)    
 * [Windows](recon/windows.md)   
-* [Database](recon/databases.md)   
+* [Databases](recon/databases.md)   
 * [Other technologies](recon/other.md)    
-   
+* [Good to know hacks](recon/good_to_know.md)  
+
 
 
 ## Privilege escalation
@@ -16,13 +17,10 @@
     * [Active Directory](priv_esc/windows/windows_ad.md) 
 
 
-## Tricks and vulnerabilities
 
-* [Assumptions](recon/assumptions.md)    
-* [Web](tricks/web.md)  
-* [Programming languages](tricks/languages.md)   
-* [Windows](tricks/windows.md)  
-* [File types](tricks/files.md) 
+## Cryptography and passwords
+
+* [Tricks and commands](crypto/pass_hash.md)
 
 
 
@@ -30,11 +28,6 @@
 
 * [Reverse engineering](re/re.md)
 
-
-
-## Cryptography and passwords
-
-* [Tricks and commands](crypto/pass_hash.md)
 
 
 ## Useful tools

