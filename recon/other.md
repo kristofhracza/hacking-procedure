@@ -13,7 +13,7 @@ snmpwalk -Os -c public <ip>
 ## Scanning
 1. `davtest`
 2. In metasploit: `search webdav`
-3. If vulnerable use: ​**[https://github.com/Re4son/Churrasco/](https://github.com/Re4son/Churrasco/)**
+3. If vulnerable use: **[Churrasco](https://github.com/Re4son/Churrasco/)**
 
 
 # Apache Subversion (SVN)
