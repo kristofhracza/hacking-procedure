@@ -209,7 +209,7 @@ The default Active Directory ms-DS-MachineAccountQuota attribute setting allows 
 **[Release](https://github.com/Flangvik/SharpCollection/blob/master/NetFramework_4.5_x64/Rubeus.exe)**       
 Rubeus is a C# toolset for raw Kerberos interaction and abuses.
 
-###  S4U attack
+### S4U attack
 ```powershell
 .\Rubeus.exe hash /password:<password> /user:<fake_name> /domain:domain.local
 ```

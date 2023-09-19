@@ -14,7 +14,10 @@
 
 * [Linux](priv_esc/linux.md)  
 * [Windows](priv_esc/windows/windows.md) 
-    * [Active Directory](priv_esc/windows/windows_ad.md) 
+    * [Active Directory Enumeration](priv_esc/windows/windows_ad.md)
+* [Active Directory Attacks](priv_esc/windows/ad_attacks/attacks.md)
+    * [DCSync](priv_esc/windows/ad_attacks/dcsync.md)
+    * [Resource-based Constrained Delegation](priv_esc/windows/ad_attacks/resource_based_constrained_delegation.md)
 
 
 

