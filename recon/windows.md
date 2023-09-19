@@ -24,10 +24,13 @@ dig axfr @<DNS_IP>
 
 #Zone transfer with domain
 dig axfr @<DNS_IP> <DOMAIN>
-
 ```
 
-
+## gobuster
+```bash
+# Subdomain scan
+gobuster dns -d domain.local -t 25 -w <wordlist>
+```
 
 ## nmap
 ```bash
@@ -43,6 +46,7 @@ auxiliary/gather/enum_dns
 
 # LDAP
 ## ldapsearch
+***Without credentials**
 ```bash
 # Anonymous access
 ldapsearch -H ldap://<ip>:<port> -b "dc=domain,dc=local" -x
@@ -62,7 +66,12 @@ ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=user)'
 # Filter groups
 ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=group)'
 ```   
-*Make sure to look for users in the Remote Management Users group*  
+***With credentials**
+```bash
+ldapsearch -H ldap://<ip> -b "dc=domain,dc=local" -D "cn=username,dc=domain,dc=local" -w <password>   -x
+
+ldapsearch -h <domain.local> -D 'user@domain.local' -w <password> -b "DC=domain,DC=local"
+```
 
 ## windapsearch.py
 LDAP enumeration script      
@@ -78,13 +87,17 @@ nmap -sT -Pn -n --open <ip> -p389 --script ldap-rootdse
 ```
 
 ## Notes
-### ldapsearch passwords in result
+### Passwords in result
 If an `ldapsearch` query comes back with users, try checking whether they have any password related options set.    
 
 **Example(s)**
 ```
 cascadeLegacyPwd: BASE64 STRING
 ```
+
+### Info field
+Log of a query might contain some info in the user.     
+In many CTF-s they put passwords there.
 ​
 
 
