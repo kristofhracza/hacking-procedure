@@ -47,7 +47,7 @@ Sometimes, these accounts have an ability to reset passwords.
 *Note that the wording of the account name might be different, but related to aforementioned names*
 
 ### Reset password through RPC
-[https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password](https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password)
+[Help](https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password)
 
 ```bash
 setuserinfo2 <user> 23 <password>
@@ -155,11 +155,6 @@ crackmapexec ldap <ip> -u <user> -p <password> -d <domain> -M laps
 # SMB
 crackmapexec smb <ip> -u <user> -p <password> --laps
 ```
-
-
-
-
-
 
 
 

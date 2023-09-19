@@ -8,7 +8,7 @@ sed -e 's/^/prefix/' <file> > <file.new>
 
 # Cewl
 Cewl can be used on a webpage, and if one suspects that a password is hidden somewhere in the website.       
-[https://www.kali.org/tools/cewl/](https://www.kali.org/tools/cewl/)
+[Documentation](https://www.kali.org/tools/cewl/)
 
 ## Usage
 ```bash
@@ -37,12 +37,25 @@ The command below can be used to decrypt a given credentials file.
 
 
 
+
 # VNC passwords
-[https://github.com/trinitronx/vncpasswd.py](https://github.com/trinitronx/vncpasswd.py)     
-Use the tool above to decrypt an VNC password hash
+## Bash
+VNC stores passwords as a hex string in `.vnc` files using a default encryption key
+```bash
+# Decrypt password
+echo -n <string> | xxd -r -p | openssl enc -des-cbc --nopad --nosalt -K e84ad660c4721ae0 -iv 0000000000000000 -d | hexdump -Cv
+```
+
+## vncpasswd.py
+[Documentation](https://github.com/trinitronx/vncpasswd.py)
 ```bash
 python vncpasswd.py -d -f <hashfile>
-```
+
+```   
+## References
+- [https://github.com/frizb/PasswordDecrypts](https://github.com/frizb/PasswordDecrypts)
+- [https://github.com/billchaison/VNCDecrypt](https://github.com/billchaison/VNCDecrypt)
+- [https://github.com/trinitronx/vncpasswd.py](https://github.com/trinitronx/vncpasswd.py)
 
 
 

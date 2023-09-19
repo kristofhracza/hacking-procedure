@@ -65,7 +65,7 @@ sqlmap -u <URL> --os-pwn
 sqlmap -u <url> --data <data> --file-write <local_file> --file-dest <destination>
 ```
 
-#### References
+## References
 - [https://0xdf.gitlab.io/2018/06/23/htb-falafel.html](https://0xdf.gitlab.io/2018/06/23/htb-falafel.html)
 - [https://book.hacktricks.xyz/pentesting-web/sql-injection/sqlmap#shell](https://book.hacktricks.xyz/pentesting-web/sql-injection/sqlmap#shell)
 - [https://www.binarytides.com/sqlmap-hacking-tutorial/](https://www.binarytides.com/sqlmap-hacking-tutorial/)
@@ -108,7 +108,7 @@ SELECT a, b FROM table1 UNION SELECT c, d FROM table2
 SELECT 1, group_concat(schema_name), 3, 4, 5, 6, 7 from information_schema.schemata;-- -
 ```
 
-#### References
+## References
 - [https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635](https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635)
 
 ## User defined functions
@@ -125,8 +125,7 @@ abcd' union select 1, concat(<data>,':',<data>) 3,4,5,6 from <table>;-- -
 *If the query needs to be edited, please follow the link in [the references](#references-1) below.*
 
 # Oracle / ODAT
-Use [this](https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf) link as a reference for the steps described below    
-[https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf](https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf)    
+Use **[this](https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf)** link as a reference for the steps described below 
 
 ## Basic creds 
 ``` 
@@ -146,10 +145,12 @@ Password --> tiger
 
 # NoSQL
 NoSQL injection knowledge base
-A well curated list of tools and injection methods to use on NoSQL databases by ​[swisskyrepo](https://github.com/swisskyrepo)
+A well curated list of tools and injection methods to use on NoSQL databases by **​[swisskyrepo](https://github.com/swisskyrepo)**  
+
+## Help
 [https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)
 
 ​
 # NoSQLMap
-[https://github.com/codingo/NoSQLMap](https://github.com/codingo/NoSQLMap)
+[Documentation and Release](https://github.com/codingo/NoSQLMap)
 ​​

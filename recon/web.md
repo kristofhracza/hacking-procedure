@@ -55,8 +55,8 @@ wfuzz -u https://<link>/<page>/?FUZZ= -w <wordlist> -H "Cookie: PHPSESSID="
 # Cewl
 CeWL (Custom Word List generator) is a ruby app which spiders a given URL, up to a specified depth, and returns a list of words which can then be used for password crackers such as John the Ripper. Optionally, CeWL can follow external links.      
 
-CeWL can also create a list of email addresses found in mailto links. These email addresses can be used as usernames in brute force actions.
-[https://www.kali.org/tools/cewl/](https://www.kali.org/tools/cewl/)
+CeWL can also create a list of email addresses found in mailto links. These email addresses can be used as usernames in brute force actions.       
+**[Documentation](https://www.kali.org/tools/cewl/)**
 
 ```bash
 cewl -w <wordlist> -d 10 -m 1 <url>

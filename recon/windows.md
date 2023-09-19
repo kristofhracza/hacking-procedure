@@ -75,8 +75,9 @@ ldapsearch -h <domain.local> -D 'user@domain.local' -w <password> -b "DC=domain,
 
 ## windapsearch.py
 LDAP enumeration script      
-[https://github.com/ropnop/windapsearch](https://github.com/ropnop/windapsearch)
+**[Documentation and Release](https://github.com/ropnop/windapsearch)**
 ```bash
+# Anonymous login
 windapsearch.py --dc-ip <ip> -d domain.local -u "" -U
 ```
 
@@ -187,13 +188,13 @@ hashcat -m 13100 --force <hash_file> <password_file>
 #### NTLM hash disabled
 Use the `-k` option as well as `-dc-host` instead of `-dc-ip`. As the latter will break the authentication and throw an error.
 
-#### References
+## References
 - [https://www.crowdstrike.com/cybersecurity-101/kerberoasting/](https://www.crowdstrike.com/cybersecurity-101/kerberoasting/)
 
 
 ## Silver ticket attack
 A Silver Ticket is a forged TGS (Ticket Granting Service) ticket, which is used directly between the client and the service, without necessarily going to the DC. Instead, the TGS ticket is signed by the service account itself, and thus the Silver Ticket is limited to authenticating only the service itself.      
--[https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/](https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/)
+**[https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/](https://www.crowdstrike.com/cybersecurity-101/attack-types/silver-ticket-attack/)**
 
 
 ### Steps

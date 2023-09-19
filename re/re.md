@@ -7,28 +7,25 @@ r2 is a complete rewrite of radare. It provides a set of libraries, tools and pl
 
 # Ghidra
 Open-source reverse engineering software developed by NSA      
-[https://github.com/NationalSecurityAgency/ghidra](https://github.com/NationalSecurityAgency/ghidra)      
-[https://ghidra-sre.org/CheatSheet.html](https://ghidra-sre.org/CheatSheet.html)
+[Ghidra GitHub](https://github.com/NationalSecurityAgency/ghidra)      
+[Ghidra CheatSheet](https://ghidra-sre.org/CheatSheet.html)
 
 
 
 # dnSpy
 Used for disassembling .NET code
-
-## Github
-[https://github.com/dnSpy/dnSpy](https://github.com/dnSpy/dnSpy)
-
+**[Documentation and Release](https://github.com/dnSpy/dnSpy)**
 
 
 # GDB
 GNU Debugger
 
 ## peda
-[https://github.com/longld/peda](https://github.com/longld/peda)      
+**[GitHub](https://github.com/longld/peda)**      
 Python Exploit Development Assistance for GDB
 
 ## Basic buffer overflow
-[*https://samsclass.info/127/proj/p3-lbuf1.htm*](https://samsclass.info/127/proj/p3-lbuf1.htm)
+*[Walkthrough and help](https://samsclass.info/127/proj/p3-lbuf1.htm)*
 
 
 
@@ -43,10 +40,9 @@ upx -d <binary>
 # Python executables
 Python files can be packed and unpacked to and from a binary.     
 
-Use the [extractor](https://github.com/extremecoders-re/pyinstxtractor) to unpack the binary, then use [uncompyle6](https://pypi.org/project/uncompyle6/) to decompile `.pyc` files received from the unpacking process.
+Use the **[extractor](https://github.com/extremecoders-re/pyinstxtractor)** to unpack the binary, then use **[uncompyle6](https://pypi.org/project/uncompyle6/)** to decompile `.pyc` files received from the unpacking process.      
 
-## Help
-[https://www.fortinet.com/blog/threat-research/unpacking-python-executables-windows-linux](https://www.fortinet.com/blog/threat-research/unpacking-python-executables-windows-linux)
+Click **[this](https://www.fortinet.com/blog/threat-research/unpacking-python-executables-windows-linux)** for better explanation and examples.
 
 
 
@@ -55,4 +51,4 @@ Binary analysis platform
 
 ## Use cases
 One can write a python script to brute-force a flag in a binary.      
-[This](https://gist.github.com/kristofhracza/cadc99ba82632b5cc6bda3a882c70c50) script gives an outline of the basic usage of the tool.
+**[This](https://gist.github.com/kristofhracza/cadc99ba82632b5cc6bda3a882c70c50)** script gives an outline of the basic usage of the tool.
