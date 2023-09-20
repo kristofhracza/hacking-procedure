@@ -31,7 +31,7 @@ net user <username> <password> /add /domain
 systeminfo
 
 # Show drives
-powershell -c get-psdrive -psprovider filesystem
+Get-PSDrive -PSProvider FileSystem
 
 # Show hidden data streams
 dir /R
@@ -76,7 +76,7 @@ C:\Users\username\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\Consol
 C:\Data\Users\app
 
 # Code policies and passwords in files
-C:\program files\windowspowershell\modules\packagemanagement
+C:\Program Files\windowspowershell\modules\packagemanagement
 
 # Config files
 C:\Windows\System32\config
