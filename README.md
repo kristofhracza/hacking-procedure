@@ -12,3 +12,5 @@ This guide and its material is intended to be used for educational and informati
 The book is mainly made up of notes from HackTheBox writeups and from some other projects on which I've been working on.
 
 {% endhint %}
+
+![Intro image](images/intro.jpg)
