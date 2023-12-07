@@ -34,7 +34,7 @@
 
 
 
-## Useful tools
+## Useful resources and tools
 
 * [Web](tools/web.md)
 * [Linux](tools/linux.md)
