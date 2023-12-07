@@ -1,5 +1,5 @@
 # Adding salt (as a normal string) to a password file
-This is if the password has no salt shown, because it has been concatenated when encrypting, therefore the salt has to be added to the dictionary line-by-line.
+This is applicable when the password lacks visible salt because it was concatenated during encryption. Consequently, the salt needs to be added to the dictionary line-by-line.
 ```bash
 sed -e 's/^/prefix/' <file> > <file.new>
 ```
@@ -17,7 +17,7 @@ cewl -w <wordlist> -d 10 -m 1 <url>
 
 
 # Padding oracle attack
-When an application decrypts encrypted data, it will first decrypt the data; then it will remove the padding. During the cleanup of the padding, if an invalid padding triggers a detectable behaviour, you have a padding oracle vulnerability. The detectable behaviour can be an error, a lack of results, or a slower response.
+When an application decrypts encrypted data, it will first decrypt the data; then it will remove the padding. During the clean-up of the padding, if an invalid padding triggers a detectable behaviour, you have a padding oracle vulnerability. The detectable behaviour can be an error, a lack of results, or a slower response.
 ```bash
 # Decrypt
 padbuster <url> "<cookie_value>" 8 -encoding 0 -cookies "<cookie_name>=<cookie_value>"
@@ -50,7 +50,6 @@ echo -n <string> | xxd -r -p | openssl enc -des-cbc --nopad --nosalt -K e84ad660
 [Documentation](https://github.com/trinitronx/vncpasswd.py)
 ```bash
 python vncpasswd.py -d -f <hashfile>
-
 ```   
 ## References
 - [https://github.com/frizb/PasswordDecrypts](https://github.com/frizb/PasswordDecrypts)

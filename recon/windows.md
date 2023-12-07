@@ -4,7 +4,7 @@ If there's more than one user that needs to compromised before getting root, enu
 each user as they might have access to something new that was protected before.
 
 ## Temporary account
-If some info suggests that an account is only temporary, than they might have some misconfigurations
+If some info suggests that an account is only temporary, then they might have some misconfigurations
 or rights that other users don't have.     
 Especially if they're created by a user which is in a group that has higher privileges.
 
@@ -46,7 +46,7 @@ auxiliary/gather/enum_dns
 
 # LDAP
 ## ldapsearch
-***Without credentials**
+**Without credentials**
 ```bash
 # Anonymous access
 ldapsearch -H ldap://<ip>:<port> -b "dc=domain,dc=local" -x
@@ -66,7 +66,7 @@ ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=user)'
 # Filter groups
 ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=group)'
 ```   
-***With credentials**
+**With credentials**
 ```bash
 ldapsearch -H ldap://<ip> -b "dc=domain,dc=local" -D "cn=username,dc=domain,dc=local" -w <password>   -x
 

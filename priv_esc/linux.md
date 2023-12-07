@@ -21,7 +21,7 @@ groups
 ## Directories and files
 ```bash
 # Sort files by date
-ls - ltrh
+ls -ltrh
 
 # Writeable folders
 find / -writable -type d 2>/dev/null
