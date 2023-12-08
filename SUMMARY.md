@@ -2,7 +2,10 @@
 
 ## Reconnaissance
 
-* [Web](recon/web.md)    
+* [Web](recon/web/web.md)    
+* [Web attacks](recon/web/attacks_exploits/attacks.md)
+    * [File Inclusion](recon/web/attacks_exploits/file_inclusion.md)
+    * [File Upload](recon/web/attacks_exploits/file_upload.md) 
 * [Windows](recon/windows.md)   
 * [Databases](recon/databases.md)   
 * [Other technologies](recon/other.md)    
