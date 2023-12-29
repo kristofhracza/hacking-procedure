@@ -7,7 +7,7 @@
     * [File Inclusion](recon/web/attacks_exploits/file_inclusion.md)
     * [File Upload](recon/web/attacks_exploits/file_upload.md) 
 * [Windows](recon/windows.md)   
-* [Databases](recon/databases.md)   
+* [Databases](recon/databases/databases.md)   
 * [DBMS](recon/databases/dbms/dbms.md)
     * [MySQL](recon/databases/dbms/mysql.md)
     * [MSSQL](recon/databases/dbms/mssql.md)
