@@ -8,7 +8,11 @@
     * [File Upload](recon/web/attacks_exploits/file_upload.md) 
 * [Windows](recon/windows.md)   
 * [Databases](recon/databases.md)   
-* [Other technologies](recon/other.md)    
+* [DBMS](recon/databases/dbms/dbms.md)
+    * [MySQL](recon/databases/dbms/mysql.md)
+    * [MSSQL](recon/databases/dbms/mssql.md)
+    * [ORACLE](recon/databases/dbms/oracle.md)
+* [Other technologies](recon/other.md)    s
 * [Good to know hacks](recon/good_to_know.md)  
 
 
