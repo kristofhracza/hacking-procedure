@@ -62,12 +62,15 @@ ltrace or strace
 
 /opt
 /var
-var/www/html
+/var/www/html
 /usr
+
+/etc/hosts
 
 # If a site is live (configurations or other sites might be shown)
 /etc/apache2 
 /etc/apache2/site-enabled
+/etc/nginx/sites-enabled
 ```
 
 # DIR / file copy (symlink)

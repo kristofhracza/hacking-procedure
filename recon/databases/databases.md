@@ -27,6 +27,11 @@ sqlmap -r <request_file> --batch
 sqlmap -u <URL> --data "username=*&password=*"
 ```
 
+### Web sockets
+```sh
+sqlmap -u ws://<ip><port> --data <data>
+```
+
 ### Commands
 **To get data from any query use the `--dump` option**
 ```sh

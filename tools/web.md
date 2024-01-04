@@ -4,6 +4,10 @@
 [https://hashcat.net/wiki/doku.php?id=example_hashes](https://hashcat.net/wiki/doku.php?id=example_hashes)
 
 
+## Requestly
+[Requestly](https://chromewebstore.google.com/detail/requestly-open-source-htt/mdnleldcmiljblolnjhpnblkcekpdkpa?pli=1) is a chrome extension used for debugging sites.     
+However I mainly use it for editing headers.    
+
 
 # Tools
 ## WasmFiddle for WASM
