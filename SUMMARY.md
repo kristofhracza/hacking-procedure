@@ -12,7 +12,7 @@
     * [MySQL](recon/databases/dbms/mysql.md)
     * [MSSQL](recon/databases/dbms/mssql.md)
     * [ORACLE](recon/databases/dbms/oracle.md)
-    * [REDIS](recon/databases/dbms/redis.md)
+    * [REDIS](recon/databases/dbms/redis.md) 
 * [Other technologies](recon/other.md)    
 * [Good to know hacks](recon/good_to_know.md)  
 

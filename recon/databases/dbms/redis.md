@@ -12,7 +12,7 @@ SORTED SETS ZRANGEBYSCORE <key> <min> <max>
 ## Connection
 ```sh
 # After Redis 6.0
-redis-cli -h <ip> -a <password>
+redis-cli -h <ip> -a <password> 
 ```
 
 ## References
