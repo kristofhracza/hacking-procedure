@@ -28,3 +28,16 @@ If there are multiple IPs listed in order, and one is missing (has no port forwa
 # Sub-folder or file exposed in non-accessible directory
 If access is denied to a folder but there's a resource known to be beyond it / inside it, one can try to access the resource.
 Either by changing directories or outputting a file.
+
+
+# PE Binaries
+## x86 or x64
+Use `hexdump <binary> -C` to see the first few bytes of the binary.
+```
+ARHCITECTURE:   x86
+50 45 00 00 4c 01 04 00  |........PE..L...|
+
+ARHCITECTURE:   x64
+50 45 00 00 64 86 03 00  |........PE..d...|
+```
+[https://www.gdatasoftware.com/blog/pebitnesstrick](https://www.gdatasoftware.com/blog/pebitnesstrick)
