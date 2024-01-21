@@ -19,10 +19,10 @@ dig A @<ip> <domain>
 # Get all available entries
 dig any server.local @<DNS_IP>
 
-#Zone transfer without domain
+# Zone transfer without domain
 dig axfr @<DNS_IP>
 
-#Zone transfer with domain
+# Zone transfer with domain
 dig axfr @<DNS_IP> <DOMAIN>
 ```
 
@@ -42,6 +42,11 @@ nmap -sSU -p53 --script dns-nsec-enum --script-args dns-nsec-enum.domains=paypal
 auxiliary/gather/enum_dns
 ```
 
+## Attacks
+### Zone transfer attack
+DNS servers contain a *Zone* file that replicates the map of the domain.     
+Only the server itself should have access to it, but if it's misconfigured anyone can request the file and
+get the list of all the sub-domains.
 
 
 # LDAP
