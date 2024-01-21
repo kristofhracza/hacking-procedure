@@ -158,6 +158,15 @@ crackmapexec smb <ip> -u <user> -p <password> --laps
 
 
 
+# Active Directory Certificate Services (ADCS)
+Active Directory Certificate Services (AD CS) is a Windows Server role for issuing and managing public key infrastructure (PKI) certificates used in secure communication and authentication protocols.     
+[https://learn.microsoft.com/en-us/windows-server/identity/ad-cs/active-directory-certificate-services-overview](https://learn.microsoft.com/en-us/windows-server/identity/ad-cs/active-directory-certificate-services-overview)
+
+## Enumeration
+Here, one should look for services that haven't been discovered before.
+```sh
+crackmapexec ldap <ip> -u <username> -p <password> -M adcs
+```
 
 # Tools and modules
 ## Powerview
