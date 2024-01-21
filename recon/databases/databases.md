@@ -10,6 +10,14 @@
 - [https://portswigger.net/web-security/sql-injection/cheat-sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet)
 
 
+## Universal structures
+```
+information_schema              Metadata and all the databases and tables
+information_schema.schemata     Databases
+information_schema.tables       Tables
+information_schema.columns      Columns
+```
+
 ## Tools (SQL)
 ## sqlmap
 ### GET
