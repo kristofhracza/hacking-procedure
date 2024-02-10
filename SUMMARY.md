@@ -44,10 +44,3 @@
 ## Reverse Engineering
 
 * [Reverse engineering](re/re.md)
-
-
-
-## Useful resources and tools
-
-* [Web](tools/web.md)
-* [Linux](tools/linux.md)
