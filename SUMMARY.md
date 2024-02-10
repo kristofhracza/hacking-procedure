@@ -8,6 +8,7 @@
     * [File Inclusion](recon/web/attacks_exploits/file_inclusion.md)
     * [File Upload](recon/web/attacks_exploits/file_upload.md) 
     * [SSRF](recon/web/attacks_exploits/ssrf.md) 
+    * [XSS](recon/web/attacks_exploits/xss.md) 
 * [Windows](recon/windows.md)   
 * [Databases](recon/databases/databases.md)   
 * [DBMS](recon/databases/dbms/dbms.md)
