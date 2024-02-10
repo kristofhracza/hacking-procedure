@@ -1,9 +1,3 @@
-# username-anarchy
-Tool for generating usernames      
-**[https://github.com/urbanadventurer/username-anarchy](https://github.com/urbanadventurer/username-anarchy)**
-
-
-
 # authbind
 If the system doesn't allow a user to bind a certain address they can try:
 ```bash
@@ -47,6 +41,7 @@ chisel client <server_ip_and_port> R:socks
 
 ## Interaction
 One can use `FoxyProxy` for the browser or `proxychains` on the command line to interact with the network.
+
 
 
 # deepce

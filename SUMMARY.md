@@ -3,6 +3,7 @@
 ## Reconnaissance
 
 * [Web](recon/web/web.md)    
+    * [Resources](recon/web/resources.md)    
 * [Web attacks](recon/web/attacks_exploits/attacks.md)
     * [File Inclusion](recon/web/attacks_exploits/file_inclusion.md)
     * [File Upload](recon/web/attacks_exploits/file_upload.md) 
@@ -20,7 +21,8 @@
 
 ## Privilege escalation
 
-* [Linux](priv_esc/linux.md)  
+* [Linux](priv_esc/linux/linux.md)  
+    * [Tools](priv_esc/linux/tools.md)  
 * [Windows](priv_esc/windows/windows.md) 
     * [Active Directory Enumeration](priv_esc/windows/windows_ad.md)
 * [Active Directory Attacks](priv_esc/windows/ad_attacks/attacks.md)
