@@ -15,15 +15,38 @@ authbind python -m http.server
 ```
 
 
+# sssd
+`sssd` is an open source client for enterprise identity management.           
+It allows for Linux machines to be joined into an Active Directory domain.
+
+`SSSD` maintains a copy of the database at the path `/var/lib/sss/secrets/secrets.ldb`.     
+The corresponding key is stored as a hidden file at the path `/var/lib/sss/secrets/.secrets.mkey`. By default, the key is only readable if you have root permissions.
+
+Knowing this informationm one can take a look at those file (if they're present) and extract data from them.    
+If data cannot be found in those files, one might try to go back one folder to `/var/lib/sss` where they might find some other files which can potentially reveal some info.            
+
+[**More info**](https://sssd.io/)  
+
+
+
 # Chisel
-HTTP tunnel     
+Tunneling tools     
 ```bash
 # SERVER
 chisel server --port <port> --reverse
 
-# CLIENT
-chisel client <server_ip_and_port> R:<local_port>:<ip>:<server_port>
+############################# [CLIENTS] #############################
+
+# BASIC SERVER LISTENER
+chisel client <server_ip_and_port> R:<listener_port>:<ip>:<forwarded_port>
+
+# SOCKS PROXY
+## Note that socks proxy will start a listener on port 1080
+chisel client <server_ip_and_port> R:socks
 ```
+
+## Interaction
+One can use `FoxyProxy` for the browser or `proxychains` on the command line to interact with the network.
 
 
 # deepce
