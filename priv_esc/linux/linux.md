@@ -37,6 +37,14 @@ find / -perm -4000 2>/dev/null
 (netstat -punta || ss --ntpu)
 ```
 
+## Ping sweep
+This is if one suspects that there's another machine on the network. (Current machine in VM or a container)
+
+Here, replace `10.10.10` with current IP.
+```
+for i in {1..254}; do (ping -c 1 10.10.10.${i} | grep "bytes from" | grep -v "Unreachable" &); done;
+```
+
 ## Miscallenous
 ```bash
 # Kill process
@@ -52,17 +60,22 @@ blkid
 ltrace or strace
 ```
 
+
+
 # Directories to check
 ```bash
 ~/
 ~/.ssh
 
 /tmp
+
 /dev/shm
 
 /opt
-/var
+
+var
 /var/www/html
+
 /usr
 
 /etc/hosts
