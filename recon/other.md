@@ -1,12 +1,24 @@
 # SNMP
-Simple Network Management Protocol      
+**SNMP** - Simple Network Management Protocol is a protocol used to monitor different devices in the network (like routers, switches, printers, IoTs...).
 
-Install with `apt install snmp-mibs-downloader`
-
+## Enumeration
 ```bash
-# Scanning
 snmpwalk -Os -c public <ip>
+
+snmpcheck <ip>
+
+msf> use auxiliary/scanner/snmp/snmp_enum
 ```
+
+## Bruteforce community strings
+```bash
+hydra -P <wordlist> <host> snmp
+onesixtyone -c <wordlist> <ip>
+msf> use auxiliary/scanner/snmp/snmp_login
+```
+
+## Resources
+- [Wordlist for community strings](https://github.com/fuzzdb-project/fuzzdb/blob/master/wordlists-misc/wordlist-common-snmp-community-strings.txt)
 
 
 # WebDav
