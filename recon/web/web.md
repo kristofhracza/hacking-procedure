@@ -31,8 +31,7 @@ ffuf -u <host>/FUZZ -w <wordlist>
 ffuf -u <host>/FUZZ -w <wordlist> -e .txt,.php,.html
 
 # DNS / Sub-domain scan
-## host format is: http://FUZZ.domain.com
-ffuf -u <host> -w <wordlist>
+ffuf -u <ip> -H "Host: FUZZ.host.local" -w <wordlist> -mc all
 ```
 
 
