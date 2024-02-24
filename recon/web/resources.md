@@ -13,3 +13,7 @@ However I mainly use it for editing headers.
 ## WasmFiddle for WASM
 [https://wasdk.github.io/WasmFiddle/](https://wasdk.github.io/WasmFiddle/)     
 Allows for C code to be turned into Web Assembly.
+
+# Crackstation
+Free password hash cracker
+[Crackstation](https://crackstation.net/)
