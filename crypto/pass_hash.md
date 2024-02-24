@@ -130,3 +130,15 @@ pfx2john <file>  |john -w=/usr/share/wordlists/rockyou.txt /dev/stdin
 ```bash
 evil-winrm -i <ip> -S -k <private_key> -c <certificate>
 ```
+
+
+# zip2john - Get hash from zip
+If a `.zip` file requires a password.
+```bash
+zip2john <zip_file> 2>/dev/null | tee myhash
+```
+
+## Breaking the hash
+```bash
+john myhash --wordlist=<wordlist> --format=PKZIP
+```
