@@ -51,6 +51,26 @@ mkdir /tmp/mount
 sudo mount -t nfs <IP>:<share> /tmp/mount/ -nolock
 ```
 
+# RPC
+## Enumeration
+```bash
+rpcinfo <host>
+nmap -sSUC -p111 <IP>
+```
+
+## NIS
+```bash
+# Install NIS tools
+apt-get install nis
+
+# Ping the NIS server to confirm its presence
+ypwhich -d <host> <IP>
+
+# Extract user credentials
+ypcat –d <host> –h <IP> passwd.byname
+```
+
+
 # QUIC protocol
 *QUIC* is a general-purpose transport layer network protocol     
 **[Explanation and guide](https://www.debugbear.com/blog/http3-quic-protocol-guide)**     
