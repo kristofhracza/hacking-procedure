@@ -26,6 +26,8 @@
 ## Privilege escalation
 
 * [Linux](priv_esc/linux/linux.md)  
+    * [Path Hijacking](priv_esc/linux/techniques/path_hijack.md)  
+    * [USBCreator D-Bus](priv_esc/linux/techniques/usb_dbus.md)  
     * [Tools](priv_esc/linux/tools.md)  
 * [Windows](priv_esc/windows/windows.md) 
     * [Active Directory Enumeration](priv_esc/windows/windows_ad.md)
