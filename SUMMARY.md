@@ -5,6 +5,7 @@
 * [Web](recon/web/web.md)    
     * [Resources](recon/web/resources.md)    
 * [Web attacks](recon/web/attacks_exploits/attacks.md)
+    * [CRLF Injection](recon/web/attacks_exploits/crlf.md) 
     * [IDOR](recon/web/attacks_exploits/idor.md) 
     * [File Inclusion](recon/web/attacks_exploits/file_inclusion.md)
     * [File Upload](recon/web/attacks_exploits/file_upload.md) 
