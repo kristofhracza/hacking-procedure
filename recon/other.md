@@ -35,6 +35,21 @@ Software versioning and revision control system
 svn co <url>
 ```
 
+# NFS
+NFS allows a system to share directories and files with others over a network. 
+## Enumeration
+```bash
+# List NFS shares
+/usr/sbin/showmount -e <IP>
+```
+## Mount shares
+```bash
+# Make directory for the mount point
+mkdir /tmp/mount
+
+# Mount the share
+sudo mount -t nfs <IP>:<share> /tmp/mount/ -nolock
+```
 
 # QUIC protocol
 *QUIC* is a general-purpose transport layer network protocol     
