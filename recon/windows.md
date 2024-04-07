@@ -11,34 +11,23 @@ Especially if they're created by a user which is in a group that has higher priv
 
 
 # DNS
-##  dig
 ```bash
 # Normal DNS request
 dig A @<ip> <domain> 
-
 # Get all available entries
 dig any server.local @<DNS_IP>
-
 # Zone transfer without domain
 dig axfr @<DNS_IP>
-
 # Zone transfer with domain
 dig axfr @<DNS_IP> <DOMAIN>
-```
 
-## gobuster
-```bash
 # Subdomain scan
 gobuster dns -d domain.local -t 25 -w <wordlist>
-```
 
-## nmap
-```bash
+# Normal nmap scan
 nmap -sSU -p53 --script dns-nsec-enum --script-args dns-nsec-enum.domains=paypal.com <domain>
-```
 
-## metasploit
-```
+# Metasploit
 auxiliary/gather/enum_dns
 ```
 
@@ -50,46 +39,24 @@ get the list of all the sub-domains.
 
 
 # LDAP
-## ldapsearch
-**Without credentials**
 ```bash
+# Normal enumeration
+nmap -sT -Pn -n --open <ip> -p389 --script ldap-rootdse
+
 # Anonymous access
 ldapsearch -H ldap://<ip>:<port> -b "dc=domain,dc=local" -x
-
-# Naming Contexts
 ldapsearch -h <ip> -x -s base namingcontexts
-
-# Get all info
 ldapsearch -h <ip> -x -b "dc=domain,dc=local"
-
-# Filter people
 ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=person)'
-
-# Filter users
 ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=user)'
-
-# Filter groups
 ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=group)'
-```   
-**With credentials**
-```bash
+
+# Connect and enumerate with username and password
 ldapsearch -H ldap://<ip> -b "dc=domain,dc=local" -D "cn=username,dc=domain,dc=local" -w <password>   -x
-
 ldapsearch -h <domain.local> -D 'user@domain.local' -w <password> -b "DC=domain,DC=local"
-```
 
-## windapsearch.py
-LDAP enumeration script      
-**[Documentation and Release](https://github.com/ropnop/windapsearch)**
-```bash
-# Anonymous login
+# https://github.com/ropnop/windapsearch
 windapsearch.py --dc-ip <ip> -d domain.local -u "" -U
-```
-
-## nmap ldap
-Basic info about the domain
-```bash
-nmap -sT -Pn -n --open <ip> -p389 --script ldap-rootdse
 ```
 
 ## Notes
@@ -109,66 +76,30 @@ In many CTF-s they put passwords there.
 
 # SMB
 ## Enumeration
-
-### smbmap
 ```bash
-# Without creds
+# Get shares
 smbmap -H <ip>
-
-# With creds
 smbmap -H <ip> -u <user> -p <password>
-```
 
-### CrackMapExec
-```bash
+# More enumeration
+enum4linux -U -o <ip>
+enum4linux -a <ip>
+nmap --script "safe or smb-enum-*" -p 445 <ip>
+
 # Enumerate users
 crackmapexec smb <ip> -u <user> -p <password> --users
-
-# Perform RID Bruteforce to get users
 crackmapexec smb <ip> -u <user> -p <password> --rid-brute
-
-# Enumerate domain groups
 crackmapexec smb <ip> -u <user> -p <password> --groups
-
-# Enumerate local users
 crackmapexec smb <ip> -u <user> -p <password> --local-users
-```
 
-### enum4linux
-```bash
-enum4linux -U -o <ip>
-```
-
-### Null session attack
-```bash
+# Null session attack
 smbclient -N -L \\\\<ip>
-
 crackmapexec smb <ip> -u ""
-```
 
-### Bruteforcing and password spraying
-```bash
-crackmapexec smb <ip> -u <username/file> -p <password/file>
-```
-
-## Establishing connection
-### smbclient
-```bash
+# Establishing connection
 smbclient //<ip> -U <user>
-```
-
-### smbclient.py
-*impacket-smbclient*
-
-```bash
-# Normal login
 smbclient.py <domain>/<username>:<password>@<ip>
-
-# Auth with kerberos
-smbclient.py -k <domain>/<username>:<password>@<ip> -dc-ip <ip>
 ```
-
-
 
 # Kerberos
 ## GetNPUsers.py
@@ -205,33 +136,26 @@ Use the `-k` option as well as `-dc-host` instead of `-dc-ip`. As the latter wil
 querydispinfo
 enumdomusers
 
-## User details
+## Details
 queryuser <rid>
-
-## User groups
+## GGroups
 queryusergroups <rid>
-
 ## SID
 lookupnames <rid>
-
 ## Aliases
 queryuseraliases builtin <username>
 
 
 # GROUPS
 enumdomgroups
-
-## Group Details
+## Details
 querygroup <rid>
-
-## Group members
+## Members
 querygroupmem <rid>
-
 
 # SHARES
 netshareenumall
-
-## Share details
+## Details
 netsharegetinfo <share>
 ```
 
@@ -244,6 +168,17 @@ rpcclient -U '' -N <ip>
 rpcclient -U <username> <ip>
 ```
 
+## NIS
+```bash
+# Install NIS tools
+apt-get install nis
+
+# Ping the NIS server to confirm its presence
+ypwhich -d <host> <IP>
+
+# Extract user credentials
+ypcat –d <host> –h <IP> passwd.byname
+```
 
 
 # Analyse office files
