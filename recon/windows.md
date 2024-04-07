@@ -37,6 +37,11 @@ DNS servers contain a *Zone* file that replicates the map of the domain.
 Only the server itself should have access to it, but if it's misconfigured anyone can request the file and
 get the list of all the sub-domains.
 
+## Ports
+```
+53  DNS
+```
+
 
 # LDAP
 ```bash
@@ -72,6 +77,11 @@ cascadeLegacyPwd: BASE64 STRING
 Log of a query might contain some info in the user.     
 In many CTF-s they put passwords there.
 ​
+## Ports
+```
+389     LDAP
+636     LDAPS (LDAP over SSL/TLS)
+```
 
 
 # SMB
@@ -101,6 +111,13 @@ smbclient //<ip> -U <user>
 smbclient.py <domain>/<username>:<password>@<ip>
 ```
 
+## Ports
+```
+139     SMB 1.0 session services
+138     SMB over UDP
+445     SMB main
+```
+
 # Kerberos
 ## GetNPUsers.py
 Impacket's `GetNPUsers.py` will attempt to harvest the non-preauth AS_REP responses for a given list of usernames
@@ -127,6 +144,10 @@ Use the `-k` option as well as `-dc-host` instead of `-dc-ip`. As the latter wil
 ## References
 - [https://www.crowdstrike.com/cybersecurity-101/kerberoasting/](https://www.crowdstrike.com/cybersecurity-101/kerberoasting/)
 
+## Ports
+```
+88      Kerberos key distribution center (KDC)
+```
 
 
 # RPC
@@ -180,6 +201,12 @@ ypwhich -d <host> <IP>
 ypcat –d <host> –h <IP> passwd.byname
 ```
 
+## Ports
+```
+135     RPC EPM
+445     SMB
+593     RPC over HTTPS
+```
 
 # Analyse office files
 Modern `Office` documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
