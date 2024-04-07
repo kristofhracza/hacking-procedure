@@ -132,13 +132,29 @@ evil-winrm -i <ip> -S -k <private_key> -c <certificate>
 ```
 
 
-# zip2john - Get hash from zip
+# Get hash from zip - zip2john
 If a `.zip` file requires a password.
 ```bash
+# Get hash
 zip2john <zip_file> 2>/dev/null | tee myhash
+
+# Crack the hash
+john myhash --wordlist=<wordlist> --format=PKZIP
 ```
 
-## Breaking the hash
+# Ansible Vault Secret - ansible2john
+Ansible Vault can encrypt a file which includes sensitive data. 
+However, we may be able to decrypt the file with password or by cracking hash to retrieve password.
+
+## Steps
 ```bash
-john myhash --wordlist=<wordlist> --format=PKZIP
+# Convert the file into a hash
+ansible2john <yml_file> >  <output>
+
+# Use john or hashcat to break the hash
+john --wordlist=wordlist.txt <hash_file>
+hashcat -a 0 -m 16900 <hash_file> <wordlist>
+
+# Decrypt the file
+ansible-vault decrypt <yml_file> --output <output>
 ```
