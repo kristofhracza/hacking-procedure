@@ -41,3 +41,13 @@ ARHCITECTURE:   x64
 50 45 00 00 64 86 03 00  |........PE..d...|
 ```
 [https://www.gdatasoftware.com/blog/pebitnesstrick](https://www.gdatasoftware.com/blog/pebitnesstrick)
+
+
+# Restoring corrupted docx files
+1. Copy docx into a zip:   `cp 1.docx 1.zip`
+2. Extract non corrupt data to another zip:  `zip -FF 1.zip 2.zip`
+3. Copy new zip to new docx:  `cp 2.zip  2.docx`
+
+## Sources
+- [https://askubuntu.com/questions/388444/how-can-i-extract-the-data-from-a-corrupted-docx-file](https://askubuntu.com/questions/388444/how-can-i-extract-the-data-from-a-corrupted-docx-file)
+- [https://superuser.com/questions/23290/terminal-tool-linux-for-repair-corrupted-zip-files](https://superuser.com/questions/23290/terminal-tool-linux-for-repair-corrupted-zip-files)
