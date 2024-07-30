@@ -44,6 +44,11 @@ wfuzz -c -z range,1-65535 --hl=2 http://<ip>:<port>/url.php?path=http://localhos
 wfuzz -u https://<link>/<page>/?FUZZ= -w <wordlist> -H "Cookie: PHPSESSID="
 ```
 
+## Zap
+[Zap](https://www.zaproxy.org/) is a web scanner that simulates human movemennt and tries to discover the target.
+It can also detect basic vulnerabilities as well as weak coding practices.
+
+
 # WordPress
 ## WPScan    
 WordPress security scanner
@@ -51,13 +56,10 @@ WordPress security scanner
 wpscan --url <url> -e ap,at,dbe,u
 ```
 
-# Zap
-[Zap](https://www.zaproxy.org/) is a web scanner that simulates human movemennt and tries to discover the target.
-It can also detect basic vulnerabilities as well as weak coding practices.
-
 # Tips
 - When initially moving through the site, do it through Burpsuite as it will allow one to see all past requests and how they
 are handled.
+
 
 # Ports
 ```
