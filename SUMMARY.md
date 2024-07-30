@@ -51,3 +51,9 @@
 ## Reverse Engineering
 
 * [Reverse engineering](re/re.md)
+
+
+
+## Language specific exploits
+* [Python]()
+    * [Data model parsing (pytorch / pickle)](languages/python/pickle.md)
