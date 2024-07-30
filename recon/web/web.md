@@ -51,7 +51,15 @@ WordPress security scanner
 wpscan --url <url> -e ap,at,dbe,u
 ```
 
-## Ports
+# Zap
+[Zap](https://www.zaproxy.org/) is a web scanner that simulates human movemennt and tries to discover the target.
+It can also detect basic vulnerabilities as well as weak coding practices.
+
+# Tips
+- When initially moving through the site, do it through Burpsuite as it will allow one to see all past requests and how they
+are handled.
+
+# Ports
 ```
 80      HTTP
 443     HTTPS

@@ -13,6 +13,7 @@ However I mainly use it for editing headers.
 - [Sub-domains (1)](https://github.com/n0kovo/n0kovo_subdomains)
 - [Sub-domains (2)](https://github.com/rbsec/dnscan/tree/master)
 - [Directories](https://github.com/daviddias/node-dirbuster/tree/master/lists)
+- [Directories (2)](https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/raft-medium-directories-lowercase.txt) *used by Feroxbuster*
 
 
 # Tools
