@@ -50,15 +50,15 @@ nmap -sT -Pn -n --open <ip> -p389 --script ldap-rootdse
 
 # Anonymous access
 ldapsearch -H ldap://<ip>:<port> -b "dc=domain,dc=local" -x
-ldapsearch -h <ip> -x -s base namingcontexts
-ldapsearch -h <ip> -x -b "dc=domain,dc=local"
-ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=person)'
-ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=user)'
-ldapsearch -h <ip> -x -b "dc=domain,dc=local" '(objectClass=group)'
+ldapsearch -H <ip> -x -s base namingcontexts
+ldapsearch -H <ip> -x -b "dc=domain,dc=local"
+ldapsearch -H <ip> -x -b "dc=domain,dc=local" '(objectClass=person)'
+ldapsearch -H <ip> -x -b "dc=domain,dc=local" '(objectClass=user)'
+ldapsearch -H <ip> -x -b "dc=domain,dc=local" '(objectClass=group)'
 
 # Connect and enumerate with username and password
 ldapsearch -H ldap://<ip> -b "dc=domain,dc=local" -D "cn=username,dc=domain,dc=local" -w <password>   -x
-ldapsearch -h <domain.local> -D 'user@domain.local' -w <password> -b "DC=domain,DC=local"
+ldapsearch -H <domain.local> -D 'user@domain.local' -w <password> -b "DC=domain,DC=local"
 
 # https://github.com/ropnop/windapsearch
 windapsearch.py --dc-ip <ip> -d domain.local -u "" -U

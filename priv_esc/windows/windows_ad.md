@@ -172,7 +172,7 @@ crackmapexec ldap <ip> -u <username> -p <password> -M adcs
 ## Powerview
 **[Code](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1)**
 
-## Enumeration
+### Enumeration
 [https://book.hacktricks.xyz/windows-hardening/basic-powershell-for-pentesters/powerview](https://book.hacktricks.xyz/windows-hardening/basic-powershell-for-pentesters/powerview)
 ```powershell
 # Basic domain info
