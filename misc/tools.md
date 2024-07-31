@@ -85,11 +85,18 @@ If data cannot be found in those files, one might try to go back one folder to `
 [**More info**](https://sssd.io/)  
 
 ## Miscellaneous
+- [Evil-WinRM](https://github.com/Hackplayers/evil-winrm)
 - [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1)
+- [All Impacket scripts](https://github.com/fortra/impacket/tree/master/examples)
 - [Powermad](https://github.com/Kevin-Robertson/Powermad)
 - [Rubeus Docs](https://github.com/GhostPack/Rubeus)
 - [Rubeus Release](https://github.com/Flangvik/SharpCollection/blob/master/NetFramework_4.5_x64/Rubeus.exe)
 - [SharpCollection - Pre-compiled binaries (windows)](https://github.com/Flangvik/SharpCollection/tree/master/NetFramework_4.5_x64)
+- [mimikatz](https://github.com/gentilkiwi/mimikatz)
+- [VNC Password Decryptor](https://github.com/trinitronx/vncpasswd.py)
+- [VNCDecrypt](https://github.com/billchaison/VNCDecrypt)
+- [Mimikatz in python](https://github.com/skelsec/pypykatz)
+- [mRemoteNG Decryptor](https://github.com/kmahyyg/mremoteng-decrypt)
 
 # Reverse Engineering
 ## Radare2 (R2)
