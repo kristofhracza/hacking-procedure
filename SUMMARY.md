@@ -31,7 +31,7 @@
     * [USBCreator D-Bus](priv_esc/linux/techniques/usb_dbus.md)  
 * [Windows](priv_esc/windows/windows.md) 
     * [Active Directory Enumeration](priv_esc/windows/windows_ad.md)
-    * [Services & Features](priv_esc/windows/windows_ad.md)
+    * [Services & Features](priv_esc/windows/services/services.md)
 * [Active Directory Attacks](priv_esc/windows/ad_attacks/dcsync.md)
     * [DCSync](priv_esc/windows/ad_attacks/dcsync.md)
     * [Resource-based Constrained Delegation](priv_esc/windows/ad_attacks/resource_based_constrained_delegation.md)
