@@ -1,3 +1,9 @@
+# Tips
+- When initially moving through the site, do it through `Burpsuite` as it will allow one to see all past requests and how they
+are handled.
+
+
+
 # In-Depth enumeration
 
 ## Nikto  
@@ -49,16 +55,13 @@ wfuzz -u https://<link>/<page>/?FUZZ= -w <wordlist> -H "Cookie: PHPSESSID="
 It can also detect basic vulnerabilities as well as weak coding practices.
 
 
+
 # WordPress
 ## WPScan    
 WordPress security scanner
 ```bash
 wpscan --url <url> -e ap,at,dbe,u
 ```
-
-# Tips
-- When initially moving through the site, do it through Burpsuite as it will allow one to see all past requests and how they
-are handled.
 
 
 # Ports
