@@ -1,6 +1,6 @@
 # Hello
 This site consist of techniques that will help with compromising CTF-like systems.     
-The book is mainly made up of notes from Hack The Box writeups and from some other projects on which I've been working on.
+The book is mainly made up of notes from Hack The Box write-ups and from some other projects on which I've been working on.
 
 
 
@@ -12,5 +12,3 @@ This guide and its material is intended to be used for educational and informati
 
 
 {% endhint %}
-
-![Intro image](images/intro.jpg)
