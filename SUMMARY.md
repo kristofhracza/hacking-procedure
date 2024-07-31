@@ -20,7 +20,6 @@
     * [MongoDB](recon/databases/dbms/mongodb.md) 
     * [SQLite](recon/databases/dbms/sqlite.md)
 * [Other technologies](recon/other.md)    
-* [Good to know hacks](recon/good_to_know.md)  
 
 
 
@@ -43,6 +42,7 @@
 ## Miscellaneous
 
 * [Universal tools and resources](misc/tools.md)
+* [Methodology, tricks & common sense](misc/meth.md)
 
 
 
