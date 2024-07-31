@@ -3,7 +3,6 @@
 ## Reconnaissance
 
 * [Web](recon/web/web.md)    
-    * [Resources](recon/web/resources.md)    
 * [Web attacks](recon/web/attacks_exploits/attacks.md)
     * [CRLF Injection](recon/web/attacks_exploits/crlf.md) 
     * [IDOR](recon/web/attacks_exploits/idor.md) 
@@ -31,7 +30,6 @@
     * [Path Hijacking](priv_esc/linux/techniques/path_hijack.md)  
     * [Shared Library Misconfigurations](priv_esc/linux/techniques/so_misconf.md)  
     * [USBCreator D-Bus](priv_esc/linux/techniques/usb_dbus.md)  
-    * [Tools](priv_esc/linux/tools.md)  
 * [Windows](priv_esc/windows/windows.md) 
     * [Active Directory Enumeration](priv_esc/windows/windows_ad.md)
 * [Active Directory Attacks](priv_esc/windows/ad_attacks/attacks.md)
@@ -42,9 +40,9 @@
 
 
 
-## Cryptography and passwords
+## Miscellaneous
 
-* [Tricks and commands](crypto/pass_hash.md)
+* [Universal tools and resources](misc/tools.md)
 
 
 

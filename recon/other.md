@@ -53,8 +53,8 @@ sudo mount -t nfs <IP>:<share> /tmp/mount/ -nolock
 
 # QUIC protocol
 *QUIC* is a general-purpose transport layer network protocol     
-**[Explanation and guide](https://www.debugbear.com/blog/http3-quic-protocol-guide)**     
-**[Wikipedia](https://en.wikipedia.org/wiki/QUIC)**
+- [Explanation and guide](https://www.debugbear.com/blog/http3-quic-protocol-guide)
+- [Wikipedia](https://en.wikipedia.org/wiki/QUIC)
 
 ## Access pages with Curl
 ```bash
