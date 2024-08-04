@@ -69,17 +69,36 @@ for i in {1..254}; do (ping -c 1 10.10.10.${i} | grep "bytes from" | grep -v "Un
 ```bash
 ~/
 /tmp
+
 /dev/shm
+
 /opt
+
 /var
-    /var/www/html
-    /var/log
-/usr
-    /usr/sbin
-/etc/hosts
+/var/log
+/var/www/html
+
+/usr/sbin
+
 /etc/apache2 
-/etc/nginx
 /etc/httpd
+/etc/nginx
+
+/etc/hosts
+/etc/issue
+/etc/motd
+/etc/passwd 
+/etc/group 
+/etc/resolv.conf
+/etc/shadow
+
+/home/USERNAME/.bash_history
+/home/USERNAME/.profile
+
+/proc/sched_debug
+/proc/net/fib_trie
+/proc/version
+/proc/self/environ
 ```
 
 ### Directory / file copy (symlink)
