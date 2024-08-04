@@ -123,6 +123,11 @@ Python Exploit Development Assistance for GDB
 [https://github.com/dnSpy/dnSpy](https://github.com/dnSpy/dnSpy)                
 Used for disassembling .NET code
 
+### Alternatives
+*These alternatives are for Linux, since dnSpy is for Windows only*
+- [IlSpy](https://github.com/icsharpcode/ILSpy)
+- [CodemerxDecompile](https://decompiler.codemerx.com/)
+
 ## Python executables
 Python files can be packed and unpacked to and from a binary.       
 
