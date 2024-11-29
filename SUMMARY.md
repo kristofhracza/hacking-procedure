@@ -11,7 +11,6 @@
     * [SSRF](recon/web/attacks_exploits/ssrf.md) 
     * [CSRF](recon/web/attacks_exploits/csrf.md) 
     * [XSS](recon/web/attacks_exploits/xss.md) 
-* [Windows](recon/windows.md)   
 * [Databases](recon/databases/databases.md)   
 * [DBMS](recon/databases/dbms/dbms.md)
     * [MySQL](recon/databases/dbms/mysql.md)
@@ -20,11 +19,12 @@
     * [REDIS](recon/databases/dbms/redis.md) 
     * [MongoDB](recon/databases/dbms/mongodb.md) 
     * [SQLite](recon/databases/dbms/sqlite.md)
+* [Windows](recon/windows.md)   
 * [Other technologies](recon/other.md)    
 
 
 
-## Privilege escalation
+## Privilege Escalation
 
 * [Linux](priv_esc/linux/linux.md)  
     * [Path Hijacking](priv_esc/linux/techniques/path_hijack.md)  
@@ -43,11 +43,11 @@
 
 ## Miscellaneous
 
-* [Universal tools and resources](misc/tools.md)
-* [Methodology, tricks & common sense](misc/meth.md)
+* [Universal Tools and Resources](misc/tools.md)
+* [Methodology, Tricks & Common sense](misc/meth.md)
 
 
 
-## Language specific exploits
+## Language Specific Exploits
 * [Python](languages/python/pickle.md)
-    * [Data model parsing (pytorch / pickle)](languages/python/pickle.md)
+    * [Data Model Parsing (pytorch / pickle)](languages/python/pickle.md)
