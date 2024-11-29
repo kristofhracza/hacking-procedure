@@ -76,7 +76,7 @@ ntlmrelayx.py --dump-gmsa --no-dump --no-da --no-acl --no-validate-privs -debug 
 
 # Interesting account names
 ## AD support accounts
-Often we have the credentials belonging limited administrative accounts such as `IT`, `helpdesk` or `support`.      
+Often we have the credentials belonging to limited administrative accounts such as `IT`, `helpdesk` or `support`.      
 Sometimes, these accounts have an ability to reset passwords.     
 *Note that the wording of the account name might be different, but related to aforementioned names*
 - [Reset password through RPC](https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password)
