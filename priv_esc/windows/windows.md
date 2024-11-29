@@ -126,7 +126,7 @@ guestmount --add <vhd_file> --inspector --ro <mount_dir>
 
 
 
-# accesschk
+# accesschk - Enumeration
 AccessChk is a command-line tool for viewing the effective permissions on files, registry keys, services, processes, kernel objects, and more. This tool will be helpful to identify whether the current user can modify files within a certain service directory.      
 
 ```bat

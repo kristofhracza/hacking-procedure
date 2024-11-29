@@ -140,4 +140,8 @@ Find-LocalAdminAccess
 
 # Find interesting ACLs
 Invoke-ACLScanner -ResolveGUIDs | select IdentityReferenceName, ObjectDN, ActiveDirectoryRights | fl
+Find-InterestingDomainAcl
+Find-InterestingDomainAcl -Domain your.domain -ResolveGUIDs
+## For a specific user
+Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "USERNAME"}
 ```
