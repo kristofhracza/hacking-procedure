@@ -1,6 +1,6 @@
 # Shared Library Misconfigurations
 
-## Exploitation
+# Exploitation
 We are going to suppose that there's an **SUID binary** called **/usr/bin/welcome**.           
 However, the user is unable to run it as the binary cannot find a library file *(let's call it **libhello.so**)* which
 should be in `/dev/shm`.                
@@ -24,5 +24,5 @@ gcc -shared libhello.c -o libhello.so -fPIC -nostartfiles
 Upon running `/usr/bin/welcome`, it will spawn an elevated shell.
 
 
-## References
+# References
 - [https://tbhaxor.com/exploiting-shared-library-misconfigurations/](https://tbhaxor.com/exploiting-shared-library-misconfigurations/)

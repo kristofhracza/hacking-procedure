@@ -1,9 +1,9 @@
 # Tips
-## Multiple users
+## Multiple Users
 If there's more than one user that needs to compromised before getting root, enumerate
 each user as they might have access to something new that was protected before.
 
-## Temporary account
+## Temporary Account
 If some info suggests that an account is only temporary, then they might have some misconfigurations
 or rights that other users don't have.     
 Especially if they're created by a user which is in a group that has higher privileges.
@@ -32,7 +32,7 @@ auxiliary/gather/enum_dns
 ```
 
 ## Attacks
-### Zone transfer attack
+### Zone Transfer
 DNS servers contain a *Zone* file that replicates the map of the domain.     
 Only the server itself should have access to it, but if it's misconfigured anyone can request the file and
 get the list of all the sub-domains.
@@ -65,7 +65,7 @@ windapsearch.py --dc-ip <ip> -d domain.local -u "" -U
 ```
 
 ## Notes
-### Passwords in result
+### Passwords in Result
 If an `ldapsearch` query comes back with users, try checking whether they have any password related options set.    
 
 **Example(s)**
@@ -73,7 +73,7 @@ If an `ldapsearch` query comes back with users, try checking whether they have a
 cascadeLegacyPwd: BASE64 STRING
 ```
 
-### Info field
+### Info Field
 Log of a query might contain some info in the user.     
 In many CTF-s they put passwords there.
 ​
@@ -132,7 +132,7 @@ Kerberoasting is a post-exploitation attack technique that attempts to obtain a 
 GetUserSPNs.py -request -dc-ip <ip> domain.local/user -save -outputfile <output_file>
 ```
 
-### Cracking the ticket
+### Cracking The Ticket
 ```bash
 hashcat -m 13100 --force <hash_file> <password_file>
 ```
@@ -180,7 +180,7 @@ netshareenumall
 netsharegetinfo <share>
 ```
 
-## Establishing connection
+## Establishing Connection
 ```bash
 # Null authentication
 rpcclient -U '' -N <ip>
@@ -208,7 +208,7 @@ ypcat –d <host> –h <IP> passwd.byname
 593     RPC over HTTPS
 ```
 
-# Analyse office files
+# Analyse Office Files
 Modern `Office` documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
 
 ## Unzip

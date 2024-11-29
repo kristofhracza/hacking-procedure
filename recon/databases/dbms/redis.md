@@ -1,6 +1,6 @@
 # Redis
 
-## Data types and retrieve commands
+# Data Types and Retrieve Commands
 ```
 String      GET <key>
 HASH        HGETALL <key>
@@ -9,11 +9,11 @@ SET         smembers <key>
 SORTED SETS ZRANGEBYSCORE <key> <min> <max>
 ```
 
-## Connection
+# Connection
 ```sh
 # After Redis 6.0
 redis-cli -h <ip> -a <password> 
 ```
 
-## References
+# References
 - [https://redis.io/docs/](https://redis.io/docs/)

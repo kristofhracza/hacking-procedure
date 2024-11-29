@@ -102,7 +102,7 @@ for i in {1..254}; do (ping -c 1 10.10.10.${i} | grep "bytes from" | grep -v "Un
 /proc/self/cmdline
 ```
 
-### Process file (PID) brute-force
+## Process File (PID) Brute-force
 The file “/proc//cmdline” serves as a repository for the command-line arguments that have been provided to a specific process identified by its (PID). 
 This allows for enumerating all the running processes based on their PID.     
 This could be well used for exploiting an LFI.
@@ -117,7 +117,7 @@ for i in {0..999}; do
 done
 ```
 
-### Directory / file copy (symlink)
+## Directory / File Copy (symlink)
 If there's a directory or a file that is being copied *(by some program, perhaps cron)*, one can either create a symlink or a direct spoof of the actual file so, that the copied item will be spoofed and contain the data the attacker wants.
 
 
@@ -134,8 +134,8 @@ if [ `which xclip 2>/dev/null` ]; then
   fi
 ```
 
-# Interesting groups
-## Disk group
+# Interesting Groups
+## disk
 A user who is in the disk group, will probably have access to info on a given disk.
 
 ### debugfs
@@ -143,7 +143,7 @@ A user who is in the disk group, will probably have access to info on a given di
 With this, one can read files owned by a given user
 
 
-# Bash file command execution
+# Bash File Command Execution
 If a file executes a variable, one might be able to write payload to it.
 ## Example
 **(program.sh)**
@@ -169,7 +169,7 @@ What the service does is defined by the `.service` file.
 If a user has access to the `systemctl` binary they can make a service which can read file or even spawn a reverse shell.
 
 
-# Raw image file conversion to actual image
+# Raw Image File Conversion to Actual Image
 Raw image data can be converted to an actual image to reveal its content.
 ## Gimp
 1. Select the file and its type (Raw image data)

@@ -1,6 +1,6 @@
 # MongoDB
 
-## Connection
+# Connection
 ```bash
 mongo -u <username> -p <password> <auth_source>
 # OR
@@ -9,8 +9,8 @@ mongo "mongodb://HOST:PORT"
 ```
 
 
-## Enumeration
-### MongoDB commands
+# Enumeration
+## Commands
 ```
 show dbs
 use <db>
@@ -20,7 +20,7 @@ db.<collection>.count()
 db.current.find({"username":"admin"})
 ```
 
-### nmap
+## nmap
 ```bash
 nmap -sV --script "mongo* and default" -p 27017 <IP>
 

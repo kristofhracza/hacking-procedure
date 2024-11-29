@@ -2,17 +2,13 @@
 - When initially moving through the site, do it through `Burpsuite` as it will allow one to see all past requests and how they
 are handled.
 
-
-
-# In-Depth enumeration
-
-## Nikto  
+# Nikto  
 Scan sites for known vulnerabilities, misconfigurations and directories.
 ```bash
 nikto -h <host>
 ```
 
-## FFUF
+# FFUF
 ```bash
 # Directory scan
 ffuf -u <host>/FUZZ -w <wordlist>
@@ -21,7 +17,7 @@ ffuf -u <host>/FUZZ -w <wordlist> -e .txt,.php,.html
 ffuf -u <ip> -H "Host: FUZZ.host.local" -w <wordlist> -mc all
 ```
 
-## gobuster
+# gobuster
 ```bash
 # Directory scan
 gobuster dir -u <IP> -w <wordlist>
@@ -32,15 +28,15 @@ gobuster dns -d <host> -w <wordlist>
 gobuster vhost -u <host> -w <wordlist> 
 ```
 
-## feroxbuster
+# feroxbuster
 ```bash
 # Scan for DIRs
 feroxbuster -u <host>
 feroxbuster -u <host> -x html,php
 ```
 
-## Wfuzz
-Wfuzz is a tool designed for brute-forcing Web Applications, it can be used for finding resources not linked directories, servlets, scripts, etc.
+# Wfuzz
+`Wfuzz` is a tool designed for brute-forcing Web Applications, it can be used for finding resources not linked directories, servlets, scripts, etc.
 ```sh
 # DNS scan
 wfuzz -u <ip> -H "Host: FUZZ.domain.local" -w <wordlist>
@@ -50,7 +46,7 @@ wfuzz -c -z range,1-65535 --hl=2 http://<ip>:<port>/url.php?path=http://localhos
 wfuzz -u https://<link>/<page>/?FUZZ= -w <wordlist> -H "Cookie: PHPSESSID="
 ```
 
-## Zap
+# Zap
 [Zap](https://www.zaproxy.org/) is a web scanner that simulates human movement and tries to discover the target.
 It can also detect basic vulnerabilities as well as weak coding practices.
 

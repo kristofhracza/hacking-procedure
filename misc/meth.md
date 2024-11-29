@@ -1,4 +1,4 @@
-# Checklist fot myself (mainly)
+# Checklist for myself (mainly)
 - Assume that the easiest path is the best
 - Enumerate every new finding and connect to previously obtained information
 

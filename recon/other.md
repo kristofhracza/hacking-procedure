@@ -10,7 +10,7 @@ snmpcheck <ip>
 msf> use auxiliary/scanner/snmp/snmp_enum
 ```
 
-## Bruteforce community strings
+## Brute-force Community Strings
 ```bash
 hydra -P <wordlist> <host> snmp
 onesixtyone -c <wordlist> <ip>
@@ -42,7 +42,7 @@ NFS allows a system to share directories and files with others over a network.
 # List NFS shares
 /usr/sbin/showmount -e <IP>
 ```
-## Mount shares
+## Mount Shares
 ```bash
 # Make directory for the mount point
 mkdir /tmp/mount
@@ -51,15 +51,15 @@ mkdir /tmp/mount
 sudo mount -t nfs <IP>:<share> /tmp/mount/ -nolock
 ```
 
-# QUIC protocol
+# QUIC Protocol
 *QUIC* is a general-purpose transport layer network protocol     
 - [Explanation and guide](https://www.debugbear.com/blog/http3-quic-protocol-guide)
 - [Wikipedia](https://en.wikipedia.org/wiki/QUIC)
 
-## Access pages with Curl
+## Access Pages with Curl
 ```bash
 curl --http3 https://site.com
 ```
 
-## Build Curl from source
+## Build Curl From Source
 Refer to **[this](https://github.com/curl/curl/blob/master/docs/HTTP3.md#quiche-version)** if your version of `curl` doesn't support QUIC.

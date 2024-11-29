@@ -82,7 +82,7 @@ The corresponding key is stored as a hidden file at the path `/var/lib/sss/secre
 Knowing this information one can take a look at those file (if they're present) and extract data from them.    
 If data cannot be found in those files, one might try to go back one folder to `/var/lib/sss` where they might find some other files which can potentially reveal some info.            
 
-[**More info**](https://sssd.io/)  
+- [**More info**](https://sssd.io/)  
 
 ## Miscellaneous
 - [Evil-WinRM](https://github.com/Hackplayers/evil-winrm)

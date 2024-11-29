@@ -2,7 +2,7 @@
 When a service or a program is accessing resources as root or running and **SUID** program that has root privileges.
 
 
-## PATH hijacking
+# PATH hijacking
 If one cannot see a full path either in a service or a program, they can overwrite or append
 to the `$PATH` environment variable.
 

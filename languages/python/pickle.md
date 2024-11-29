@@ -1,12 +1,12 @@
 # Data models (pytorch, pickle)
 
-## Overview
+# Overview
 If a model is parsed through a pytorch script, then one might be able to create a malicious model which can lead to RCE.
 
-### Requirements
+## Requirements
 - The vulnerable script loads the model provided by the end-user
 
-## Exploitation
+# Exploitation
 ```py
 import torch
 import torch.nn as nn
@@ -31,7 +31,7 @@ torch.save(model, "file.pth")
 By overwriting the `__reduce__` method, we can inject shell code and it will be executed whenever the vulnerable
 script will try to load the module.
 
-### Longer explanation
+## Longer explanation
 The `__reduce__` method returns either a string or a tuple which tells the script how to reconstruct the object
 when unpickling.        
 Usually, the tuple consists of:

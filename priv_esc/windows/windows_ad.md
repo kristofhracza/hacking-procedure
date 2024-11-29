@@ -1,4 +1,4 @@
-# Privileged groups
+# Privileged Groups
 ## AD Recycle Bin
 A user in the group is allowed to read / recover deleted AD objects.
 ```powershell
@@ -25,7 +25,7 @@ Get-SeBackupPrivilege
 ```
 - [SeBackupPrivilege DLLs](https://github.com/k4sth4/SeBackupPrivilege)
 
-### Get hashes from .dit file
+### Get Hashes from .dit File
 ```bash
 # REMOTE
 
@@ -43,7 +43,7 @@ secretsdump.py -system <system_hive> -ntds <database_file> LOCAL
 *(ReadGMSAPassword abuse)*     
 Group Managed Service Accounts (gMSA) are where Windows servers manage the password for an account by generating a long random password for it.
 
-### Get password (locally)
+### Get Password (locally)
 This solution is taken from: [https://0xdf.gitlab.io/2022/04/30/htb-search.html#get-password](https://0xdf.gitlab.io/2022/04/30/htb-search.html#get-password)
 ```powershell
 # Save the blob to a variable
@@ -74,11 +74,11 @@ ntlmrelayx.py --dump-gmsa --no-dump --no-da --no-acl --no-validate-privs -debug 
 
 
 
-# Interesting account names
-## AD support accounts
+# Interesting Account Names
+## AD Support Accounts
 Often we have the credentials belonging to limited administrative accounts such as `IT`, `helpdesk` or `support`.      
 Sometimes, these accounts have an ability to reset passwords.     
-*Note that the wording of the account name might be different, but related to aforementioned names*
+*Note that the wording of the account name might be different, but related to aforementioned names*         
 - [Reset password through RPC](https://bitvijays.github.io/LFF-IPS-P3-Exploitation.html#reset-ad-user-password)
 
 ```bash
@@ -109,7 +109,7 @@ bloodhound-python -u <username> -p <password> -d <domain> -c All -ns <nameserver
 # Powerview
 - [Github](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1)
 
-### Enumeration
+## Enumeration
 - [More help](https://book.hacktricks.xyz/windows-hardening/basic-powershell-for-pentesters/powerview)
 ```powershell
 # Basic domain info

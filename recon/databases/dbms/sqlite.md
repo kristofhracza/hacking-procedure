@@ -1,6 +1,6 @@
 # SQLite
 
-## Commands
+# Commands
 ```bash
 # Open DB file
 .open <your_file.db>
@@ -15,8 +15,8 @@
 .schema <table>
 ```
 
-## Command execution
-### load_extension
+# Command Execution
+## load_extension
 Suppose we're on Linux and there's a bash script which asks for a username that will be used to activate the user.
 
 The commands looks like this: 
