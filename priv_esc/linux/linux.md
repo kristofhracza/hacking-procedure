@@ -138,7 +138,7 @@ if [ `which xclip 2>/dev/null` ]; then
 ## disk
 A user who is in the disk group, will probably have access to info on a given disk.
 
-### debugfs
+## debugfs
 `debugfs` let's you debug a file system if you can read the device.       
 With this, one can read files owned by a given user
 
