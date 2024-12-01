@@ -34,7 +34,7 @@ int main(){
     return 0;
 }
 ```
-But as seen in the **output** below, since the flag is stored on the stack and it will print it regardless.
+But as seen in the **output** below, since the flag is stored on the stack it will print it regardless.
 ```
 %p %p %p %p %p %p %p %p %p
 0x7fff120059d0 0x100 0x76d74d5147e2 0x76d74d61bf10 0x76d74d6c6040 0x2 0xcafebabe0000000e 0x7025207025207025 0x2520702520702520
@@ -48,7 +48,7 @@ In short, the code:
 1. Loads *flag.txt* as `file`
 2. Puts contents of `file` into `data_from_file`
 3. Puts `data_from_file` onto the stack -- `buffer`
-4. Aks for an input -- `password`
+4. Asks for an input -- `password`
 5. Outputs are shown and the program halts
 
 In the actual challenge the flag was in the file and its contents were put onto the stack.
